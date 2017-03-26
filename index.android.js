@@ -22,6 +22,9 @@ export default class Evo2go extends Component {
     super(props);
     this.state = {markers: []};
 
+    // start to load the vehicles
+    this.loadVehicles();
+
     // load all car2go vehicles every 5 seconds
     setInterval(() => {
       this.loadVehicles();
