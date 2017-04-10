@@ -1,6 +1,6 @@
 import { car2GoConfig } from './config';
 
-const params = `?${car2GoConfig.loc}&${car2GoConfig.oauthConsumerKey}&${car2GoConfig.format}`;
+const params = `?loc=${car2GoConfig.loc}&oauth_consumer_key=${car2GoConfig.key}&format=${car2GoConfig.format}`;
 
 export const getAvailableVehicleCar2Go = () => {
   return fetch(`${car2GoConfig.url}/vehicles${params}`)
