@@ -7,6 +7,7 @@ import {
   View
 } from 'react-native';
 import MapView from 'react-native-maps';
+import { getAvailableVehicleCar2Go } from './services/api/index';
 
 export default class Evo2go extends Component {
   constructor(props) {
@@ -45,10 +46,7 @@ export default class Evo2go extends Component {
   }
 
   loadVehicles() {
-    //console.log(this);
-    fetch('http://www.car2go.com/api/v2.1/vehicles?loc=vancouver&oauth_consumer_key=TransitApp&format=json')
-      .then(response => response.json())
-      .then(responseJson => responseJson.placemarks)
+    getAvailableVehicleCar2Go()
       .then(placemarks => {
         let markers = [];
 
