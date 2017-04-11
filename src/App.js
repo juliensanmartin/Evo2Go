@@ -9,6 +9,11 @@ import {
 import MapView from 'react-native-maps';
 import { getAvailableVehicleCar2Go } from './services/api/index';
 
+// This is used in order to see requests on the Chrome DevTools
+XMLHttpRequest = GLOBAL.originalXMLHttpRequest ?
+	GLOBAL.originalXMLHttpRequest :
+	GLOBAL.XMLHttpRequest;
+
 export default class Evo2go extends Component {
   constructor(props) {
     super(props);
