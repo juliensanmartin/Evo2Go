@@ -1,89 +1,44 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  Button,
-  Alert,
-  View
-} from 'react-native';
-import MapView from 'react-native-maps';
-import { getAvailableVehicleCar2Go } from './services/api/index';
+import { Provider } from 'react-redux';
+import store from './store/index';
+import { MapContainer } from './containers/Map/index';
+import { fetchCar2GoCars } from './store/Car/actions';
+import { connect } from 'react-redux';
 
 // This is used in order to see requests on the Chrome DevTools
 XMLHttpRequest = GLOBAL.originalXMLHttpRequest ?
 	GLOBAL.originalXMLHttpRequest :
 	GLOBAL.XMLHttpRequest;
 
-export default class Evo2go extends Component {
+class Evo2go extends Component {
+
   constructor(props) {
+    console.log('huhu');
     super(props);
-    this.state = { markers: [] };
+  }
 
-    // start to load the vehicles
-    this.loadVehicles();
-
-    // load all car2go vehicles every 5 seconds
-    setInterval(() => {
-      this.loadVehicles();
-    }, 5000);
+  componentDidMount() {
+    dispatch(fetchCar2GoCars());
   }
 
   render() {
     return (
-      < View style = { styles.container } >
-        < MapView
-          style = { styles.map }
-          initialRegion = {
-            {
-              latitude: 49.2800565,
-              longitude: -123.1212937,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
-          >
-            { this.state.markers.map(marker =>
-                < MapView.Marker key = { marker.id } coordinate = { marker.latlng } />
-              )
-            }
-        < /MapView>
-      < /View>
+      <Provider store={store}>
+        <MapContainer markers={this.props.markers}/>
+      </Provider>
     );
-  }
-
-  loadVehicles() {
-    getAvailableVehicleCar2Go()
-      .then(placemarks => {
-        let markers = [];
-
-        placemarks.map(placemark => {
-          markers.push({
-            id: markers.length,
-            latlng: {
-              latitude: placemark.coordinates[1],
-              longitude: placemark.coordinates[0],
-            },
-          });
-        });
-
-        this.setState({markers});
-      })
-      .catch(error => {
-        return {};
-      });
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  map: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  load_vehicules_btn: {
+Evo2go.propTypes = {
+  markers: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired,
+}
 
-  },
-});
+function mapStateToProps(state) {
+  return {
+    markers: state.markers,
+  };
+}
+
+export default connect(mapStateToProps)(Evo2go);

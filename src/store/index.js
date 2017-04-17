@@ -1,0 +1,20 @@
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import devTools from 'remote-redux-devtools';
+
+import { reducer as carReducer } from './Car/reducers';
+
+const appReducer = combineReducers({
+	car: carReducer,
+});
+
+const enhancer = compose(
+	applyMiddleware(
+		thunk,
+	),
+	devTools()
+);
+
+const store = createStore(appReducer, enhancer);
+
+export default store;

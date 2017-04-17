@@ -1,0 +1,1 @@
+export const GET_CAR2GO_CARS = 'GET_CAR2GO_CARS';

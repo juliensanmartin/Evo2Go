@@ -1,4 +1,9 @@
-import { car2GoConfig } from './config';
+const car2GoConfig = {
+	key: 'TransitApp',
+	url: 'http://www.car2go.com/api/v2.1',
+  format: 'json',
+  loc: 'vancouver',
+};
 
 const params = `?loc=${car2GoConfig.loc}&oauth_consumer_key=${car2GoConfig.key}&format=${car2GoConfig.format}`;
 
@@ -8,7 +13,7 @@ export const getAvailableVehicleCar2Go = () => {
     .then(responseJson => {
       return responseJson.placemarks;
     })
-    .catch((error) => {
+    .catch(error => {
       console.error(error);
     });
 };
