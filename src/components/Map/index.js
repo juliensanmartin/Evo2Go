@@ -6,14 +6,9 @@ import {
   View
 } from 'react-native';
 import React, { Component, PropTypes } from 'react';
-import MapView from 'react-native-maps';
-import { fetchCar2GoCars } from '../../store/Car/actions';
-import { connect } from 'react-redux';
 
 // we export the class for testing purposes, passing stubs for props
-const MapContainer = (props) => {
-  const { markers } = props;
-
+const MapContainer = ({markers}) => {
   return (
     < View style = { styles.container } >
       < MapView style = { styles.map } initialRegion = { initialRegion }>
@@ -52,9 +47,3 @@ const styles = StyleSheet.create({
 
   },
 });
-
-const mapStateToProps = (state) => ({
-  markers: state.markers
-});
-// this is the connected class the app renders
-export default connect(mapStateToProps, null)(MapContainer);
