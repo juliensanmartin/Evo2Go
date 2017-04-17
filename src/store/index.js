@@ -1,8 +1,7 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import devTools from 'remote-redux-devtools';
-
-import { reducer as car } from './Car/reducers';
+import car from './Car/reducers';
 
 const appReducer = combineReducers({
 	car,

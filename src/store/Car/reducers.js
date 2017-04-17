@@ -4,7 +4,7 @@ const initialState = {
   markers: [],
 };
 
-const reducer = (state = initialState, action) => {
+export default car = (state = initialState, action) => {
   switch (action.type) {
     case GET_CAR2GO_CARS:
       return {
@@ -15,5 +15,3 @@ const reducer = (state = initialState, action) => {
       return state;
   }
 };
-
-export default reducer;

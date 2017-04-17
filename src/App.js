@@ -8,7 +8,7 @@ XMLHttpRequest = GLOBAL.originalXMLHttpRequest ?
 	GLOBAL.originalXMLHttpRequest :
 	GLOBAL.XMLHttpRequest;
 
-class Evo2go extends Component {
+export default class Evo2go extends Component {
   render() {
     return (
       <Provider store={store}>
