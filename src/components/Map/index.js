@@ -8,7 +8,7 @@ import {
 import React, { Component, PropTypes } from 'react';
 
 // we export the class for testing purposes, passing stubs for props
-const MapContainer = ({markers}) => {
+export default MapContainer = ({markers}) => {
   return (
     < View style = { styles.container } >
       < MapView style = { styles.map } initialRegion = { initialRegion }>
