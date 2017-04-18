@@ -6,24 +6,27 @@ import {
   View
 } from 'react-native';
 import React, { Component, PropTypes } from 'react';
+import MapView from 'react-native-maps';
 
 // we export the class for testing purposes, passing stubs for props
-export default MapContainer = ({markers}) => {
-  return (
-    < View style = { styles.container } >
-      < MapView style = { styles.map } initialRegion = { initialRegion }>
-          { markers.map(marker =>
-              < MapView.Marker key = { marker.id } coordinate = { marker.latlng } />
-            )
-          }
-      < /MapView>
-    < /View>
-  );
+export default class MapContainer extends Component {
+  render() {
+    return (
+      < View style = { styles.container } >
+        < MapView style = { styles.map } initialRegion = { initialRegion }>
+            { this.props.markers.map(marker =>
+                < MapView.Marker key = { marker.id } coordinate = { marker.latlng } />
+              )
+            }
+        < /MapView>
+      < /View>
+    );
+  }
 };
 
 MapContainer.propTypes = {
   // these come from 'connect'
-  markers: PropTypes.object.isRequired,
+  markers: PropTypes.array.isRequired,
 };
 
 const initialRegion = {

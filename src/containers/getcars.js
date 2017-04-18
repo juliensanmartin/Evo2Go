@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { MapContainer } from '../components/Map/index';
+import MapContainer from '../components/Map/index';
 import { fetchCar2GoCars } from '../store/Car/actions';
 import { connect } from 'react-redux';
 
@@ -12,6 +12,7 @@ class GetCars extends Component {
 
   componentDidMount() {
 		const { dispatch } = this.props;
+		console.log('HAHA : ',this);
     dispatch(fetchCar2GoCars());
   }
 
