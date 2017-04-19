@@ -1,5 +1,5 @@
 import { GET_CAR2GO_CARS } from './actions.type';
-import { getAvailableVehicleCar2Go } from '../api';
+import { getAvailableVehicleCar2Go } from '../car2go.api';
 
 // selectors
 //export const selectGuestToken = (state) => state[GLOBAL_STATE_KEY].guestToken;

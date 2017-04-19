@@ -3,16 +3,10 @@ import MapContainer from '../components/Map/index';
 import { fetchCar2GoCars } from '../store/Car/actions';
 import { connect } from 'react-redux';
 
-class GetCars extends Component {
-
-  constructor(props) {
-    console.log('huhu');
-    super(props);
-  }
+class GetCarsContainer extends Component {
 
   componentDidMount() {
 		const { dispatch } = this.props;
-		console.log('HAHA : ',this);
     dispatch(fetchCar2GoCars());
   }
 
@@ -23,7 +17,7 @@ class GetCars extends Component {
   }
 }
 
-GetCars.propTypes = {
+GetCarsContainer.propTypes = {
   markers: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
 }
@@ -34,4 +28,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(GetCars);
+export default connect(mapStateToProps)(GetCarsContainer);
