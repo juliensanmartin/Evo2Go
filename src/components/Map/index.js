@@ -7,25 +7,25 @@ import {
 } from 'react-native';
 import React, { Component, PropTypes } from 'react';
 import MapView from 'react-native-maps';
+import styled from 'styled-components';
 
 // we export the class for testing purposes, passing stubs for props
 export default class MapContainer extends Component {
   render() {
     return (
-      < View style = { styles.container } >
-        < MapView style = { styles.map } initialRegion = { initialRegion }>
+      < StyledView>
+        < MapView initialRegion = { initialRegion }>
             { this.props.markers.map(marker =>
                 < MapView.Marker key = { marker.id } coordinate = { marker.latlng } />
               )
             }
         < /MapView>
-      < /View>
+      < /StyledView>
     );
   }
 };
 
 MapContainer.propTypes = {
-  // these come from 'connect'
   markers: PropTypes.array.isRequired,
 };
 
@@ -36,17 +36,24 @@ const initialRegion = {
   longitudeDelta: 0.0421,
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  map: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  load_vehicules_btn: {
+const StyledView = styled.View`
+  flex: 1;
+  justifyContent: center;
+  alignItems: center;
+  backgroundColor: #F5FCFF;
+`;
 
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     backgroundColor: '#F5FCFF',
+//   },
+//   map: {
+//     ...StyleSheet.absoluteFillObject,
+//   },
+//   load_vehicules_btn: {
+//
+//   },
+// });
