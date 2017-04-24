@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import MapContainer from '../components/Map/index';
-import { fetchCar2GoCars } from '../store/Car/actions';
+import { fetchCar2GoCars, fetchEvoCars } from '../store/Car/actions';
 import { connect } from 'react-redux';
 
 class GetCarsContainer extends Component {
@@ -8,6 +8,7 @@ class GetCarsContainer extends Component {
   componentDidMount() {
 		const { dispatch } = this.props;
     dispatch(fetchCar2GoCars());
+    dispatch(fetchEvoCars());
   }
 
   render() {
@@ -23,8 +24,9 @@ GetCarsContainer.propTypes = {
 }
 
 function mapStateToProps(state) {
+  console.log('state : ',state);
   return {
-    markers: state.car.markers,
+    markers: [...state.car.car2go.markers, ...state.car.evo.markers],
   };
 }
 

@@ -6,17 +6,25 @@ import {
   View
 } from 'react-native';
 import React, { Component, PropTypes } from 'react';
-import MapView from 'react-native-maps';
-import styled from 'styled-components';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import styled from 'styled-components/native';
+import mapStyle from './map.style';
+
+const car2GoPin = require('./assets/car2go_pin.png');
+const evoPin = require('./assets/evo_pin.png');
+
+const getPin = (type) => (type === 'evoPin') ? evoPin : car2GoPin;
 
 // we export the class for testing purposes, passing stubs for props
 export default class MapContainer extends Component {
   render() {
+    // the last 2 attributes in comment in MapView are for customize googlemap on IOS, doesn't work :
+    // Read this for more info https://github.com/airbnb/react-native-maps#customizing-the-map-style
     return (
       < StyledView>
-        < MapView initialRegion = { initialRegion }>
+        < MapView style={styles.map} initialRegion={initialRegion} /*customMapStyle={mapStyle} provider={PROVIDER_GOOGLE}*/>
             { this.props.markers.map(marker =>
-                < MapView.Marker key = { marker.id } coordinate = { marker.latlng } />
+                < MapView.Marker key={marker.id} coordinate={marker.latlng} image={getPin(marker.type)}/>
               )
             }
         < /MapView>
@@ -36,6 +44,7 @@ const initialRegion = {
   longitudeDelta: 0.0421,
 };
 
+// Usage of styled-components : https://github.com/styled-components/styled-components
 const StyledView = styled.View`
   flex: 1;
   justifyContent: center;
@@ -43,17 +52,12 @@ const StyledView = styled.View`
   backgroundColor: #F5FCFF;
 `;
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: '#F5FCFF',
-//   },
-//   map: {
-//     ...StyleSheet.absoluteFillObject,
-//   },
-//   load_vehicules_btn: {
-//
-//   },
-// });
+// But need to styled-components this one!!
+const styles = StyleSheet.create({
+  map: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  load_vehicules_btn: {
+
+  },
+});

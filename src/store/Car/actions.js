@@ -1,5 +1,6 @@
-import { GET_CAR2GO_CARS } from './actions.type';
+import { GET_CAR2GO_CARS, GET_EVO_CARS } from './actions.type';
 import { getAvailableVehicleCar2Go } from '../car2go.api';
+import { getAvailableVehicleEvo } from '../evo.api';
 
 // selectors
 //export const selectGuestToken = (state) => state[GLOBAL_STATE_KEY].guestToken;
@@ -20,11 +21,36 @@ export const fetchCar2GoCars = () => (dispatch, getState) => {
             latitude: placemark.coordinates[1],
             longitude: placemark.coordinates[0],
           },
+          type: 'car2GoPin',
         });
       });
 
       return dispatch({
         type: GET_CAR2GO_CARS,
+        markers,
+      });
+    },
+    errors => console.error(errors)
+  )
+};
+
+export const fetchEvoCars = () => (dispatch, getState) => {
+  return getAvailableVehicleEvo()
+  .then(data => {
+      let markers = [];
+      data.map(car => {
+        markers.push({
+          id: car.Id,
+          latlng: {
+            latitude: car.Lat,
+            longitude: car.Lon,
+          },
+          type: 'evoPin',
+        });
+      });
+
+      return dispatch({
+        type: GET_EVO_CARS,
         markers,
       });
     },
