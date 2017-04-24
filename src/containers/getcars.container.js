@@ -7,6 +7,13 @@ class GetCarsContainer extends Component {
 
   componentDidMount() {
 		const { dispatch } = this.props;
+
+    // To run in parallel
+    // Promise.all([
+    //   dispatch(fetchCar2GoCars()),
+    //   dispatch(fetchEvoCars()),
+    // ]));
+
     dispatch(fetchCar2GoCars());
     dispatch(fetchEvoCars());
   }
