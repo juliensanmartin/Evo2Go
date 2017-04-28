@@ -1,4 +1,4 @@
-import { schema } from 'normalizr';
+import { schema, arrayOf } from 'normalizr';
 
 // "placemarks": [
 //     {
@@ -18,4 +18,9 @@ import { schema } from 'normalizr';
 //     },
 //   ]
 
-export const vehicle = new schema('vehicles', { idAttribute: 'vin' });
+const vehicle = new schema.Entity('vehicles', { idAttribute: 'vin' });
+
+//const roleListSchema = new schema.Array(new schema.Entity('roles'));
+
+
+export const vehicles = new schema.Array(vehicle);
