@@ -18,9 +18,9 @@ import { schema, arrayOf } from 'normalizr';
 //     },
 //   ]
 
-const vehicle = new schema.Entity('vehicles', { idAttribute: 'vin' });
+const vehicle = new schema.Entity('vehicles');
 
 //const roleListSchema = new schema.Array(new schema.Entity('roles'));
 
 
-export const vehicles = new schema.Array(vehicle);
+export const vehicleListSchema = [vehicle];

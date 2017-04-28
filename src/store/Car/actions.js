@@ -1,8 +1,8 @@
 import { GET_CAR2GO_CARS, GET_EVO_CARS } from './actions.type';
 import { getAvailableVehicleCar2Go } from '../car2go.api';
 import { getAvailableVehicleEvo } from '../evo.api';
-import { normalize, schema } from 'normalizr';
-import { vehicles } from '../schema';
+import { normalize } from 'normalizr';
+import { vehicleListSchema } from '../schema';
 
 // this is a thunk (redux-thunk)
 export const fetchCar2GoCars = () => (dispatch, getState) => {
@@ -10,13 +10,7 @@ export const fetchCar2GoCars = () => (dispatch, getState) => {
   .then(placemarks => {
       let markers = [];
 
-      const vehicleSchema = new schema.Entity('placemarks', {idAttribute: 'vin'});
-      const vehicleListSchema = [vehicleSchema];
-
-      response = normalize(placemarks, vehicleListSchema);
-
-      console.log(response);
-      response.map(placemark => {
+      placemarks.map(placemark => {
         markers.push({
           id: markers.length,
           latlng: {
@@ -40,6 +34,11 @@ export const fetchEvoCars = () => (dispatch, getState) => {
   return getAvailableVehicleEvo()
   .then(data => {
       let markers = [];
+
+      response = normalize(data, vehicleListSchema);
+
+      console.log(response);
+
       data.map(car => {
         markers.push({
           id: car.Id,
