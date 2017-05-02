@@ -1,5 +1,10 @@
-import { schema } from 'normalizr';
+import { schema, normalize } from 'normalizr';
 
-const vehicle = new schema.Entity('vehicles', {}, { idAttribute: 'vin' });
+const car2GoVehicle = new schema.Entity('vehicles', {}, { idAttribute: 'vin' });
+const car2goVehicleListSchema = [car2GoVehicle];
+export const car2goVehicleNormalizer = result => normalize(result, car2goVehicleListSchema);
 
-export const vehicleListSchema = [vehicle];
+
+const evoVehicle = new schema.Entity('vehicles', {}, { idAttribute: 'Id' });
+const evoVehicleListSchema = [evoVehicle];
+export const evoVehicleNormalizer = result => normalize(result, evoVehicleListSchema);
