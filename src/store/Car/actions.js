@@ -9,11 +9,11 @@ export const fetchCar2GoCars = () => (dispatch, getState) => {
   .then(placemarks => {
 
       normalizedResponse = car2goVehicleNormalizer(placemarks);
-      console.log(normalizedResponse);
+      console.log('CAR2GO NORMALIZED', normalizedResponse);
 
       return dispatch({
         type: GET_CAR2GO_CARS,
-        vehicles: normalizedResponse.entities,
+        vehicles: normalizedResponse.entities.vehicles,
       });
     },
     errors => console.error(errors)
@@ -24,11 +24,11 @@ export const fetchEvoCars = () => (dispatch, getState) => {
   return getAvailableVehicleEvo()
   .then(data => {
     normalizedResponse = evoVehicleNormalizer(data);
-    console.log(normalizedResponse);
+    console.log('EVO NORMALIZED', normalizedResponse);
 
       return dispatch({
         type: GET_EVO_CARS,
-        vehicles: normalizedResponse.entities,
+        vehicles: normalizedResponse.entities.vehicles,
       });
     },
     errors => console.error(errors)

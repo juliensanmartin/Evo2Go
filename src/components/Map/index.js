@@ -18,6 +18,7 @@ const getPin = (type) => (type === 'evoPin') ? evoPin : car2GoPin;
 // we export the class for testing purposes, passing stubs for props
 export default class MapContainer extends Component {
   render() {
+    console.log('MapContainer : ',this.props.markers);
     // the last 2 attributes in comment in MapView are for customize googlemap on IOS, doesn't work :
     // Read this for more info https://github.com/airbnb/react-native-maps#customizing-the-map-style
     return (

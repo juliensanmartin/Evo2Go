@@ -15,7 +15,7 @@ class GetCarsContainer extends Component {
     //   dispatch(fetchEvoCars()),
     // ]));
 
-    dispatch(fetchCar2GoCars());
+    //dispatch(fetchCar2GoCars());
     dispatch(fetchEvoCars());
   }
 
@@ -32,7 +32,7 @@ GetCarsContainer.propTypes = {
 }
 
 function mapStateToProps(state) {
-  console.log('state : ',state);
+  console.log('mapStateToProps : ',state);
   return {
     markers: getAllMarkers(state),
   };

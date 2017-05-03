@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { keys } from 'lodash';
 
 // Select entities from state
 const getCar2GoVehicles = (state) => state.car.car2go.vehicles;
@@ -6,7 +7,7 @@ const getEvoVehicles = (state) => state.car.evo.vehicles;
 
 const getCar2GoMarkers = createSelector(
   getCar2GoVehicles,
-  vehicles => vehicles.map(vehicle => (
+  vehicles => keys(vehicles).map(vehicle => (
     {
       id: vehicle.vin,
       latlng: {
@@ -20,7 +21,7 @@ const getCar2GoMarkers = createSelector(
 
 const getEvoMarkers = createSelector(
   getEvoVehicles,
-  vehicles => vehicles.map(vehicle => (
+  vehicles => keys(vehicles).map(vehicle => (
     {
       id: vehicle.Id,
       latlng: {
@@ -34,7 +35,7 @@ const getEvoMarkers = createSelector(
 
 const getAllMarkers = createSelector(
   [getCar2GoMarkers, getEvoMarkers],
-  (car2goMarkers, evoMarkers) => [car2goMarkers, evoMarkers]
+  (car2goMarkers, evoMarkers) => [keys(car2goMarkers), keys(evoMarkers)]
 );
 
 export {
