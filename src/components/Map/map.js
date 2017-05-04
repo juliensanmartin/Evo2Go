@@ -3,7 +3,8 @@ import {
   Text,
   Button,
   Alert,
-  View
+  View,
+  ActivityIndicator,
 } from 'react-native';
 import React, { Component, PropTypes } from 'react';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
@@ -28,6 +29,11 @@ export default class MapContainer extends Component {
               )
             }
         < /MapView>
+        < ActivityIndicator
+          animating={this.props.loading}
+          style={[styles.centering, {height: 80}]}
+          size="large"
+        />
       < /StyledView>
     );
   }
@@ -35,6 +41,7 @@ export default class MapContainer extends Component {
 
 MapContainer.propTypes = {
   markers: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 const initialRegion = {

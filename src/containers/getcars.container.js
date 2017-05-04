@@ -18,7 +18,7 @@ class GetCarsContainer extends Component {
 
   render() {
     return (
-      <MapContainer markers={this.props.markers}/>
+      <MapContainer markers={this.props.markers} loading={this.props.loading}/>
     );
   }
 }
@@ -26,11 +26,13 @@ class GetCarsContainer extends Component {
 GetCarsContainer.propTypes = {
   markers: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 }
 
 function mapStateToProps(state) {
   return {
     markers: getAllMarkers(state),
+    loading: true,
   };
 }
 
