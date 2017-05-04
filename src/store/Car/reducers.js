@@ -2,7 +2,7 @@ import { GET_CAR2GO_CARS, GET_EVO_CARS } from './actions.type';
 import { combineReducers } from 'redux';
 
 const initialState = {
-  vehicles: [],
+  vehicles: {},
 };
 
 const car2go = (state = initialState, action) => {

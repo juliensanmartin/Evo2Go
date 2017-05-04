@@ -1,5 +1,8 @@
 import { createSelector } from 'reselect';
-import { keys } from 'lodash';
+import { concat, reduce } from 'lodash';
+
+// Selector for car model : define and transform data for component usage :
+// http://redux.js.org/docs/recipes/ComputingDerivedData.html
 
 // Select entities from state
 const getCar2GoVehicles = (state) => state.car.car2go.vehicles;
@@ -7,35 +10,37 @@ const getEvoVehicles = (state) => state.car.evo.vehicles;
 
 const getCar2GoMarkers = createSelector(
   getCar2GoVehicles,
-  vehicles => keys(vehicles).map(vehicle => (
-    {
-      id: vehicle.vin,
+  vehicles => reduce(vehicles, (result, value, key) => {
+    result.push({
+      id: key,
       latlng: {
-        latitude: vehicle.coordinates[1],
-        longitude: vehicle.coordinates[0],
+        latitude: value.coordinates[1],
+        longitude: value.coordinates[0],
       },
       type: 'car2GoPin',
     })
-  )
+    return result;
+  }, [])
 );
 
 const getEvoMarkers = createSelector(
   getEvoVehicles,
-  vehicles => keys(vehicles).map(vehicle => (
-    {
-      id: vehicle.Id,
+  vehicles => reduce(vehicles, (result, value, key) => {
+    result.push({
+      id: key,
       latlng: {
-        latitude: car.Lat,
-        longitude: car.Lon,
+        latitude: value.Lat,
+        longitude: value.Lon,
       },
       type: 'evoPin',
     })
-  )
+    return result;
+  }, [])
 );
 
 const getAllMarkers = createSelector(
   [getCar2GoMarkers, getEvoMarkers],
-  (car2goMarkers, evoMarkers) => [keys(car2goMarkers), keys(evoMarkers)]
+  (car2goMarkers, evoMarkers) => concat(car2goMarkers, evoMarkers)
 );
 
 export {
