@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { concat, reduce } from 'lodash';
+import { concat, reduce, isEmpty } from 'lodash';
 
 // Selector for car model : define and transform data for component usage :
 // http://redux.js.org/docs/recipes/ComputingDerivedData.html
@@ -43,6 +43,12 @@ const getAllMarkers = createSelector(
   (car2goMarkers, evoMarkers) => concat(car2goMarkers, evoMarkers)
 );
 
+const isLoaded = createSelector(
+  [getCar2GoVehicles, getEvoVehicles],
+  (car2goVehicles, evoVehicle) => !isEmpty(car2goVehicles) && !isEmpty(evoVehicle)
+);
+
 export {
   getAllMarkers,
+  isLoaded,
 };

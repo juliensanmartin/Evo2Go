@@ -31,8 +31,8 @@ export default class MapContainer extends Component {
         < /MapView>
         < ActivityIndicator
           animating={this.props.loading}
-          style={[styles.centering, {height: 80}]}
           size="large"
+          color="blue"
         />
       < /StyledView>
     );

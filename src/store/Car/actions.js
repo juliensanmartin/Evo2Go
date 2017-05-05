@@ -4,8 +4,7 @@ import { getAvailableVehicleEvo } from '../evo.api';
 import { car2goVehicleNormalizer, evoVehicleNormalizer } from './schema';
 
 // this is a thunk (redux-thunk)
-export const fetchCar2GoCars = () => (dispatch, getState) => {
-  return getAvailableVehicleCar2Go()
+export const fetchCar2GoCars = () => (dispatch, getState) => getAvailableVehicleCar2Go()
   .then(placemarks => {
       // placemarks => [objects]
       // Normalized to entities => {objects} and result => [keys]
@@ -19,10 +18,8 @@ export const fetchCar2GoCars = () => (dispatch, getState) => {
     },
     errors => console.error(errors)
   )
-};
 
-export const fetchEvoCars = () => (dispatch, getState) => {
-  return getAvailableVehicleEvo()
+export const fetchEvoCars = () => (dispatch, getState) => getAvailableVehicleEvo()
   .then(data => {
     normalized = evoVehicleNormalizer(data);
     console.log('EVO NORMALIZED', normalized);
@@ -34,4 +31,3 @@ export const fetchEvoCars = () => (dispatch, getState) => {
     },
     errors => console.error(errors)
   )
-};
