@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import MapContainer from '../components/Map/map';
+import MapComponent from '../components/Map/map';
 import { fetchCar2GoCars, fetchEvoCars } from '../store/Car/actions';
 import { getAllMarkers, isLoaded } from '../store/Car/selectors';
 import { connect } from 'react-redux';
@@ -18,7 +18,7 @@ class GetCarsContainer extends Component {
 
   render() {
     return (
-      <MapContainer markers={this.props.markers} loading={this.props.loading}/>
+      <MapComponent markers={this.props.markers} loading={this.props.loading}/>
     );
   }
 }
