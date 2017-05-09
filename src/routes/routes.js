@@ -1,28 +1,27 @@
-import React from 'react';
-import { TabNavigator, StackNavigator } from 'react-navigation';
-import { Icon } from 'react-native-elements';
+import React from 'react'
+import { Image } from 'react-native'
+import { TabNavigator, StackNavigator } from 'react-navigation'
+//import { Icon } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome'
 
-import Home from '../screens/Home/index';
-import Filter from '../screens/Filter/index';
+import Home from '../screens/Home/index'
+import Filter from '../screens/Filter/index'
 
-
-const Tabs = TabNavigator({
+export default TabNavigator({
+  Home: {
+    screen: Home,
+    navigationOptions: {
+      tabBarLabel: 'Home',
+      tabBarIcon: ({ tintColor }) => <Icon size={ 20 } name={ 'cogs' } color={ tintColor }/>
+    },
+  },
   Filter: {
     screen: Filter,
     navigationOptions: {
       tabBarLabel: 'Filter',
-      tabBarIcon: ({ tintColor }) => <Icon name="sliders" type='font-awesome' size={35} color={tintColor} />,
+      tabBarIcon: ({ tintColor }) => <Icon size={ 20 } name={ 'sliders' } color={ tintColor }/>
     },
   },
-});
-
-export default StackNavigator({
-  Tabs: {
-    screen: Tabs,
-  },
-  Home: {
-    screen: Home,
-  }
 },{
     mode: 'modal',
     headerMode: 'none',
