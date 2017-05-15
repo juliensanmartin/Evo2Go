@@ -1,25 +1,20 @@
 import React from 'react'
 import { TabNavigator, StackNavigator, DrawerNavigator } from 'react-navigation'
 import { Icon } from 'react-native-elements';
-
-import MapScreen from '../screens/Home/index'
-import FilterScreen from '../screens/Filter/index'
-
-const drawerRight = DrawerNavigator({
-  Filter: { screen: FilterScreen }
-}, {
-    drawerPosition: 'right',
-    drawerWidth: 200
-})
+import HomeScreen from '../screens/Home/index'
 
 const homeStack = StackNavigator({
-  Map: { screen: MapScreen }
-  drawerFilter: { screen: drawerRight }
-})
+    Home: { screen: HomeScreen }
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none'
+  }
+)
 
 export default TabNavigator({
-  tabMap: {
-    screen: mapStack,
+  tabHome: {
+    screen: homeStack,
     navigationOptions: {
       tabBarLabel: 'Map',
       tabBarIcon: ({ tintColor }) => <Icon type='font-awesome' size={ 20 } name='map' color={ tintColor }/>

@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "run:packager": "./node_modules/react-native/packager/packager.sh",
+    "run:ios": "react-native run-ios",
     "test": "jest"
   },
   "dependencies": {
@@ -13,6 +15,7 @@
     "react": "15.4.2",
     "react-native": "0.42.3",
     "react-native-elements": "^0.11.2",
+    "react-native-interactable": "0.0.9",
     "react-native-maps": "^0.13.1",
     "react-native-vector-icons": "4.0.0",
     "react-navigation": "^1.0.0-beta.9",

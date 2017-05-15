@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import MapComponent from '../components/Map/map';
-import { fetchCar2GoCars, fetchEvoCars } from '../store/Car/actions';
-import { getAllMarkers, isLoaded } from '../store/Car/selectors';
+import MapComponent from '../../components/Map/map';
+import { fetchCar2GoCars, fetchEvoCars } from '../../store/Car/actions';
+import { getAllMarkers, isLoaded } from '../../store/Car/selectors';
 import { connect } from 'react-redux';
 
-class GetCarsContainer extends Component {
+class MapScreen extends Component {
 
   componentDidMount() {
 		const { dispatch } = this.props;
@@ -23,7 +23,7 @@ class GetCarsContainer extends Component {
   }
 }
 
-GetCarsContainer.propTypes = {
+MapScreen.propTypes = {
   markers: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
@@ -36,4 +36,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(GetCarsContainer);
+export default connect(mapStateToProps)(MapScreen);
