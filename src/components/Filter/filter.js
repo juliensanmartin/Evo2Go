@@ -11,7 +11,10 @@ const Screen = {
 export default class FilterComponent extends Component {
   render() {
     return (
-      <View style={styles.panelContainer}>
+      // Issue : the map does not move or zoom
+      // https://github.com/airbnb/react-native-maps/issues/108 :
+      // Add the property pointerEvents=none to the View which is on the same level as the MapView
+      <View style={styles.panelContainer} pointerEvents={'none'}>
         <Interactable.View
           verticalOnly={true}
           snapPoints={[{y: 0, tension: 0, damping: 1}, {y: -Screen.height + 80}]}
