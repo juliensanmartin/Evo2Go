@@ -20,6 +20,12 @@ const getPin = (type) => (type === 'evoPin') ? evoPin : car2GoPin;
 // we export the class for testing purposes, passing stubs for props
 export default class MapComponent extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {region: initialRegion};
+    this.onRegionChange = this.onRegionChange.bind(this)
+  }
+
   onRegionChange(region) {
     this.setState({ region: region });
     //this.state.region.setValue(region);
@@ -30,7 +36,7 @@ export default class MapComponent extends Component {
     // Read this for more info https://github.com/airbnb/react-native-maps#customizing-the-map-style
     return (
       <StyledView>
-        <MapView.Animated style={styles.map} region={initialRegion} onRegionChange={this.onRegionChange} /*initialRegion={initialRegion} customMapStyle={mapStyle} provider={PROVIDER_GOOGLE}*/>
+        <MapView.Animated style={styles.map} region={this.state.region} onRegionChange={this.onRegionChange} /*initialRegion={initialRegion} customMapStyle={mapStyle} provider={PROVIDER_GOOGLE}*/>
             { this.props.markers.map(marker =>
                 < MapView.Marker key={marker.id} coordinate={marker.latlng} image={getPin(marker.type)}/>
               )
@@ -51,12 +57,12 @@ MapComponent.propTypes = {
   loading: PropTypes.bool.isRequired,
 };
 
-const initialRegion = {
+const initialRegion = new MapView.AnimatedRegion({
   latitude: 49.2800565,
   longitude: -123.1212937,
   latitudeDelta: 0.0922,
   longitudeDelta: 0.0421,
-};
+});
 
 // Usage of styled-components : https://github.com/styled-components/styled-components
 const StyledView = styled.View`
