@@ -24,12 +24,12 @@ export default class MapComponent extends Component {
     // Read this for more info https://github.com/airbnb/react-native-maps#customizing-the-map-style
     return (
       <StyledView>
-        <MapView.Animated style={styles.map} initialRegion={initialRegion} /*customMapStyle={mapStyle} provider={PROVIDER_GOOGLE}*/>
+        <MapView style={styles.map} initialRegion={initialRegion} /*customMapStyle={mapStyle} provider={PROVIDER_GOOGLE}*/>
             { this.props.markers.map(marker =>
                 < MapView.Marker key={marker.id} coordinate={marker.latlng} image={getPin(marker.type)}/>
               )
             }
-        </MapView.Animated>
+        </MapView>
         <ActivityIndicator
           animating={this.props.loading}
           size="large"
@@ -45,12 +45,12 @@ MapComponent.propTypes = {
   loading: PropTypes.bool.isRequired,
 };
 
-const initialRegion = new MapView.AnimatedRegion({
+const initialRegion = {
   latitude: 49.2800565,
   longitude: -123.1212937,
   latitudeDelta: 0.0922,
   longitudeDelta: 0.0421,
-});
+};
 
 // Usage of styled-components : https://github.com/styled-components/styled-components
 const StyledView = styled.View`
