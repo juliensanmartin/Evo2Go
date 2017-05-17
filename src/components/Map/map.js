@@ -1,19 +1,17 @@
 import {
   StyleSheet,
-  Text,
-  Button,
-  Alert,
   View,
   ActivityIndicator,
-  Dimensions
-} from 'react-native';
-import React, { Component, PropTypes } from 'react';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
-import styled from 'styled-components/native';
-import mapStyle from './map.style';
+  TouchableOpacity,
+  Text
+} from 'react-native'
+import React, { Component, PropTypes } from 'react'
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
+import styled from 'styled-components/native'
+import mapStyle from './map.style'
 
-const car2GoPin = require('./assets/car2go_pin.png');
-const evoPin = require('./assets/evo_pin.png');
+const car2GoPin = require('./assets/car2go_pin.png')
+const evoPin = require('./assets/evo_pin.png')
 
 const getPin = (type) => (type === 'evoPin') ? evoPin : car2GoPin;
 
@@ -35,6 +33,14 @@ export default class MapComponent extends Component {
           size="large"
           color="blue"
         />
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('Filter')}
+            style={[styles.bubble, styles.button]}
+          >
+            <Text>Filter</Text>
+          </TouchableOpacity>
+        </View>
       </StyledView>
     );
   }
@@ -43,6 +49,7 @@ export default class MapComponent extends Component {
 MapComponent.propTypes = {
   markers: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
+  navigation: PropTypes.object.isRequired
 };
 
 const initialRegion = {
@@ -67,5 +74,22 @@ const styles = StyleSheet.create({
     // width: Screen.width,
     // height: Screen.height
     ...StyleSheet.absoluteFillObject,
+  },
+  bubble: {
+    backgroundColor: 'rgba(255,255,255,0.7)',
+    paddingHorizontal: 18,
+    paddingVertical: 12,
+    borderRadius: 20,
+  },
+  button: {
+    marginTop: 12,
+    paddingHorizontal: 12,
+    alignItems: 'center',
+    marginHorizontal: 10,
+  },
+  buttonContainer: {
+    flexDirection: 'column',
+    marginVertical: 20,
+    backgroundColor: 'transparent',
   },
 });

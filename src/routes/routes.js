@@ -1,10 +1,13 @@
 import React from 'react'
 import { TabNavigator, StackNavigator, DrawerNavigator } from 'react-navigation'
-import { Icon } from 'react-native-elements';
-import HomeScreen from '../screens/Home/index'
+import { Icon } from 'react-native-elements'
+import MapScreen from '../screens/Map/index'
+import FilterScreen from '../screens/Filter/index'
+
 
 const homeStack = StackNavigator({
-    Home: { screen: HomeScreen }
+    Map: { screen: MapScreen },
+    Filter: { screen: FilterScreen }
   },
   {
     mode: 'modal',

@@ -18,7 +18,7 @@ class MapScreen extends Component {
 
   render() {
     return (
-      <MapComponent markers={this.props.markers} loading={this.props.loading}/>
+      <MapComponent markers={this.props.markers} loading={this.props.loading} navigation={this.props.navigation}/>
     );
   }
 }
@@ -27,6 +27,7 @@ MapScreen.propTypes = {
   markers: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
+  navigation: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
