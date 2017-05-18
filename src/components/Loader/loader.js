@@ -13,7 +13,7 @@ export default class LoaderComponent extends Component {
   componentDidMount() {
     Animated.timing(this.state.progress, {
       toValue: 1,
-      duration: 5000,
+      duration: 2000,
     }).start();
   }
 

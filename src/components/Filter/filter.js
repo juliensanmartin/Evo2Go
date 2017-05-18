@@ -28,9 +28,7 @@ FilterComponent.propTypes = {
 
 // Usage of styled-components : https://github.com/styled-components/styled-components
 const StyledView = styled.View`
-  flex: 1;
   justifyContent: center;
   alignItems: center;
-  alignSelf: stretch;
   backgroundColor: #F5FCFF;
 `;

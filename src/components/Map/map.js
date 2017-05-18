@@ -34,7 +34,6 @@ export default class MapComponent extends Component {
           size="large"
           color="blue"
         />
-        <LoaderComponent />
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate('Filter')}
