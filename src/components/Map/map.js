@@ -9,6 +9,7 @@ import React, { Component, PropTypes } from 'react'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import styled from 'styled-components/native'
 import mapStyle from './map.style'
+import LoaderComponent from '../Loader/loader'
 
 const car2GoPin = require('./assets/car2go_pin.png')
 const evoPin = require('./assets/evo_pin.png')
@@ -33,6 +34,7 @@ export default class MapComponent extends Component {
           size="large"
           color="blue"
         />
+        <LoaderComponent />
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate('Filter')}
