@@ -16,6 +16,10 @@ class Filter extends Component {
   //   ]);
   // }
 
+  static navigationOptions = {
+    title: 'Filter'
+  }
+
   render() {
     return (
       <FilterComponent car2GoSwitchIsOn={this.props.car2GoSwitchIsOn} evoSwitchIsOn={this.props.evoSwitchIsOn}/>
