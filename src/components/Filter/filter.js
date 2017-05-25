@@ -1,34 +1,47 @@
 import React, { Component, PropTypes } from 'react'
-import { StyleSheet, View, Switch, Text } from 'react-native'
+import { View, Switch, Text } from 'react-native'
 import styled from 'styled-components/native'
 
 export default class FilterComponent extends Component {
   render() {
     return (
-      <StyledView>
-        <Switch
-          //onValueChange={(value) => this.setState({eventSwitchIsOn: value})}
-          style={{marginBottom: 10}}
-          value={this.props.evoSwitchIsOn} />
-        <Text>See Evo cars</Text>
-        <Switch
-          //onValueChange={(value) => this.setState({eventSwitchIsOn: value})}
-          style={{marginBottom: 10}}
-          value={this.props.car2GoSwitchIsOn} />
-        <Text>See Car2Go cars</Text>
-      </StyledView>
+      <StyledContainer>
+        <StyledView>
+          <StyledSwitch
+            //onValueChange={(value) => this.setState({eventSwitchIsOn: value})}
+            value={this.props.evoSwitchIsOn} />
+          <Text>EVO</Text>
+        </StyledView>
+        <StyledView>
+          <StyledSwitch
+            //onValueChange={(value) => this.setState({eventSwitchIsOn: value})}
+            value={this.props.car2GoSwitchIsOn} />
+          <Text>CAR2GO</Text>
+        </StyledView>
+      </StyledContainer>
     )
   }
 }
 
 FilterComponent.propTypes = {
   evoSwitchIsOn: PropTypes.bool.isRequired,
-  car2GoSwitchIsOn: PropTypes.bool.isRequired,
+  car2GoSwitchIsOn: PropTypes.bool.isRequired
 }
 
-// Usage of styled-components : https://github.com/styled-components/styled-components
+const StyledContainer = styled.View`
+  flexDirection: column;
+  justifyContent: flex-start;
+  padding: 10;
+  margin: 10;
+`
+
 const StyledView = styled.View`
-  justifyContent: center;
+  flexDirection: row;
+  justifyContent: flex-start;
   alignItems: center;
-  backgroundColor: #F5FCFF;
-`;
+`
+
+const StyledSwitch= styled.Switch`
+  padding: 10;
+  margin: 10;
+`
