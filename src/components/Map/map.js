@@ -1,9 +1,7 @@
 import {
   StyleSheet,
   View,
-  ActivityIndicator,
-  TouchableOpacity,
-  Text
+  ActivityIndicator
 } from 'react-native'
 import React, { Component, PropTypes } from 'react'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
@@ -22,7 +20,7 @@ export default class MapComponent extends Component {
     // the last 2 attributes in comment in MapView are for customize googlemap on IOS, doesn't work :
     // Read this for more info https://github.com/airbnb/react-native-maps#customizing-the-map-style
     return (
-      <StyledView>
+      <MapContainer>
         <MapView style={styles.map} initialRegion={initialRegion} /*customMapStyle={mapStyle} provider={PROVIDER_GOOGLE}*/>
             { this.props.markers.map(marker =>
                 < MapView.Marker key={marker.id} coordinate={marker.latlng} image={getPin(marker.type)}/>
@@ -34,15 +32,7 @@ export default class MapComponent extends Component {
           size="large"
           color="blue"
         />
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('Filter')}
-            style={[styles.bubble, styles.button]}
-          >
-            <Text>Filter</Text>
-          </TouchableOpacity>
-        </View>
-      </StyledView>
+      </MapContainer>
     );
   }
 };
@@ -61,11 +51,10 @@ const initialRegion = {
 };
 
 // Usage of styled-components : https://github.com/styled-components/styled-components
-const StyledView = styled.View`
+const MapContainer = styled.View`
   flex: 1;
   justifyContent: center;
   alignItems: center;
-  alignSelf: stretch;
   backgroundColor: #F5FCFF;
 `;
 
@@ -75,22 +64,5 @@ const styles = StyleSheet.create({
     // width: Screen.width,
     // height: Screen.height
     ...StyleSheet.absoluteFillObject,
-  },
-  bubble: {
-    backgroundColor: 'rgba(255,255,255,0.7)',
-    paddingHorizontal: 18,
-    paddingVertical: 12,
-    borderRadius: 20,
-  },
-  button: {
-    marginTop: 12,
-    paddingHorizontal: 12,
-    alignItems: 'center',
-    marginHorizontal: 10,
-  },
-  buttonContainer: {
-    flexDirection: 'column',
-    marginVertical: 20,
-    backgroundColor: 'transparent',
-  },
+  }
 });

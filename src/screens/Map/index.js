@@ -5,10 +5,6 @@ import { getAllMarkers, isLoaded } from '../../store/Car/selectors';
 import { connect } from 'react-redux';
 
 class MapScreen extends Component {
-  static navigationOptions = {
-    title: 'Map'
-  }
-
   componentDidMount() {
 		const { dispatch } = this.props;
 
