@@ -8,13 +8,13 @@ export default class FilterComponent extends Component {
       <StyledContainer>
         <StyledView>
           <StyledSwitch
-            //onValueChange={(value) => this.setState({eventSwitchIsOn: value})}
+            onValueChange={(value) => this.props.onFilterToggle('SHOW_EVO')}
             value={this.props.evoSwitchIsOn} />
           <Text>EVO</Text>
         </StyledView>
         <StyledView>
           <StyledSwitch
-            //onValueChange={(value) => this.setState({eventSwitchIsOn: value})}
+            onValueChange={(value) => this.props.onFilterToggle('SHOW_CAR2GO')}
             value={this.props.car2GoSwitchIsOn} />
           <Text>CAR2GO</Text>
         </StyledView>
@@ -25,7 +25,8 @@ export default class FilterComponent extends Component {
 
 FilterComponent.propTypes = {
   evoSwitchIsOn: PropTypes.bool.isRequired,
-  car2GoSwitchIsOn: PropTypes.bool.isRequired
+  car2GoSwitchIsOn: PropTypes.bool.isRequired,
+  onFilterToggle: PropTypes.func.isRequired
 }
 
 const StyledContainer = styled.View`

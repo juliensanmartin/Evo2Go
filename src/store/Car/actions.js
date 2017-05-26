@@ -1,4 +1,4 @@
-import { GET_CAR2GO_CARS, GET_EVO_CARS } from './actions.type';
+import { GET_CAR2GO_CARS, GET_EVO_CARS, SET_VISIBILITY_FILTER } from './actions.type';
 import { getAvailableVehicleCar2Go } from '../car2go.api';
 import { getAvailableVehicleEvo } from '../evo.api';
 import { car2goVehicleNormalizer, evoVehicleNormalizer } from './schema';
@@ -31,3 +31,10 @@ export const fetchEvoCars = () => (dispatch, getState) => getAvailableVehicleEvo
     },
     errors => console.error(errors)
   )
+
+  export const setVisibilityFilter = () => (dispatch, filter) => {
+    return dispatch({
+      type: SET_VISIBILITY_FILTER,
+      filter
+    })
+  }

@@ -7,6 +7,7 @@ import { concat, reduce, isEmpty } from 'lodash';
 // Select entities from state
 const getCar2GoVehicles = (state) => state.car.car2go.vehicles;
 const getEvoVehicles = (state) => state.car.evo.vehicles;
+const getVisibilityFilter = (state) => state.car.visibilityFilter;
 
 const getCar2GoMarkers = createSelector(
   getCar2GoVehicles,
@@ -43,6 +44,20 @@ const getAllMarkers = createSelector(
   (car2goMarkers, evoMarkers) => concat(car2goMarkers, evoMarkers)
 );
 
+const getVisibleMarkers = createSelector(
+  [ getVisibilityFilter, getAllMarkers ],
+  (visibilityFilter, markers) => {
+    switch (visibilityFilter) {
+      case 'SHOW_ALL':
+        return markers
+      case 'SHOW_EVO':
+        return markers.filter(({type}) => type === 'evoPin')
+      case 'SHOW_CAR2GO':
+        return markers.filter(({type}) => type === 'car2GoPin')
+    }
+  }
+)
+
 const isLoaded = createSelector(
   [getCar2GoVehicles, getEvoVehicles],
   (car2goVehicles, evoVehicle) => !isEmpty(car2goVehicles) && !isEmpty(evoVehicle)
@@ -51,4 +66,5 @@ const isLoaded = createSelector(
 export {
   getAllMarkers,
   isLoaded,
+  getVisibleMarkers
 };

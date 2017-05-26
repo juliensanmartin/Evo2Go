@@ -29,6 +29,15 @@ const evo = (state = initialState, action) => {
   }
 };
 
+const visibilityFilter = (state = 'SHOW_ALL', action) => {
+  switch (action.type) {
+    case 'SET_VISIBILITY_FILTER':
+      return action.filter
+    default:
+      return state
+  }
+}
+
 export default car = combineReducers({
-	car2go, evo
+	car2go, evo, visibilityFilter
 });
