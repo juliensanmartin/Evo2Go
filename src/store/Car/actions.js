@@ -1,7 +1,12 @@
-import { GET_CAR2GO_CARS, GET_EVO_CARS, SET_VISIBILITY_FILTER } from './actions.type';
-import { getAvailableVehicleCar2Go } from '../car2go.api';
-import { getAvailableVehicleEvo } from '../evo.api';
-import { car2goVehicleNormalizer, evoVehicleNormalizer } from './schema';
+import {
+  GET_CAR2GO_CARS,
+  GET_EVO_CARS,
+  SET_EVO_VISIBILITY,
+  SET_CAR2GO_VISIBILITY
+ } from './actions.type'
+import { getAvailableVehicleCar2Go } from '../car2go.api'
+import { getAvailableVehicleEvo } from '../evo.api'
+import { car2goVehicleNormalizer, evoVehicleNormalizer } from './schema'
 
 // this is a thunk (redux-thunk)
 export const fetchCar2GoCars = () => (dispatch, getState) => getAvailableVehicleCar2Go()
@@ -19,6 +24,13 @@ export const fetchCar2GoCars = () => (dispatch, getState) => getAvailableVehicle
     errors => console.error(errors)
   )
 
+export const setCar2GoVisibility = (visible) => {
+  return {
+    type: SET_CAR2GO_VISIBILITY,
+    visible
+  }
+}
+
 export const fetchEvoCars = () => (dispatch, getState) => getAvailableVehicleEvo()
   .then(data => {
     normalized = evoVehicleNormalizer(data);
@@ -32,9 +44,9 @@ export const fetchEvoCars = () => (dispatch, getState) => getAvailableVehicleEvo
     errors => console.error(errors)
   )
 
-  export const setVisibilityFilter = () => (dispatch, filter) => {
-    return dispatch({
-      type: SET_VISIBILITY_FILTER,
-      filter
-    })
-  }
+export const setEvoVisibility = (visible) => (dispatch) => {
+  return dispatch({
+    type: SET_EVO_VISIBILITY,
+    visible
+  })
+}

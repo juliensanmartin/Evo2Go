@@ -1,13 +1,14 @@
-import { createSelector } from 'reselect';
-import { concat, reduce, isEmpty } from 'lodash';
+import { createSelector } from 'reselect'
+import { concat, reduce, isEmpty, reject } from 'lodash'
 
 // Selector for car model : define and transform data for component usage :
 // http://redux.js.org/docs/recipes/ComputingDerivedData.html
 
 // Select entities from state
-const getCar2GoVehicles = (state) => state.car.car2go.vehicles;
-const getEvoVehicles = (state) => state.car.evo.vehicles;
-const getVisibilityFilter = (state) => state.car.visibilityFilter;
+const getCar2GoVehicles = (state) => state.car.car2go.vehicles
+const getEvoVehicles = (state) => state.car.evo.vehicles
+const getCar2GoVisibility = (state) => state.car.car2go.visible
+const getEvoVisibility = (state) => state.car.evo.visible
 
 const getCar2GoMarkers = createSelector(
   getCar2GoVehicles,
@@ -45,16 +46,16 @@ const getAllMarkers = createSelector(
 );
 
 const getVisibleMarkers = createSelector(
-  [ getVisibilityFilter, getAllMarkers ],
-  (visibilityFilter, markers) => {
-    switch (visibilityFilter) {
-      case 'SHOW_ALL':
-        return markers
-      case 'SHOW_EVO':
-        return markers.filter(({type}) => type === 'evoPin')
-      case 'SHOW_CAR2GO':
-        return markers.filter(({type}) => type === 'car2GoPin')
+  [ getCar2GoVisibility, getEvoVisibility, getAllMarkers ],
+  (car2goVisible, evoVisible, markers) => {
+    let result = markers
+    if (!car2goVisible) {
+      result = reject(result, {type:'car2GoPin'})
     }
+    if (!evoVisible) {
+      result = reject(result, {type:'evoPin'})
+    }
+    return result
   }
 )
 
@@ -66,5 +67,7 @@ const isLoaded = createSelector(
 export {
   getAllMarkers,
   isLoaded,
-  getVisibleMarkers
-};
+  getVisibleMarkers,
+  getCar2GoVisibility,
+  getEvoVisibility
+}

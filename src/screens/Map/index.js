@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import MapComponent from '../../components/Map/map';
 import { fetchCar2GoCars, fetchEvoCars } from '../../store/Car/actions';
-import { getAllMarkers, isLoaded } from '../../store/Car/selectors';
+import { getVisibleMarkers, isLoaded } from '../../store/Car/selectors';
 import { connect } from 'react-redux';
 
 class MapScreen extends Component {
@@ -31,7 +31,7 @@ MapScreen.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    markers: getAllMarkers(state),
+    markers: getVisibleMarkers(state),
     loading: !isLoaded(state),
   };
 }
