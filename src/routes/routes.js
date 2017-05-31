@@ -3,6 +3,22 @@ import { TabNavigator, StackNavigator, DrawerNavigator } from 'react-navigation'
 import { Icon } from 'react-native-elements'
 import MapScreen from '../screens/Map/index'
 import FilterScreen from '../screens/Filter/index'
+import CarDetailsScreen from '../components/CarDetails/car-details'
+
+const carDetailsStack = StackNavigator({
+    CarDetails: {
+      screen: CarDetailsScreen
+    }
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none',
+    cardStyle: {
+      height: 50,
+      backgroundColor: 'purple'
+    }
+  }
+)
 
 const homeStack = StackNavigator({
     Map: {
@@ -24,6 +40,9 @@ const homeStack = StackNavigator({
       navigationOptions: {
         title: 'Filter'
       }
+    },
+    CarDetailsStack: {
+      screen: carDetailsStack
     }
   }
 )

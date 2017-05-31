@@ -23,7 +23,11 @@ export default class MapComponent extends Component {
       <MapContainer>
         <MapView style={styles.map} initialRegion={initialRegion} /*customMapStyle={mapStyle} provider={PROVIDER_GOOGLE}*/>
             { this.props.markers.map(marker =>
-                < MapView.Marker key={marker.id} coordinate={marker.latlng} image={getPin(marker.type)}/>
+                < MapView.Marker
+                  key={marker.id}
+                  coordinate={marker.latlng}
+                  image={getPin(marker.type)}
+                  onPress={() => this.props.navigation.navigate('CarDetailsStack', { id: marker.id })} />
               )
             }
         </MapView>
