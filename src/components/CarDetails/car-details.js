@@ -6,7 +6,7 @@ export default class CarDetailsComponent extends Component {
   render() {
     return (
       <StyledContainer>
-        <Text>ID : {this.props.navigation.state.id}</Text>
+        <Text>ID : {this.props.navigation.state.params.id}</Text>
       </StyledContainer>
     )
   }
@@ -21,4 +21,6 @@ const StyledContainer = styled.View`
   justifyContent: flex-start;
   padding: 10;
   margin: 10;
+  backgroundColor: red;
+  height: 50;
 `

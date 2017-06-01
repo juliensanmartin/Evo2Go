@@ -32,14 +32,16 @@ FilterComponent.propTypes = {
 
 const StyledContainer = styled.View`
   flexDirection: column;
-  justifyContent: flex-start;
+  justifyContent: space-around;
   padding: 10;
   margin: 10;
+  height: 150;
+  backgroundColor: rgba(135,206,250,0.5);
 `
 
 const StyledView = styled.View`
   flexDirection: row;
-  justifyContent: flex-start;
+  justifyContent: space-between;
   alignItems: center;
 `
 

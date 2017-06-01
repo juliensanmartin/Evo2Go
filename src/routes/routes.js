@@ -5,21 +5,6 @@ import MapScreen from '../screens/Map/index'
 import FilterScreen from '../screens/Filter/index'
 import CarDetailsScreen from '../components/CarDetails/car-details'
 
-const carDetailsStack = StackNavigator({
-    CarDetails: {
-      screen: CarDetailsScreen
-    }
-  },
-  {
-    mode: 'modal',
-    headerMode: 'none',
-    cardStyle: {
-      height: 50,
-      backgroundColor: 'purple'
-    }
-  }
-)
-
 const homeStack = StackNavigator({
     Map: {
       screen: MapScreen,
@@ -41,8 +26,17 @@ const homeStack = StackNavigator({
         title: 'Filter'
       }
     },
-    CarDetailsStack: {
-      screen: carDetailsStack
+    CarDetails: {
+      screen: CarDetailsScreen,
+      navigationOptions: {
+        title: 'Details'
+      }
+    }
+  },
+  {
+    cardStyle: {
+      backgroundColor: 'transparent',
+      opacity: 1
     }
   }
 )
