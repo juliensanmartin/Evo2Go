@@ -9,6 +9,7 @@ const getCar2GoVehicles = (state) => state.car.car2go.vehicles
 const getEvoVehicles = (state) => state.car.evo.vehicles
 const getCar2GoVisibility = (state) => state.car.car2go.visible
 const getEvoVisibility = (state) => state.car.evo.visible
+const getCarDetailsId = (state) => state.car.carDetails.id
 
 const getCar2GoMarkers = createSelector(
   getCar2GoVehicles,

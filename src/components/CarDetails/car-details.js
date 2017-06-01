@@ -6,14 +6,14 @@ export default class CarDetailsComponent extends Component {
   render() {
     return (
       <StyledContainer>
-        <Text>ID : {this.props.navigation.state.params.id}</Text>
+        <Text>ID : {this.props.car.id}</Text>
       </StyledContainer>
     )
   }
 }
 
 CarDetailsComponent.propTypes = {
-  navigation: PropTypes.object.isRequired
+  car: PropTypes.object.isRequired
 }
 
 const StyledContainer = styled.View`
@@ -22,5 +22,5 @@ const StyledContainer = styled.View`
   padding: 10;
   margin: 10;
   backgroundColor: red;
-  height: 50;
+  height: 300;
 `

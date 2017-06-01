@@ -3,7 +3,7 @@ import { TabNavigator, StackNavigator, DrawerNavigator } from 'react-navigation'
 import { Icon } from 'react-native-elements'
 import MapScreen from '../screens/Map/index'
 import FilterScreen from '../screens/Filter/index'
-import CarDetailsScreen from '../components/CarDetails/car-details'
+import CarDetailsScreen from '../screens/CarDetails/index'
 
 const homeStack = StackNavigator({
     Map: {
