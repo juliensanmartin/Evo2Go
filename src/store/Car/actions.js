@@ -53,7 +53,6 @@ export const setEvoVisibility = (visible) => (dispatch) => {
 }
 
 export const fetchCarDetails = (id) => (dispatch) => {
-  console.log('id action ; ',id)
   return dispatch({
     type: GET_CAR_DETAILS,
     id
