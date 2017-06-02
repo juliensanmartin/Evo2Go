@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import { concat, reduce, isEmpty, reject } from 'lodash'
+import { concat, reduce, isEmpty, reject, find } from 'lodash'
 
 // Selector for car model : define and transform data for component usage :
 // http://redux.js.org/docs/recipes/ComputingDerivedData.html
@@ -9,7 +9,7 @@ const getCar2GoVehicles = (state) => state.car.car2go.vehicles
 const getEvoVehicles = (state) => state.car.evo.vehicles
 const getCar2GoVisibility = (state) => state.car.car2go.visible
 const getEvoVisibility = (state) => state.car.evo.visible
-const getCarDetailsId = (state) => state.car.carDetails.id
+const getCarDetailsId = (state) => state.car.carDetails
 
 const getCar2GoMarkers = createSelector(
   getCar2GoVehicles,
@@ -63,12 +63,22 @@ const getVisibleMarkers = createSelector(
 const isLoaded = createSelector(
   [getCar2GoVehicles, getEvoVehicles],
   (car2goVehicles, evoVehicle) => !isEmpty(car2goVehicles) && !isEmpty(evoVehicle)
-);
+)
+
+const getCarDetails = createSelector(
+  [getCarDetailsId, getAllMarkers],
+  (id, markers) => {
+    console.log('id',id)
+    console.log('huhu',find(markers, {id}))
+    return find(markers, {id})
+  }
+)
 
 export {
   getAllMarkers,
   isLoaded,
   getVisibleMarkers,
   getCar2GoVisibility,
-  getEvoVisibility
+  getEvoVisibility,
+  getCarDetails
 }

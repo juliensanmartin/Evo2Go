@@ -1,34 +1,35 @@
 import React, { Component, PropTypes } from 'react';
 import CarDetailsComponent from '../../components/CarDetails/car-details';
 import { fetchCarDetails } from '../../store/Car/actions';
-import { getCarDetails, isCarFetch } from '../../store/Car/selectors';
+import { getCarDetails } from '../../store/Car/selectors';
 import { connect } from 'react-redux';
 
 class CarDetailsScreen extends Component {
   componentDidMount() {
 		const { dispatch, navigation } = this.props
-    dispatch(fetchCarDetails(navigation.state.params.id))
+    console.log('componentWillMount ', navigation.state.params)
+    Promise.all([
+      dispatch(fetchCarDetails(navigation.state.params.id)),
+    ]);
   }
 
   render() {
+    console.log('car ; ',this.props.car)
     return (
-      <CarDetailsComponent car={this.props.markers} loading={this.props.loading}/>
+      <CarDetailsComponent car={this.props.car}/>
     );
   }
 }
 
 CarDetailsScreen.propTypes = {
-  id: PropTypes.string.isRequired,
   car: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
   navigation: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
   return {
-    car: getCarDetails(state),
-    loading: !isCarFetch(state)
+    car: getCarDetails(state)
   }
 }
 

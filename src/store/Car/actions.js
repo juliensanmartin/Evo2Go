@@ -2,7 +2,8 @@ import {
   GET_CAR2GO_CARS,
   GET_EVO_CARS,
   SET_EVO_VISIBILITY,
-  SET_CAR2GO_VISIBILITY
+  SET_CAR2GO_VISIBILITY,
+  GET_CAR_DETAILS
  } from './actions.type'
 import { getAvailableVehicleCar2Go } from '../car2go.api'
 import { getAvailableVehicleEvo } from '../evo.api'
@@ -48,5 +49,13 @@ export const setEvoVisibility = (visible) => (dispatch) => {
   return dispatch({
     type: SET_EVO_VISIBILITY,
     visible
+  })
+}
+
+export const fetchCarDetails = (id) => (dispatch) => {
+  console.log('id action ; ',id)
+  return dispatch({
+    type: GET_CAR_DETAILS,
+    id
   })
 }
