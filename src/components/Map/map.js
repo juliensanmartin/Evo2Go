@@ -27,7 +27,7 @@ export default class MapComponent extends Component {
                   key={marker.id}
                   coordinate={marker.latlng}
                   image={getPin(marker.type)}
-                  onPress={() => this.props.navigation.navigate('CarDetails', { id: marker.id })} />
+                  onPress={() => this.props.navigation.navigate('CarDetails', { marker })} />
               )
             }
         </MapView>

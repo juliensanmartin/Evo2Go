@@ -20,6 +20,9 @@ const getCar2GoMarkers = createSelector(
         longitude: value.coordinates[0],
       },
       type: 'car2GoPin',
+      address: value.address,
+      fuel: value.fuel,
+      name: value.name
     })
     return result;
   }, [])
@@ -35,6 +38,9 @@ const getEvoMarkers = createSelector(
         longitude: value.Lon,
       },
       type: 'evoPin',
+      address: value.Address,
+      fuel: value.Fuel,
+      name: value.Name
     })
     return result;
   }, [])
