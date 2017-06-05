@@ -50,8 +50,8 @@ MapComponent.propTypes = {
 const initialRegion = {
   latitude: 49.2800565,
   longitude: -123.1212937,
-  latitudeDelta: 0.0922,
-  longitudeDelta: 0.0421,
+  latitudeDelta: 0.0086,
+  longitudeDelta: 0.0068,
 };
 
 // Usage of styled-components : https://github.com/styled-components/styled-components
