@@ -17,7 +17,7 @@ export default class FilterComponent extends Component {
         <StyledView>
           <StyledLeftView>
             <StyledImage
-              source={require('./assets/Car2go_logo.png')}
+              source={require('../assets/Car2go_logo.png')}
             />
             <Text>CAR2GO</Text>
           </StyledLeftView>
