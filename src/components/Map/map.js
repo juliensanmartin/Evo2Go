@@ -8,6 +8,7 @@ import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import styled from 'styled-components/native'
 import mapStyle from './map.style'
 import LoaderComponent from '../Loader/loader'
+import IconMarkerComponent from '../../components/IconMarker/icon-marker';
 
 const car2GoPin = require('./assets/car2go_pin.png')
 const evoPin = require('./assets/evo_pin.png')
@@ -26,8 +27,9 @@ export default class MapComponent extends Component {
                 < MapView.Marker
                   key={marker.id}
                   coordinate={marker.latlng}
-                  image={getPin(marker.type)}
-                  onPress={() => this.props.navigation.navigate('CarDetails', { marker })} />
+                  onPress={() => this.props.navigation.navigate('CarDetails', { marker })} >
+                    <IconMarkerComponent marker={marker} />
+                </ MapView.Marker>
               )
             }
         </MapView>
