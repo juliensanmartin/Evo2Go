@@ -5,7 +5,7 @@ This README would normally document whatever steps are necessary to get your app
 ### Tasks ###
 * cleanup
 * Geolocalisation - put initialRegion in store
-* Click on markers -> modal popup
+* *Click on markers -> modal popup*
 * Splash screen
 * Reload every 5-10 seconds
 * Integrate interactable
@@ -17,6 +17,8 @@ This README would normally document whatever steps are necessary to get your app
 * Add modo
 * Add bus
 * Fastest way (cheapest way)
+* Add distance/time from car (carDetails)
+* Standardise color
 
 ### What is this repository for? ###
 
