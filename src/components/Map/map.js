@@ -10,10 +10,11 @@ import mapStyle from './map.style'
 import LoaderComponent from '../Loader/loader'
 import IconMarkerComponent from '../../components/IconMarker/icon-marker';
 
-const car2GoPin = require('./assets/car2go_pin.png')
-const evoPin = require('./assets/evo_pin.png')
-
-const getPin = (type) => (type === 'evoPin') ? evoPin : car2GoPin;
+// to be removed soon
+// const car2GoPin = require('./assets/car2go_pin.png')
+// const evoPin = require('./assets/evo_pin.png')
+//
+// const getPin = (type) => (type === 'evoPin') ? evoPin : car2GoPin;
 
 // we export the class for testing purposes, passing stubs for props
 export default class MapComponent extends Component {

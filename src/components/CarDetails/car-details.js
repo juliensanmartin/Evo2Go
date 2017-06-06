@@ -16,23 +16,33 @@ export default class CarDetailsComponent extends Component {
     return (
       <StyledContainer>
         <ImageContainer>
-          <StyledImage
-            source={logo}
-          />
+          <StyledImage source={logo}/>
         </ImageContainer>
+
         <DetailsContainer>
-          <ViewItem>
-            <Icon reverse type='font-awesome' size={ 20 } name='map-marker' color='#6699ff'/>
-            <Text>{address}</Text>
-          </ViewItem>
-          <ViewItem>
-            <Icon reverse type='ionicon' size={ 20 } name='ios-speedometer' color='#6699ff'/>
-            <Badge value={fuel} containerStyle={{ backgroundColor: fuelColor, width:50, height:20 }} />
-          </ViewItem>
-          <ViewItem>
-            <Icon reverse type='font-awesome' size={ 20 } name='id-card' color='#6699ff'/>
-            <Text>{name}</Text>
-          </ViewItem>
+          <ViewMainDetails>
+            <ViewName>
+              <StyledText>{name}</StyledText>
+              <StyledTextSmall>{address}</StyledTextSmall>
+            </ViewName>
+            <Icon type='ionicon' size={ 50 } name='ios-navigate' color='#6699ff'/>
+          </ViewMainDetails>
+          <ViewSecondaryDetails>
+            <ViewItem>
+              <Icon type='ionicon' size={ 50 } name='ios-speedometer' color='#99A3A4'/>
+              <ViewName>
+                <StyledText>{fuel}%</StyledText>
+                <StyledTextSmall>Fuel level</StyledTextSmall>
+              </ViewName>
+            </ViewItem>
+            <ViewItem>
+              <Icon type='ionicon' size={ 50 } name='ios-clock' color='#99A3A4'/>
+              <ViewName>
+                <StyledText>Distance</StyledText>
+                <StyledTextSmall>Time</StyledTextSmall>
+              </ViewName>
+            </ViewItem>
+          </ViewSecondaryDetails>
         </DetailsContainer>
       </StyledContainer>
     )
@@ -59,6 +69,24 @@ const DetailsContainer = styled.View`
   margin: 10;
 `
 
+const ViewMainDetails = styled.View`
+  flexDirection: row;
+  justifyContent: space-between;
+  alignItems: center;
+`
+
+const ViewSecondaryDetails = styled.View`
+  flexDirection: row;
+  justifyContent: space-between;
+  alignItems: center;
+`
+
+const ViewName = styled.View`
+  flexDirection: column;
+  justifyContent: center;
+  margin: 10;
+`
+
 const ViewItem = styled.View`
   flexDirection: row;
   justifyContent: space-between;
@@ -74,4 +102,13 @@ const ImageContainer = styled.View`
 const StyledImage= styled.Image`
   height: 150;
   width: 250;
+`
+
+const StyledText= styled.Text`
+  color: #99A3A4;
+`
+
+const StyledTextSmall= styled.Text`
+  color: #99A3A4;
+  fontSize: 10;
 `
