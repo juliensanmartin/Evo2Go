@@ -6,13 +6,23 @@ import { connect } from 'react-redux'
 
 class MapScreen extends Component {
   componentDidMount() {
-		const { dispatch } = this.props
+		//const { dispatch } = this.props
 
-    // To run in parallel
+    // Fetch api every 15 seconds
+    this.interval = setInterval(this.fetchCars, 5000)
+  }
+
+  fetchCars() {
+    const { dispatch } = this.props
+    console.log('HUHUHUHUHUHUHU')
     Promise.all([
       dispatch(fetchCar2GoCars()),
       dispatch(fetchEvoCars())
     ])
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
   }
 
   render() {
