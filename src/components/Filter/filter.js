@@ -8,7 +8,8 @@ export default class FilterComponent extends Component {
       <StyledContainer>
         <StyledView>
           <StyledLeftView>
-            <Text>EVO</Text>
+            <StyledImage source={require('../assets/evo_logo.png')}/>
+            <StyledText>EVO</StyledText>
           </StyledLeftView>
           <StyledSwitch
             onValueChange={this.props.onEvoToggle}
@@ -16,10 +17,8 @@ export default class FilterComponent extends Component {
         </StyledView>
         <StyledView>
           <StyledLeftView>
-            <StyledImage
-              source={require('../assets/Car2go_logo.png')}
-            />
-            <Text>CAR2GO</Text>
+            <StyledImage source={require('../assets/Car2go_logo.png')}/>
+            <StyledText>CAR2GO</StyledText>
           </StyledLeftView>
           <StyledSwitch
             onValueChange={this.props.onCar2GoToggle}
@@ -42,8 +41,8 @@ const StyledContainer = styled.View`
   justifyContent: space-around;
   padding: 10;
   margin: 10;
-  height: 150;
-  backgroundColor: rgba(135,206,250,0.5);
+  height: 100;
+  backgroundColor: rgba(255,255,255,0.9);
 `
 
 const StyledView = styled.View`
@@ -66,4 +65,8 @@ const StyledImage= styled.Image`
   height: 20;
   width: 20;
   marginHorizontal: 10;
+`
+
+const StyledText= styled.Text`
+  color: #99A3A4;
 `
