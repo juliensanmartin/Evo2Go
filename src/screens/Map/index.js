@@ -5,24 +5,29 @@ import { getVisibleMarkers, isLoaded } from '../../store/Car/selectors'
 import { connect } from 'react-redux'
 
 class MapScreen extends Component {
-  componentDidMount() {
-		//const { dispatch } = this.props
-
-    // Fetch api every 15 seconds
-    this.interval = setInterval(this.fetchCars, 5000)
+  state = {
+    timer: null
   }
 
-  fetchCars() {
-    const { dispatch } = this.props
-    console.log('HUHUHUHUHUHUHU')
+  componentDidMount() {
+    let timer = setInterval(() => {
+      Promise.all([
+        this.props.dispatch(fetchCar2GoCars()),
+        this.props.dispatch(fetchEvoCars())
+      ])
+    }, 20000)
+    this.setState({timer})
+
+    // Duplicate here to run the first time and because the setInterval
+    // does not work when in Debugging Mode on Chrome
     Promise.all([
-      dispatch(fetchCar2GoCars()),
-      dispatch(fetchEvoCars())
+      this.props.dispatch(fetchCar2GoCars()),
+      this.props.dispatch(fetchEvoCars())
     ])
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval)
+    this.clearInterval(this.state.timer)
   }
 
   render() {
