@@ -4,10 +4,10 @@ This README would normally document whatever steps are necessary to get your app
 
 ### Tasks ###
 * cleanup
-* Geolocalisation - put initialRegion in store
+* *Geolocalisation - put initialRegion in store*
 * *Click on markers -> modal popup*
 * Splash screen
-* Reload every 5-10 seconds
+* *Reload every 20 seconds*
 * Integrate interactable
 * Cool loader
 * Refactor filter screen
