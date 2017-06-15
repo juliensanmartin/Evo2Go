@@ -1,0 +1,1 @@
+export const GET_CURRENT_DISTANCE = 'car/GET_CURRENT_DISTANCE'

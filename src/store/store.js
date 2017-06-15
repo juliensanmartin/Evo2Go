@@ -3,9 +3,10 @@ import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import devTools from 'remote-redux-devtools';
 import car from './Car/reducers';
+import distance from './Distance/reducers';
 
 const appReducer = combineReducers({
-	car,
+	car, distance
 });
 
 const enhancer = compose(
