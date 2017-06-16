@@ -17,7 +17,8 @@ This README would normally document whatever steps are necessary to get your app
 * Add modo
 * Add bus
 * Fastest way (cheapest way)
-* Add distance/time from car (carDetails)
+* *Add distance/time from car (carDetails)*
+* CarDetails get direction
 * Standardise color
 
 ### What is this repository for? ###
