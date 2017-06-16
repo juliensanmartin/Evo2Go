@@ -5,11 +5,10 @@ import {
 const distance = (state = {}, action) => {
   switch (action.type) {
     case GET_CURRENT_DISTANCE:
-      return {
-        ...state,
-        distance: action.distance
-      }
+      return action.distance
     default:
       return state
   }
 }
+
+export default distance

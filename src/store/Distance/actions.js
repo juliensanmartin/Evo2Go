@@ -5,13 +5,14 @@ import { getTimeAndDistance } from '../google-map.api'
 
 export const fetchDistance = (origin, destination) => dispatch =>
   getTimeAndDistance(origin, destination)
-    .then(({distance, duration}) => {
-        console.log(distance, duration)
+    .then(({rows}) => {
+        const distance = rows[0].elements[0].distance.text
+        const duration = rows[0].elements[0].duration.text
         return dispatch({
           type: GET_CURRENT_DISTANCE,
           distance: {
-            distance: distance.text,
-            duration: disatance.text
+            distance,
+            duration
           }
         })
       },

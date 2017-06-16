@@ -10,7 +10,6 @@ class CarDetails extends Component {
   }
 
   render() {
-    console.log(this)
     return (
       <CarDetailsComponent
         marker={this.props.navigation.state.params.marker}
