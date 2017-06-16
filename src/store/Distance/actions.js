@@ -3,10 +3,10 @@ import {
  } from './actions.type'
 import { getTimeAndDistance } from '../google-map.api'
 
-// this is a thunk (redux-thunk)
-export const fetchDistance = (origin, destination) => dispatch =>
-  getTimeAndDistance(origin, destination)
-    .then({distance, duration}} => {
+export const fetchDistance = (origin, destination) => dispatch => {
+  console.log(origin, destination)
+  return getTimeAndDistance(origin, destination)
+    .then(({distance, duration}) => {
         return dispatch({
           type: GET_CURRENT_DISTANCE,
           distance: {
@@ -14,6 +14,7 @@ export const fetchDistance = (origin, destination) => dispatch =>
             duration: disatance.text
           }
         })
-      }
+      },
       errors => console.error(errors)
     )
+  }

@@ -5,11 +5,8 @@ import { Badge, Icon } from 'react-native-elements'
 
 export default class CarDetailsComponent extends Component {
   render() {
-    const { type, address, fuel, name } = this.props.navigation.state.params.marker
-    let fuelColor = 'green'
-    if (fuel > 20 && fuel < 50) fuelColor = 'orange'
-    if (fuel <= 20) fuelColor = 'red'
-
+    const { type, address, fuel, name } = this.props.marker
+    const { distance, duration } = this.props.distance
     let logo
     if (type==='evoPin') logo=require('../assets/evo_car.png')
     if (type==='car2GoPin') logo=require('../assets/car2go_car.png')
@@ -38,8 +35,8 @@ export default class CarDetailsComponent extends Component {
             <ViewItem>
               <Icon type='ionicon' size={ 50 } name='ios-clock' color='#99A3A4'/>
               <ViewName>
-                <StyledText>Distance</StyledText>
-                <StyledTextSmall>Time</StyledTextSmall>
+                <StyledText>{distance}</StyledText>
+                <StyledTextSmall>{duration}</StyledTextSmall>
               </ViewName>
             </ViewItem>
           </ViewSecondaryDetails>
@@ -50,7 +47,8 @@ export default class CarDetailsComponent extends Component {
 }
 
 CarDetailsComponent.propTypes = {
-  navigation: PropTypes.object.isRequired
+  marker: PropTypes.object.isRequired,
+  distance: PropTypes.object.isRequired
 }
 
 const StyledContainer = styled.View`

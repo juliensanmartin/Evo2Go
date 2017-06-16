@@ -7,7 +7,7 @@ const distance = (state = {}, action) => {
     case GET_CURRENT_DISTANCE:
       return {
         ...state,
-        action.distance
+        distance: action.distance
       }
     default:
       return state
