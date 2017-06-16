@@ -4,7 +4,8 @@ const googleMapConfig = {
 }
 
 export const getTimeAndDistance = (origin, destination) => {
-  const url = `${googleMapConfig.url}?origins=${origin.lat},${origin.lon}&destinations=${destination.lat},${destination.lon}&key=${googleMapConfig.key}&mode=walking`
+	console.log('huhuh :', origin, destination)
+  const url = `${googleMapConfig.url}?origins=${origin.latitude},${origin.longitude}&destinations=${destination.latitude},${destination.longitude}&key=${googleMapConfig.key}&mode=walking`
   return fetch(url)
     .then(response => response.rows.elements[0])
     .catch(error => {

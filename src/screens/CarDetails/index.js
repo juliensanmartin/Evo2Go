@@ -4,14 +4,13 @@ import { fetchDistance } from '../../store/Distance/actions'
 import { connect } from 'react-redux'
 
 class CarDetails extends Component {
-  componentDidMount() {
-    console.log('huhuhuhuhu')
-    const {latitude, longitude} = this.props.navigation.state.params.currentPosition
-    this.props.dispatch(fetchDistance(latitude, longitude))
+  componentWillMount() {
+    const {currentPosition, marker} = this.props.navigation.state.params
+    this.props.dispatch(fetchDistance(currentPosition, marker.latlng))
   }
 
   render() {
-    console.log('hahaha')
+    console.log(this)
     return (
       <CarDetailsComponent
         marker={this.props.navigation.state.params.marker}
