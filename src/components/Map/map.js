@@ -56,7 +56,8 @@ export default class MapComponent extends Component {
           showsPointsOfInterest={false}
           showsBuildings={false}
           style={styles.map}>
-            { this.props.markers.map(marker =>
+            {
+              this.props.markers.map(marker =>
                 < MapView.Marker
                   key={marker.id}
                   coordinate={marker.latlng}
@@ -65,6 +66,13 @@ export default class MapComponent extends Component {
                 </ MapView.Marker>
               )
             }
+            { this.props.direction &&
+                <MapView.Polyline
+                  coordinates={this.props.direction}
+                  strokeWidth={4}
+                  strokeColor="#6699ff"/>
+            }
+
         </MapView>
         <ActivityIndicator
           animating={this.props.loading}
@@ -79,7 +87,8 @@ export default class MapComponent extends Component {
 MapComponent.propTypes = {
   markers: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object.isRequired,
+  direction: PropTypes.array
 }
 
 // Usage of styled-components : https://github.com/styled-components/styled-components

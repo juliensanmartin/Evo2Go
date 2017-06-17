@@ -22,7 +22,8 @@ export default class CarDetailsComponent extends Component {
               <StyledText>{name}</StyledText>
               <StyledTextSmall>{address}</StyledTextSmall>
             </ViewName>
-            <Icon type='ionicon' size={ 50 } name='ios-navigate' color='#6699ff'/>
+            <Icon type='ionicon' size={ 50 } name='ios-navigate' color='#6699ff'
+              onPress={this.props.onDirectionPress}/>
           </ViewMainDetails>
           <ViewSecondaryDetails>
             <ViewItem>
@@ -48,7 +49,8 @@ export default class CarDetailsComponent extends Component {
 
 CarDetailsComponent.propTypes = {
   marker: PropTypes.object.isRequired,
-  distance: PropTypes.object.isRequired
+  distance: PropTypes.object.isRequired,
+  onDirectionPress: PropTypes.func.isRequired
 }
 
 const StyledContainer = styled.View`

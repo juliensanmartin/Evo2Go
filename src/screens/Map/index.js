@@ -35,7 +35,8 @@ class MapScreen extends Component {
       <MapComponent
         markers={this.props.markers}
         loading={this.props.loading}
-        navigation={this.props.navigation}/>
+        navigation={this.props.navigation}
+        direction={this.props.direction}/>
     )
   }
 }
@@ -50,7 +51,8 @@ MapScreen.propTypes = {
 function mapStateToProps(state) {
   return {
     markers: getVisibleMarkers(state),
-    loading: !isLoaded(state)
+    loading: !isLoaded(state),
+    direction: state.distance.direction
   }
 }
 
