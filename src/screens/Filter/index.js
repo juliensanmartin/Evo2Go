@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
-import FilterComponent from '../../components/Filter/filter';
-import { setEvoVisibility, setCar2GoVisibility, setBusVisibility } from '../../store/Car/actions';
-import { getCar2GoVisibility, getEvoVisibility, getBusVisibility } from '../../store/Car/selectors';
+import React, { Component, PropTypes } from 'react'
+import FilterComponent from '../../components/Filter/filter'
+import { setEvoVisibility, setCar2GoVisibility, setBusVisibility } from '../../store/Car/actions'
+import { getCar2GoVisibility, getEvoVisibility, getBusVisibility } from '../../store/Car/selectors'
 import { connect } from 'react-redux';
 
 class Filter extends Component {
@@ -13,8 +13,8 @@ class Filter extends Component {
         onEvoToggle={this.props.onEvoToggle}
         onCar2GoToggle={this.props.onCar2GoToggle}
         onBusToggle={this.props.onBusToggle}
-        onBusToggle={this.props.onBusToggle}/>
-    );
+        busVisible={this.props.busVisible}/>
+    )
   }
 }
 

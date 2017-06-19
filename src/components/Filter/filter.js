@@ -52,7 +52,7 @@ const StyledContainer = styled.View`
   justifyContent: space-around;
   padding: 10;
   margin: 10;
-  height: 100;
+  height: 150;
   backgroundColor: rgba(255,255,255,0.9);
 `
 
