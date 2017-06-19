@@ -1,0 +1,19 @@
+const translinkConfig = {
+	key: 'pbiQspKk9nYe5sFwUn04',
+	url: 'http://api.translink.ca/rttiapi/v1/buses',
+}
+
+const params = `?apiKey=${translinkConfig.key}`
+
+export const getAvailableBus = () => {
+  const request = new Request(`${translinkConfig.url}${params}`,{
+  	headers: new Headers({
+  		'accept': 'application/JSON'
+  	})
+  )
+  return fetch(request)
+    .then(response => response.json())
+    .catch(error => {
+      console.error(error)
+    })
+}
