@@ -60,7 +60,7 @@ const getBusMarkers = createSelector(
       type: 'busPin',
       address: value.Destination,
       fuel: null,
-      name: value.Pattern,
+      name: value.RouteNo,
       direction: value.Direction
     })
     return result

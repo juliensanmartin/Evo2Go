@@ -24,6 +24,15 @@ export default class FilterComponent extends Component {
             onValueChange={this.props.onCar2GoToggle}
             value={this.props.car2GoVisible} />
         </StyledView>
+        <StyledView>
+          <StyledLeftView>
+            <StyledImage source={require('../assets/translink_logo.png')}/>
+            <StyledText>TRANSLINK</StyledText>
+          </StyledLeftView>
+          <StyledSwitch
+            onValueChange={this.props.onBusToggle}
+            value={this.props.busVisible} />
+        </StyledView>
       </StyledContainer>
     )
   }
@@ -32,8 +41,10 @@ export default class FilterComponent extends Component {
 FilterComponent.propTypes = {
   evoVisible: PropTypes.bool.isRequired,
   car2GoVisible: PropTypes.bool.isRequired,
+  busVisible: PropTypes.bool.isRequired,
   onEvoToggle: PropTypes.func.isRequired,
-  onCar2GoToggle: PropTypes.func.isRequired
+  onCar2GoToggle: PropTypes.func.isRequired,
+  onBusToggle: PropTypes.func.isRequired
 }
 
 const StyledContainer = styled.View`

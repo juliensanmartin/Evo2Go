@@ -5,11 +5,12 @@ import { Badge, Icon } from 'react-native-elements'
 
 export default class CarDetailsComponent extends Component {
   render() {
-    const { type, address, fuel, name } = this.props.marker
+    const { type, address, fuel, name, direction } = this.props.marker
     const { distance, duration } = this.props.distance
     let logo
     if (type==='evoPin') logo=require('../assets/evo_car.png')
     if (type==='car2GoPin') logo=require('../assets/car2go_car.png')
+    if (type==='busPin') logo=require('../assets/bus.gif')
     return (
       <StyledContainer>
         <ImageContainer>
@@ -26,13 +27,24 @@ export default class CarDetailsComponent extends Component {
               onPress={this.props.onDirectionPress}/>
           </ViewMainDetails>
           <ViewSecondaryDetails>
-            <ViewItem>
-              <Icon type='ionicon' size={ 50 } name='ios-speedometer' color='#99A3A4'/>
-              <ViewName>
-                <StyledText>{fuel}%</StyledText>
-                <StyledTextSmall>Fuel level</StyledTextSmall>
-              </ViewName>
-            </ViewItem>
+            { fuel &&
+              <ViewItem>
+                <Icon type='ionicon' size={ 50 } name='ios-speedometer' color='#99A3A4'/>
+                <ViewName>
+                  <StyledText>{fuel}%</StyledText>
+                  <StyledTextSmall>Fuel level</StyledTextSmall>
+                </ViewName>
+              </ViewItem>
+            }
+            { direction &&
+              <ViewItem>
+                <Icon type='ionicon' size={ 50 } name='ios-compass' color='#99A3A4'/>
+                <ViewName>
+                  <StyledText>{direction}</StyledText>
+                  <StyledTextSmall>Direction</StyledTextSmall>
+                </ViewName>
+              </ViewItem>
+            }
             <ViewItem>
               <Icon type='ionicon' size={ 50 } name='ios-clock' color='#99A3A4'/>
               <ViewName>
