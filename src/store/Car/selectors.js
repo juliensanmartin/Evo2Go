@@ -9,6 +9,8 @@ const getCar2GoVehicles = (state) => state.car.car2go.vehicles
 const getEvoVehicles = (state) => state.car.evo.vehicles
 const getCar2GoVisibility = (state) => state.car.car2go.visible
 const getEvoVisibility = (state) => state.car.evo.visible
+const getBusVehicles = (state) => state.car.translink.vehicles
+const getBusVisibility = (state) => state.car.translink.visible
 
 const getCar2GoMarkers = createSelector(
   getCar2GoVehicles,
@@ -17,16 +19,16 @@ const getCar2GoMarkers = createSelector(
       id: key,
       latlng: {
         latitude: value.coordinates[1],
-        longitude: value.coordinates[0],
+        longitude: value.coordinates[0]
       },
       type: 'car2GoPin',
       address: value.address,
       fuel: value.fuel,
       name: value.name
     })
-    return result;
+    return result
   }, [])
-);
+)
 
 const getEvoMarkers = createSelector(
   getEvoVehicles,
@@ -42,18 +44,37 @@ const getEvoMarkers = createSelector(
       fuel: value.Fuel,
       name: value.Name
     })
-    return result;
+    return result
   }, [])
-);
+)
+
+const getBusMarkers = createSelector(
+  getBusVehicles,
+  vehicles => reduce(vehicles, (result, value, key) => {
+    result.push({
+      id: key,
+      latlng: {
+        latitude: value.Latitude,
+        longitude: value.Longitude
+      },
+      type: 'busPin',
+      address: value.Destination,
+      fuel: null,
+      name: value.Pattern,
+      direction: value.Direction
+    })
+    return result
+  }, [])
+)
 
 const getAllMarkers = createSelector(
-  [getCar2GoMarkers, getEvoMarkers],
-  (car2goMarkers, evoMarkers) => concat(car2goMarkers, evoMarkers)
-);
+  [getCar2GoMarkers, getEvoMarkers, getBusMarkers],
+  (car2goMarkers, evoMarkers, busMarkers) => concat(car2goMarkers, evoMarkers, busMarkers)
+)
 
 const getVisibleMarkers = createSelector(
-  [ getCar2GoVisibility, getEvoVisibility, getAllMarkers ],
-  (car2goVisible, evoVisible, markers) => {
+  [ getCar2GoVisibility, getEvoVisibility, getBusVisibility ,getAllMarkers ],
+  (car2goVisible, evoVisible, busVisibility, markers) => {
     let result = markers
     if (!car2goVisible) {
       result = reject(result, {type:'car2GoPin'})
@@ -61,13 +82,16 @@ const getVisibleMarkers = createSelector(
     if (!evoVisible) {
       result = reject(result, {type:'evoPin'})
     }
+    if (!busVisibility) {
+      result = reject(result, {type:'busPin'})
+    }
     return result
   }
 )
 
 const isLoaded = createSelector(
-  [getCar2GoVehicles, getEvoVehicles],
-  (car2goVehicles, evoVehicle) => !isEmpty(car2goVehicles) && !isEmpty(evoVehicle)
+  [getCar2GoVehicles, getEvoVehicles, getBusVehicles],
+  (car2goVehicles, evoVehicles, busVehicles) => !isEmpty(car2goVehicles) && !isEmpty(evoVehicles) && !isEmpty(busVehicles)
 )
 
 export {
@@ -75,5 +99,6 @@ export {
   isLoaded,
   getVisibleMarkers,
   getCar2GoVisibility,
-  getEvoVisibility
+  getEvoVisibility,
+  getBusVisibility
 }

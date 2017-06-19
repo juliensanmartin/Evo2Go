@@ -2,7 +2,9 @@ import {
   GET_CAR2GO_CARS,
   GET_EVO_CARS,
   SET_EVO_VISIBILITY,
-  SET_CAR2GO_VISIBILITY
+  SET_CAR2GO_VISIBILITY,
+  GET_BUS,
+  SET_BUS_VISIBILITY
  } from './actions.type'
 import { combineReducers } from 'redux'
 
@@ -45,6 +47,23 @@ const evo = (state = initialState, action) => {
   }
 }
 
+const translink = (state = initialState, action) => {
+  switch (action.type) {
+    case GET_BUS:
+      return {
+        ...state,
+        vehicles: action.vehicles
+      }
+      case SET_BUS_VISIBILITY:
+        return {
+          ...state,
+          visible: action.visible
+        }
+    default:
+      return state
+  }
+}
+
 export default car = combineReducers({
-	car2go, evo
+	car2go, evo, translink
 })

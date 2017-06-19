@@ -9,20 +9,20 @@ import {
 import { getAvailableVehicleCar2Go } from '../car2go.api'
 import { getAvailableVehicleEvo } from '../evo.api'
 import { getAvailableBus } from '../translink.api'
-import { car2goVehicleNormalizer, evoVehicleNormalizer } from './schema'
+import { car2goVehicleNormalizer, evoVehicleNormalizer, busNormalizer } from './schema'
 
 // this is a thunk (redux-thunk)
 export const fetchCar2GoCars = () => (dispatch, getState) => getAvailableVehicleCar2Go()
   .then(placemarks => {
       // placemarks => [objects]
       // Normalized to entities => {objects} and result => [keys]
-      normalized= car2goVehicleNormalizer(placemarks);
-      console.log('CAR2GO NORMALIZED', normalized);
+      normalized= car2goVehicleNormalizer(placemarks)
+      console.log('CAR2GO NORMALIZED', normalized)
 
       return dispatch({
         type: GET_CAR2GO_CARS,
-        vehicles: normalized.entities.vehicles,
-      });
+        vehicles: normalized.entities.vehicles
+      })
     },
     errors => console.error(errors)
   )
@@ -36,13 +36,13 @@ export const setCar2GoVisibility = (visible) => {
 
 export const fetchEvoCars = () => (dispatch, getState) => getAvailableVehicleEvo()
   .then(data => {
-    normalized = evoVehicleNormalizer(data);
-    console.log('EVO NORMALIZED', normalized);
+    normalized = evoVehicleNormalizer(data)
+    console.log('EVO NORMALIZED', normalized)
 
       return dispatch({
         type: GET_EVO_CARS,
-        vehicles: normalized.entities.vehicles,
-      });
+        vehicles: normalized.entities.vehicles
+      })
     },
     errors => console.error(errors)
   )
@@ -52,4 +52,24 @@ export const setEvoVisibility = (visible) => (dispatch) => {
     type: SET_EVO_VISIBILITY,
     visible
   })
+}
+
+export const fetchBus = () => dispatch => getAvailableBus()
+  .then(response => {
+      const normalized = busNormalizer(response)
+      console.log('BUS NORMALIZED', normalized)
+
+      return dispatch({
+        type: GET_BUS,
+        vehicles: normalized.entities.bus
+      })
+    },
+    errors => console.error(errors)
+  )
+
+export const setBusVisibility = visible => {
+  return {
+    type: SET_BUS_VISIBILITY,
+    visible
+  }
 }

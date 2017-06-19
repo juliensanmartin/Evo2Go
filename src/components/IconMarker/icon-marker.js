@@ -5,11 +5,25 @@ export default class IconMarkerComponent extends Component {
   render() {
     const { type } = this.props.marker
 
-    let color
-    if (type==='evoPin') color='black'
-    if (type==='car2GoPin') color='#00BCE2'
+    let icon = {
+      color: 'black',
+      name: 'ios-car'
+    }
+    if (type === 'evoPin') {
+      icon.color='black'
+      icon.name='ios-car'
+    }
+    if (type==='car2GoPin') {
+      icon.color='#00BCE2'
+      icon.name='ios-car'
+    }
+    if (type==='busPin') {
+      icon.color='#104f86'
+      icon.name='ios-bus'
+    }
+
     return (
-      <Icon type='ionicon' size={ 20 } name='ios-car' color={color}/>
+      <Icon type='ionicon' size={ 30 } name={icon.name} color={icon.color}/>
     )
   }
 }

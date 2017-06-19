@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import MapComponent from '../../components/Map/map'
-import { fetchCar2GoCars, fetchEvoCars } from '../../store/Car/actions'
+import { fetchCar2GoCars, fetchEvoCars, fetchBus } from '../../store/Car/actions'
 import { getVisibleMarkers, isLoaded } from '../../store/Car/selectors'
 import { connect } from 'react-redux'
 
@@ -13,7 +13,8 @@ class MapScreen extends Component {
     let timer = setInterval(() => {
       Promise.all([
         this.props.dispatch(fetchCar2GoCars()),
-        this.props.dispatch(fetchEvoCars())
+        this.props.dispatch(fetchEvoCars()),
+        this.props.dispatch(fetchBus())
       ])
     }, 20000)
     this.setState({timer})
@@ -22,7 +23,8 @@ class MapScreen extends Component {
     // does not work when in Debugging Mode on Chrome
     Promise.all([
       this.props.dispatch(fetchCar2GoCars()),
-      this.props.dispatch(fetchEvoCars())
+      this.props.dispatch(fetchEvoCars()),
+      this.props.dispatch(fetchBus())
     ])
   }
 

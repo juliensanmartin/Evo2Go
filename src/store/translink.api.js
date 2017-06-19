@@ -10,7 +10,7 @@ export const getAvailableBus = () => {
   	headers: new Headers({
   		'accept': 'application/JSON'
   	})
-  )
+  })
   return fetch(request)
     .then(response => response.json())
     .catch(error => {
