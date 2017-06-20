@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import { Icon } from 'react-native-elements'
+import { Icon, Badge } from 'react-native-elements'
+import { View } from 'react-native'
 
 export default class IconMarkerComponent extends Component {
   render() {
-    const { type } = this.props.marker
+    const { type, name } = this.props.marker
 
     let icon = {
       color: 'black',
@@ -17,13 +18,18 @@ export default class IconMarkerComponent extends Component {
       icon.color='#00BCE2'
       icon.name='ios-car'
     }
-    if (type==='busPin') {
-      icon.color='#104f86'
-      icon.name='ios-bus'
+
+    let marker = null
+    if (type === 'busPin') {
+      marker = <Badge value={name} containerStyle={{ backgroundColor: '#104f86'}}/>
+    } else {
+      marker = <Icon type='ionicon' size={ 30 } name={icon.name} color={icon.color}/>
     }
 
     return (
-      <Icon type='ionicon' size={ 30 } name={icon.name} color={icon.color}/>
+      <View>
+        {marker}
+      </View>
     )
   }
 }

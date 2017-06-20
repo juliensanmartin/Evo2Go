@@ -17,6 +17,8 @@ const initialRegion = {
   longitudeDelta: 0.0421
 }
 
+const DEFAULT_PADDING = { top: 40, right: 40, bottom: 40, left: 40 }
+
 export default class MapComponent extends Component {
   constructor(props) {
       super(props)
@@ -46,10 +48,19 @@ export default class MapComponent extends Component {
     )
   }
 
+  onMarkerPress (marker) {
+    this.map.fitToCoordinates([marker.latlng, this.state.currentPosition], {
+      edgePadding: DEFAULT_PADDING,
+      animated: true,
+    })
+    this.props.navigation.navigate('CarDetails', { marker, currentPosition: this.state.currentPosition })
+  }
+
   render() {
     return (
       <MapContainer>
         <MapView
+          ref={ref => { this.map = ref }}
           showsUserLocation
           followsUserLocation
           showsMyLocationButton
@@ -61,7 +72,7 @@ export default class MapComponent extends Component {
                 < MapView.Marker
                   key={marker.id}
                   coordinate={marker.latlng}
-                  onPress={() => this.props.navigation.navigate('CarDetails', { marker, currentPosition: this.state.currentPosition })} >
+                  onPress={() => this.onMarkerPress(marker)} >
                     <IconMarkerComponent marker={marker} />
                 </ MapView.Marker>
               )
