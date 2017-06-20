@@ -3,23 +3,24 @@
 This README would normally document whatever steps are necessary to get your application up and running.
 
 ### Tasks ###
-* cleanup
+
 * *Geolocalisation - put initialRegion in store*
 * *Click on markers -> modal popup*
-* Splash screen
+* *Refactor filter screen*
+* *Add bus*
+* *Add distance/time from car (carDetails)*
+* *CarDetails get direction*
 * *Reload every 20 seconds*
-* Integrate interactable
+* Splash screen
+* Integrate interactable/animation
+* Find out how to make filter and cardetails height not 100%
 * Cool loader
-* Refactor filter screen
 * Get car2go api key
 * Ask Evo permission use API
-* Find out how to make filter and cardetails height not 100%
 * Add modo
-* Add bus
-* Fastest way (cheapest way)
-* *Add distance/time from car (carDetails)*
-* CarDetails get direction
+* test on android
 * Standardise color
+* Fastest way (cheapest way)
 
 ### What is this repository for? ###
 
