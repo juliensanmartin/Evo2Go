@@ -64,8 +64,10 @@ export default class MapComponent extends Component {
           showsUserLocation
           followsUserLocation
           showsMyLocationButton
+          liteMode={true}
           showsPointsOfInterest={false}
           showsBuildings={false}
+          showsIndoors={false}
           style={styles.map}>
             {
               this.props.markers.map(marker =>
