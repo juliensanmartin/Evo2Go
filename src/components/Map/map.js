@@ -39,9 +39,14 @@ export default class MapComponent extends Component {
           error: null
         })
       },
-      error => this.setState({ error: error.message }),
+      error => this.setState({
+        error: error.message,
+        currentPosition: {
+          latitude: initialRegion.latitude,
+          longitude: initialRegion.longitude
+        }
+      }),
       {
-        enableHighAccuracy: true,
         timeout: 20000,
         maximumAge: 1000
       }
@@ -64,7 +69,6 @@ export default class MapComponent extends Component {
           showsUserLocation
           followsUserLocation
           showsMyLocationButton
-          liteMode={true}
           showsPointsOfInterest={false}
           showsBuildings={false}
           showsIndoors={false}
