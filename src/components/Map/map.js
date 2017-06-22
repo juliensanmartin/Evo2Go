@@ -13,8 +13,8 @@ import IconMarkerComponent from '../../components/IconMarker/icon-marker'
 const initialRegion = {
   latitude: 49.2800565,
   longitude: -123.1212937,
-  latitudeDelta: 0.0922,
-  longitudeDelta: 0.0421
+  latitudeDelta: 0.02305,
+  longitudeDelta: 0.010525
 }
 
 const DEFAULT_PADDING = { top: 40, right: 40, bottom: 40, left: 40 }
@@ -29,7 +29,7 @@ export default class MapComponent extends Component {
       }
     }
 
-  componentDidMount() {
+  componentWillMount() {
     navigator.geolocation.getCurrentPosition((position) => {
         this.setState({
           currentPosition: {
@@ -38,6 +38,7 @@ export default class MapComponent extends Component {
           },
           error: null
         })
+        this.onCurrentPositionFetch()
       },
       error => this.setState({
         error: error.message,
@@ -51,6 +52,16 @@ export default class MapComponent extends Component {
         maximumAge: 1000
       }
     )
+  }
+
+  onCurrentPositionFetch () {
+    const currentRegion = {
+      latitude: this.state.currentPosition.latitude,
+      longitude: this.state.currentPosition.longitude,
+      latitudeDelta: 0.00922,
+      longitudeDelta: 0.00421
+    }
+    this.map.animateToRegion(currentRegion)
   }
 
   onMarkerPress (marker) {
@@ -72,6 +83,7 @@ export default class MapComponent extends Component {
           showsPointsOfInterest={false}
           showsBuildings={false}
           showsIndoors={false}
+          initialRegion={initialRegion}
           style={styles.map}>
             {
               this.props.markers.map(marker =>
