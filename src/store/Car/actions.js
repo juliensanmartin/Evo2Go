@@ -11,6 +11,17 @@ import { getAvailableVehicleEvo } from '../evo.api'
 import { getAvailableBus } from '../translink.api'
 import { car2goVehicleNormalizer, evoVehicleNormalizer, busNormalizer } from './schema'
 
+export const fetchVisibleCars = () => (dispatch, getState) => {
+  const state = getState()
+  const car2GoVisible = state.car.car2go.visible
+  const evoVisible = state.car.evo.visible
+  const busVisible = state.car.translink.visible
+
+  if (car2GoVisible) dispatch(fetchCar2GoCars())
+  if (evoVisible) dispatch(fetchEvoCars())
+  if (busVisible) dispatch(fetchBus())
+}
+
 // this is a thunk (redux-thunk)
 export const fetchCar2GoCars = () => (dispatch, getState) => getAvailableVehicleCar2Go()
   .then(placemarks => {
@@ -27,7 +38,8 @@ export const fetchCar2GoCars = () => (dispatch, getState) => getAvailableVehicle
     errors => console.error(errors)
   )
 
-export const setCar2GoVisibility = (visible) => {
+export const setCar2GoVisibility = (visible) => (dispatch) => {
+  //dispatch(fetchCar2GoCars())
   return {
     type: SET_CAR2GO_VISIBILITY,
     visible
@@ -48,10 +60,11 @@ export const fetchEvoCars = () => (dispatch, getState) => getAvailableVehicleEvo
   )
 
 export const setEvoVisibility = (visible) => (dispatch) => {
-  return dispatch({
+  //dispatch(fetchEvoCars())
+  return {
     type: SET_EVO_VISIBILITY,
     visible
-  })
+  }
 }
 
 export const fetchBus = () => dispatch => getAvailableBus()
@@ -67,7 +80,8 @@ export const fetchBus = () => dispatch => getAvailableBus()
     errors => console.error(errors)
   )
 
-export const setBusVisibility = visible => {
+export const setBusVisibility = visible => dispatch => {
+  //dispatch(fetchBus())
   return {
     type: SET_BUS_VISIBILITY,
     visible

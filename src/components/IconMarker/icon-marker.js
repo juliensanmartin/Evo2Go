@@ -9,7 +9,7 @@ export default class IconMarkerComponent extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps.coordinate.latitude && nextProps.coordinate.longitude) {
+    if (nextProps.coordinate) {
   	  return nextProps.coordinate.latitude != this.state.coordinate.latitude && nextProps.coordinate.longitude != this.state.coordinate.longitude
     }
     return true

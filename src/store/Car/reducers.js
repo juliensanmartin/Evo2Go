@@ -11,7 +11,7 @@ import { combineReducers } from 'redux'
 const initialState = {
   vehicles: {},
   visible: true
-};
+}
 
 const car2go = (state = initialState, action) => {
   switch (action.type) {
@@ -47,7 +47,12 @@ const evo = (state = initialState, action) => {
   }
 }
 
-const translink = (state = initialState, action) => {
+const initialStateBus = {
+  vehicles: {},
+  visible: false
+}
+
+const translink = (state = initialStateBus, action) => {
   switch (action.type) {
     case GET_BUS:
       return {

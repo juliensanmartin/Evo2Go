@@ -60,6 +60,7 @@ export default class MapComponent extends Component {
       latitudeDelta: initialRegion.latitudeDelta,
       longitudeDelta: initialRegion.longitudeDelta
     }
+    console.log(currentRegion)
     this.map.animateToRegion(currentRegion)
   }
 

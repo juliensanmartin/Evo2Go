@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import MapComponent from '../../components/Map/map'
-import { fetchCar2GoCars, fetchEvoCars, fetchBus } from '../../store/Car/actions'
+import { fetchCar2GoCars, fetchEvoCars, fetchBus, fetchVisibleCars } from '../../store/Car/actions'
 import { getVisibleMarkers, isLoaded } from '../../store/Car/selectors'
 import { connect } from 'react-redux'
 
@@ -10,22 +10,14 @@ class MapScreen extends Component {
   }
 
   componentDidMount() {
-    // let timer = setInterval(() => {
-    //   Promise.all([
-    //     this.props.dispatch(fetchCar2GoCars())
-    //     //this.props.dispatch(fetchEvoCars()),
-    //     //this.props.dispatch(fetchBus())
-    //   ])
-    // }, 20000)
-    // this.setState({timer})
+    let timer = setInterval(() => {
+        this.props.dispatch(fetchVisibleCars())
+    }, 20000)
+    this.setState({timer})
 
     // Duplicate here to run the first time and because the setInterval
     // does not work when in Debugging Mode on Chrome
-    Promise.all([
-      this.props.dispatch(fetchCar2GoCars()),
-      this.props.dispatch(fetchEvoCars()),
-      this.props.dispatch(fetchBus())
-    ])
+    this.props.dispatch(fetchVisibleCars())
   }
 
   componentWillUnmount() {
