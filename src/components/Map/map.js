@@ -9,12 +9,11 @@ import styled from 'styled-components/native'
 import LoaderComponent from '../Loader/loader'
 import IconMarkerComponent from '../../components/IconMarker/icon-marker'
 
-// initialRegion not used
 const initialRegion = {
   latitude: 49.2800565,
   longitude: -123.1212937,
-  latitudeDelta: 0.02305,
-  longitudeDelta: 0.010525
+  latitudeDelta: 0.00461,
+  longitudeDelta: 0.002105
 }
 
 const DEFAULT_PADDING = { top: 40, right: 40, bottom: 40, left: 40 }
@@ -29,7 +28,7 @@ export default class MapComponent extends Component {
       }
     }
 
-  componentWillMount() {
+  componentDidMount() {
     navigator.geolocation.getCurrentPosition((position) => {
         this.setState({
           currentPosition: {
@@ -58,8 +57,8 @@ export default class MapComponent extends Component {
     const currentRegion = {
       latitude: this.state.currentPosition.latitude,
       longitude: this.state.currentPosition.longitude,
-      latitudeDelta: 0.00922,
-      longitudeDelta: 0.00421
+      latitudeDelta: initialRegion.latitudeDelta,
+      longitudeDelta: initialRegion.longitudeDelta
     }
     this.map.animateToRegion(currentRegion)
   }
@@ -83,6 +82,7 @@ export default class MapComponent extends Component {
           showsPointsOfInterest={false}
           showsBuildings={false}
           showsIndoors={false}
+          toolbarEnabled={false}
           initialRegion={initialRegion}
           style={styles.map}>
             {

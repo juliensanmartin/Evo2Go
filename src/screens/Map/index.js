@@ -9,15 +9,15 @@ class MapScreen extends Component {
     timer: null
   }
 
-  componentWillMount() {
-    let timer = setInterval(() => {
-      Promise.all([
-        this.props.dispatch(fetchCar2GoCars()),
-        this.props.dispatch(fetchEvoCars()),
-        this.props.dispatch(fetchBus())
-      ])
-    }, 20000)
-    this.setState({timer})
+  componentDidMount() {
+    // let timer = setInterval(() => {
+    //   Promise.all([
+    //     this.props.dispatch(fetchCar2GoCars())
+    //     //this.props.dispatch(fetchEvoCars()),
+    //     //this.props.dispatch(fetchBus())
+    //   ])
+    // }, 20000)
+    // this.setState({timer})
 
     // Duplicate here to run the first time and because the setInterval
     // does not work when in Debugging Mode on Chrome

@@ -3,6 +3,18 @@ import { Icon, Badge } from 'react-native-elements'
 import { View } from 'react-native'
 
 export default class IconMarkerComponent extends Component {
+  constructor(props) {
+  	super(props)
+  	this.state = {...props}
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.coordinate.latitude && nextProps.coordinate.longitude) {
+  	  return nextProps.coordinate.latitude != this.state.coordinate.latitude && nextProps.coordinate.longitude != this.state.coordinate.longitude
+    }
+    return true
+  }
+
   render() {
     const { type, name } = this.props.marker
 
