@@ -1,15 +1,15 @@
 import {
-  GET_CAR2GO_CARS,
-  GET_EVO_CARS,
   SET_EVO_VISIBILITY,
   SET_CAR2GO_VISIBILITY,
-  GET_BUS,
-  SET_BUS_VISIBILITY
+  SET_BUS_VISIBILITY,
+  GET_VISIBLE_CARS,
+  CARS_LOADED
  } from './actions.type'
 import { getAvailableVehicleCar2Go } from '../car2go.api'
 import { getAvailableVehicleEvo } from '../evo.api'
 import { getAvailableBus } from '../translink.api'
 import { car2goVehicleNormalizer, evoVehicleNormalizer, busNormalizer } from './schema'
+import { reduce, chunk, each } from 'lodash'
 
 export const fetchVisibleCars = () => (dispatch, getState) => {
   const state = getState()
@@ -17,33 +17,75 @@ export const fetchVisibleCars = () => (dispatch, getState) => {
   const evoVisible = state.car.evo.visible
   const busVisible = state.car.translink.visible
 
-  if (car2GoVisible) dispatch(fetchCar2GoCars())
-  if (evoVisible) dispatch(fetchEvoCars())
-  if (busVisible) dispatch(fetchBus())
+  const promises = []
+
+  if (car2GoVisible) promises.push(dispatch(fetchCar2GoCars()))
+  if (evoVisible) promises.push(dispatch(fetchEvoCars()))
+  if (busVisible) promises.push(dispatch(fetchBus()))
+
+  Promise.all(promises)
+    .then(() => {
+      return dispatch({
+        type: CARS_LOADED,
+        loaded: true
+      })
+    })
 }
 
 // this is a thunk (redux-thunk)
 export const fetchCar2GoCars = () => (dispatch, getState) => getAvailableVehicleCar2Go()
   .then(placemarks => {
-      // placemarks => [objects]
-      // Normalized to entities => {objects} and result => [keys]
-      normalized= car2goVehicleNormalizer(placemarks)
-      console.log('CAR2GO NORMALIZED', normalized)
+    // placemarks => [objects]
+    // Normalized to entities => {objects} and result => [keys]
+    normalized= car2goVehicleNormalizer(placemarks)
+    console.log('CAR2GO NORMALIZED', normalized)
 
-      return dispatch({
-        type: GET_CAR2GO_CARS,
-        vehicles: normalized.entities.vehicles
+    const vehicles = reduce(normalized.entities.vehicles, (result, value, key) => {
+      result.push({
+        id: key,
+        latlng: {
+          latitude: value.coordinates[1],
+          longitude: value.coordinates[0]
+        },
+        type: 'car2GoPin',
+        address: value.address,
+        fuel: value.fuel,
+        name: value.name
       })
-    },
-    errors => console.error(errors)
-  )
+      return result
+    }, [])
+
+    const vehiclesChunks = chunk(vehicles, 100)
+
+    each(vehiclesChunks, (value) => {
+      dispatch({
+        type: GET_VISIBLE_CARS,
+        vehicles
+      })
+    })
+  },
+  errors => console.error(errors)
+)
 
 export const setCar2GoVisibility = (visible) => (dispatch) => {
-  //dispatch(fetchCar2GoCars())
-  return {
+  if (visible) {
+    dispatch({
+      type: CARS_LOADED,
+      loaded: false
+    })
+    dispatch(fetchCar2GoCars())
+      .then(() => {
+        return dispatch({
+          type: CARS_LOADED,
+          loaded: true
+        })
+      })
+  }
+
+  return dispatch({
     type: SET_CAR2GO_VISIBILITY,
     visible
-  }
+  })
 }
 
 export const fetchEvoCars = () => (dispatch, getState) => getAvailableVehicleEvo()
@@ -51,20 +93,51 @@ export const fetchEvoCars = () => (dispatch, getState) => getAvailableVehicleEvo
     normalized = evoVehicleNormalizer(data)
     console.log('EVO NORMALIZED', normalized)
 
-      return dispatch({
-        type: GET_EVO_CARS,
-        vehicles: normalized.entities.vehicles
+    const vehicles = reduce(normalized.entities.vehicles, (result, value, key) => {
+      result.push({
+        id: key,
+        latlng: {
+          latitude: value.Lat,
+          longitude: value.Lon,
+        },
+        type: 'evoPin',
+        address: value.Address,
+        fuel: value.Fuel,
+        name: value.Name
       })
-    },
-    errors => console.error(errors)
-  )
+      return result
+    }, [])
+
+    const vehiclesChunks = chunk(vehicles, 100)
+
+    each(vehiclesChunks, (value) => {
+      dispatch({
+        type: GET_VISIBLE_CARS,
+        vehicles
+      })
+    })
+  },
+  errors => console.error(errors)
+)
 
 export const setEvoVisibility = (visible) => (dispatch) => {
-  //dispatch(fetchEvoCars())
-  return {
+  if (visible) {
+    dispatch({
+      type: CARS_LOADED,
+      loaded: false
+    })
+    dispatch(fetchEvoCars())
+      .then(() => {
+        return dispatch({
+          type: CARS_LOADED,
+          loaded: true
+        })
+      })
+  }
+  return dispatch({
     type: SET_EVO_VISIBILITY,
     visible
-  }
+  })
 }
 
 export const fetchBus = () => dispatch => getAvailableBus()
@@ -72,18 +145,50 @@ export const fetchBus = () => dispatch => getAvailableBus()
       const normalized = busNormalizer(response)
       console.log('BUS NORMALIZED', normalized)
 
-      return dispatch({
-        type: GET_BUS,
-        vehicles: normalized.entities.bus
+      const vehicles = reduce(normalized.entities.bus, (result, value, key) => {
+        result.push({
+          id: key,
+          latlng: {
+            latitude: value.Latitude,
+            longitude: value.Longitude
+          },
+          type: 'busPin',
+          address: value.Destination,
+          fuel: null,
+          name: value.RouteNo,
+          direction: value.Direction
+        })
+        return result
+      }, [])
+
+      const vehiclesChunks = chunk(vehicles, 100)
+
+      each(vehiclesChunks, (value) => {
+        dispatch({
+          type: GET_VISIBLE_CARS,
+          vehicles
+        })
       })
     },
     errors => console.error(errors)
   )
 
 export const setBusVisibility = visible => dispatch => {
-  //dispatch(fetchBus())
-  return {
+  if (visible) {
+    dispatch({
+      type: CARS_LOADED,
+      loaded: false
+    })
+    dispatch(fetchBus())
+      .then(() => {
+        return dispatch({
+          type: CARS_LOADED,
+          loaded: true
+        })
+      })
+  }
+  return dispatch({
     type: SET_BUS_VISIBILITY,
     visible
-  }
+  })
 }

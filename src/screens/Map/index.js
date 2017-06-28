@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import MapComponent from '../../components/Map/map'
-import { fetchCar2GoCars, fetchEvoCars, fetchBus, fetchVisibleCars } from '../../store/Car/actions'
+import { fetchVisibleCars } from '../../store/Car/actions'
 import { getVisibleMarkers, isLoaded } from '../../store/Car/selectors'
 import { connect } from 'react-redux'
 
@@ -12,7 +12,7 @@ class MapScreen extends Component {
   componentDidMount() {
     let timer = setInterval(() => {
         this.props.dispatch(fetchVisibleCars())
-    }, 20000)
+    }, 60000)
     this.setState({timer})
 
     // Duplicate here to run the first time and because the setInterval

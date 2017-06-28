@@ -1,28 +1,35 @@
 import {
-  GET_CAR2GO_CARS,
-  GET_EVO_CARS,
   SET_EVO_VISIBILITY,
   SET_CAR2GO_VISIBILITY,
-  GET_BUS,
-  SET_BUS_VISIBILITY
+  SET_BUS_VISIBILITY,
+  GET_VISIBLE_CARS,
+  CARS_LOADED
  } from './actions.type'
 import { combineReducers } from 'redux'
+import { unionBy } from 'lodash'
 
-const initialState = {
-  vehicles: {},
-  visible: true
+const visibleCars = (state = [], action) => {
+  switch (action.type) {
+    case GET_VISIBLE_CARS:
+      return unionBy(action.vehicles, state, 'id')
+    default:
+      return state
+  }
 }
 
-const car2go = (state = initialState, action) => {
+const carLoaded = (state = false, action) => {
   switch (action.type) {
-    case GET_CAR2GO_CARS:
-      return {
-        ...state,
-        vehicles: action.vehicles
-      }
+    case CARS_LOADED:
+      return action.loaded
+    default:
+      return state
+  }
+}
+
+const car2go = (state = {visible:true}, action) => {
+  switch (action.type) {
     case SET_CAR2GO_VISIBILITY:
       return {
-        ...state,
         visible: action.visible
       }
     default:
@@ -30,45 +37,28 @@ const car2go = (state = initialState, action) => {
   }
 }
 
-const evo = (state = initialState, action) => {
+const evo = (state = {visible:true}, action) => {
   switch (action.type) {
-    case GET_EVO_CARS:
+    case SET_EVO_VISIBILITY:
       return {
-        ...state,
-        vehicles: action.vehicles
+        visible: action.visible
       }
-      case SET_EVO_VISIBILITY:
-        return {
-          ...state,
-          visible: action.visible
-        }
     default:
       return state
   }
 }
 
-const initialStateBus = {
-  vehicles: {},
-  visible: false
-}
-
-const translink = (state = initialStateBus, action) => {
+const translink = (state = {visible:false}, action) => {
   switch (action.type) {
-    case GET_BUS:
+    case SET_BUS_VISIBILITY:
       return {
-        ...state,
-        vehicles: action.vehicles
+        visible: action.visible
       }
-      case SET_BUS_VISIBILITY:
-        return {
-          ...state,
-          visible: action.visible
-        }
     default:
       return state
   }
 }
 
 export default car = combineReducers({
-	car2go, evo, translink
+	car2go, evo, translink, visibleCars, carLoaded
 })
