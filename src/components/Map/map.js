@@ -85,7 +85,9 @@ export default class MapComponent extends Component {
           showsIndoors={false}
           toolbarEnabled={false}
           initialRegion={initialRegion}
-          style={styles.map}>
+          style={styles.map}
+          onRegionChange={this.props.onRegionChange}
+          liteMode={true}>
             {
               this.props.markers.map(marker =>
                 < MapView.Marker
@@ -118,7 +120,8 @@ MapComponent.propTypes = {
   markers: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
   navigation: PropTypes.object.isRequired,
-  direction: PropTypes.array
+  direction: PropTypes.array,
+  onRegionChange: PropTypes.func.isRequired
 }
 
 // Usage of styled-components : https://github.com/styled-components/styled-components

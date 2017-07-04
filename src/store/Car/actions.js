@@ -3,7 +3,8 @@ import {
   SET_CAR2GO_VISIBILITY,
   SET_BUS_VISIBILITY,
   GET_VISIBLE_CARS,
-  CARS_LOADED
+  CARS_LOADED,
+  ON_REGION_CHANGE
  } from './actions.type'
 import { getAvailableVehicleCar2Go } from '../car2go.api'
 import { getAvailableVehicleEvo } from '../evo.api'
@@ -55,13 +56,9 @@ export const fetchCar2GoCars = () => (dispatch, getState) => getAvailableVehicle
       return result
     }, [])
 
-    const vehiclesChunks = chunk(vehicles, 100)
-
-    each(vehiclesChunks, (value) => {
-      dispatch({
-        type: GET_VISIBLE_CARS,
-        vehicles
-      })
+    dispatch({
+      type: GET_VISIBLE_CARS,
+      vehicles
     })
   },
   errors => console.error(errors)
@@ -108,13 +105,9 @@ export const fetchEvoCars = () => (dispatch, getState) => getAvailableVehicleEvo
       return result
     }, [])
 
-    const vehiclesChunks = chunk(vehicles, 100)
-
-    each(vehiclesChunks, (value) => {
-      dispatch({
-        type: GET_VISIBLE_CARS,
-        vehicles
-      })
+    dispatch({
+      type: GET_VISIBLE_CARS,
+      vehicles
     })
   },
   errors => console.error(errors)
@@ -161,13 +154,9 @@ export const fetchBus = () => dispatch => getAvailableBus()
         return result
       }, [])
 
-      const vehiclesChunks = chunk(vehicles, 100)
-
-      each(vehiclesChunks, (value) => {
-        dispatch({
-          type: GET_VISIBLE_CARS,
-          vehicles
-        })
+      dispatch({
+        type: GET_VISIBLE_CARS,
+        vehicles
       })
     },
     errors => console.error(errors)
@@ -190,5 +179,12 @@ export const setBusVisibility = visible => dispatch => {
   return dispatch({
     type: SET_BUS_VISIBILITY,
     visible
+  })
+}
+
+export const updateRegion = region => dispatch => {
+  return dispatch({
+    type: ON_REGION_CHANGE,
+    region
   })
 }

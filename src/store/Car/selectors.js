@@ -10,6 +10,7 @@ const getEvoVisibility = (state) => state.car.evo.visible
 const getBusVisibility = (state) => state.car.translink.visible
 const getVisibleCars = (state) => state.car.visibleCars
 const isLoaded = state => state.car.carLoaded
+const currentRegion = state => state.car.currentRegion
 
 const getVisibleMarkers = createSelector(
   [ getCar2GoVisibility, getEvoVisibility, getBusVisibility ,getVisibleCars ],
@@ -28,10 +29,39 @@ const getVisibleMarkers = createSelector(
   }
 )
 
+const getRegionMarkers = createSelector(
+  [ currentRegion ,getVisibleMarkers ],
+  (currentRegion, markers) => {
+    const topLeft = {
+      latitude: currentRegion.latitude+(currentRegion.latitudeDelta/2),
+      longitude: currentRegion.longitude-(currentRegion.longitudeDelta/2)
+    }
+
+    const bottomRight = {
+      latitude: currentRegion.latitude-(currentRegion.latitudeDelta/2),
+      longitude: currentRegion.longitude+(currentRegion.longitudeDelta/2)
+    }
+
+    const vehicles = reduce(markers, (result, value, key) => {
+      if (value.latlng.longitude > topLeft.longitude &&
+        value.latlng.longitude < bottomRight.longitude &&
+        value.latlng.latitude < topLeft.latitude &&
+        value.latlng.latitude > bottomRight.latitude) {
+          result.push(value)
+        }
+      return result
+    }, [])
+
+    console.log(vehicles)
+    return vehicles
+  }
+)
+
 export {
   isLoaded,
   getVisibleMarkers,
   getCar2GoVisibility,
   getEvoVisibility,
-  getBusVisibility
+  getBusVisibility,
+  getRegionMarkers
 }

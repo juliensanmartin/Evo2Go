@@ -3,7 +3,8 @@ import {
   SET_CAR2GO_VISIBILITY,
   SET_BUS_VISIBILITY,
   GET_VISIBLE_CARS,
-  CARS_LOADED
+  CARS_LOADED,
+  ON_REGION_CHANGE
  } from './actions.type'
 import { combineReducers } from 'redux'
 import { unionBy } from 'lodash'
@@ -59,6 +60,20 @@ const translink = (state = {visible:false}, action) => {
   }
 }
 
+const currentRegion = (state = {
+  latitude: 49.2800565,
+  longitude: -123.1212937,
+  latitudeDelta: 0.00461,
+  longitudeDelta: 0.002105
+}, action) => {
+  switch (action.type) {
+    case ON_REGION_CHANGE:
+      return { ...action.region }
+    default:
+      return state
+  }
+}
+
 export default car = combineReducers({
-	car2go, evo, translink, visibleCars, carLoaded
+	car2go, evo, translink, visibleCars, carLoaded, currentRegion
 })

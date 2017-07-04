@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import MapComponent from '../../components/Map/map'
-import { fetchVisibleCars } from '../../store/Car/actions'
-import { getVisibleMarkers, isLoaded } from '../../store/Car/selectors'
+import { fetchVisibleCars, updateRegion } from '../../store/Car/actions'
+import { getVisibleMarkers, isLoaded, getRegionMarkers } from '../../store/Car/selectors'
 import { connect } from 'react-redux'
 
 class MapScreen extends Component {
@@ -30,7 +30,8 @@ class MapScreen extends Component {
         markers={this.props.markers}
         loading={this.props.loading}
         navigation={this.props.navigation}
-        direction={this.props.direction}/>
+        direction={this.props.direction}
+        onRegionChange={this.props.onRegionChange}/>
     )
   }
 }
@@ -39,15 +40,25 @@ MapScreen.propTypes = {
   markers: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object.isRequired,
+  onRegionChange: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {
   return {
-    markers: getVisibleMarkers(state),
+    markers: getRegionMarkers(state),
     loading: !isLoaded(state),
     direction: state.distance.direction
   }
 }
 
-export default connect(mapStateToProps)(MapScreen)
+function mapDispatchToProps (dispatch) {
+  return {
+    onRegionChange: (region) => {
+      dispatch(updateRegion(region))
+    },
+    dispatch: dispatch
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapScreen)
