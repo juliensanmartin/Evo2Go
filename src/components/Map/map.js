@@ -87,7 +87,7 @@ export default class MapComponent extends Component {
           initialRegion={initialRegion}
           style={styles.map}
           onRegionChange={this.props.onRegionChange}
-          liteMode={true}>
+          initialRegion={initialRegion}>
             {
               this.props.markers.map(marker =>
                 < MapView.Marker

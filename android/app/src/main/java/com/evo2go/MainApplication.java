@@ -3,6 +3,7 @@ package com.evo2go;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.airbnb.android.react.maps.MapsPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
 import com.wix.interactable.Interactable;
 import com.oblador.vectoricons.VectorIconsPackage;
