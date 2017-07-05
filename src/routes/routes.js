@@ -23,20 +23,22 @@ const homeStack = StackNavigator({
     Filter: {
       screen: FilterScreen,
       navigationOptions: {
-        title: 'Filter'
+        title: 'Filter',
+        gesturesEnabled: true
       }
     },
     CarDetails: {
       screen: CarDetailsScreen,
       navigationOptions: {
-        title: 'Details'
+        title: 'Details',
+        gesturesEnabled: true
       }
     }
   },
   {
     cardStyle: {
       backgroundColor: 'transparent',
-      opacity: 1
+      opacity: 0.8
     }
   }
 )
@@ -52,5 +54,7 @@ export default TabNavigator({
 },{
     mode: 'modal',
     headerMode: 'none',
+    animationEnabled: true,
+    swipeEnabled: true
   }
 )

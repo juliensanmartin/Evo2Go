@@ -106,11 +106,9 @@ export default class MapComponent extends Component {
             }
 
         </MapView>
-        <ActivityIndicator
-          animating={this.props.loading}
-          size="large"
-          color="blue"
-        />
+        <LoaderContainer>
+          <LoaderComponent animating={this.props.loading}/>
+        </LoaderContainer>
       </MapContainer>
     )
   }
@@ -127,9 +125,13 @@ MapComponent.propTypes = {
 // Usage of styled-components : https://github.com/styled-components/styled-components
 const MapContainer = styled.View`
   flex: 1;
-  justifyContent: center;
-  alignItems: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
   backgroundColor: #F5FCFF;
+`
+
+const LoaderContainer = styled.View`
 `
 
 // But need to styled-components this one!!
