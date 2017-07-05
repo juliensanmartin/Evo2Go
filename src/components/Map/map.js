@@ -86,7 +86,7 @@ export default class MapComponent extends Component {
           toolbarEnabled={false}
           initialRegion={initialRegion}
           style={styles.map}
-          onRegionChange={this.props.onRegionChange}
+          onRegionChangeComplete={this.props.onRegionChange}
           initialRegion={initialRegion}>
             {
               this.props.markers.map(marker =>
