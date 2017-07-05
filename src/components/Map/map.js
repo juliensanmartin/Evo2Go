@@ -1,7 +1,8 @@
 import {
   StyleSheet,
   View,
-  ActivityIndicator
+  ActivityIndicator,
+  Platform
 } from 'react-native'
 import React, { Component, PropTypes } from 'react'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
@@ -106,9 +107,18 @@ export default class MapComponent extends Component {
             }
 
         </MapView>
-        <LoaderContainer>
-          <LoaderComponent animating={this.props.loading}/>
-        </LoaderContainer>
+        { Platform.OS === 'ios' &&
+          <LoaderContainer>
+            <LoaderComponent animating={this.props.loading}/>
+          </LoaderContainer>
+        }
+        { Platform.OS === 'android' &&
+          <ActivityIndicator
+            animating={this.props.loading}
+            size="large"
+            color="blue"
+          />
+        }
       </MapContainer>
     )
   }
