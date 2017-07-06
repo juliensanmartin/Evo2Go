@@ -12,7 +12,7 @@ class MapScreen extends Component {
   componentDidMount() {
     let timer = setInterval(() => {
         this.props.dispatch(fetchVisibleCars())
-    }, 60000)
+    }, 30000)
     this.setState({timer})
 
     // Duplicate here to run the first time and because the setInterval

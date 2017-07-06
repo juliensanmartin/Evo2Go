@@ -16,7 +16,7 @@ const homeStack = StackNavigator({
             size={ 20 }
             name='sliders'
             onPress={() => navigation.navigate('Filter')}
-            containerStyle={{marginHorizontal:10}}/>
+            containerStyle={{marginHorizontal:25}}/>
           )
       })
     },
@@ -38,7 +38,7 @@ const homeStack = StackNavigator({
   {
     cardStyle: {
       backgroundColor: 'transparent',
-      opacity: 0.8
+      opacity: 1
     }
   }
 )
