@@ -136,12 +136,13 @@ MapComponent.propTypes = {
 const MapContainer = styled.View`
   flex: 1;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   backgroundColor: #F5FCFF;
 `
 
 const LoaderContainer = styled.View`
+  align-self: flex-end;
 `
 
 // But need to styled-components this one!!
