@@ -1,6 +1,7 @@
 import React from 'react'
 import { TabNavigator, StackNavigator, DrawerNavigator } from 'react-navigation'
 import { Icon } from 'react-native-elements'
+import { TouchableOpacity } from 'react-native'
 import MapScreen from '../screens/Map/index'
 import FilterScreen from '../screens/Filter/index'
 import CarDetailsScreen from '../screens/CarDetails/index'
@@ -11,14 +12,16 @@ const homeStack = StackNavigator({
       navigationOptions: ({ navigation }) => ({
         title: 'Map',
         headerRight: (
-          <Icon
-            type='font-awesome'
-            size={ 20 }
-            name='sliders'
-            onPress={() => navigation.navigate('Filter')}
-            color='#2A93D5'
-            containerStyle={{marginHorizontal:25}}/>
-          )
+          <TouchableOpacity>
+            <Icon
+              type='font-awesome'
+              size={ 20 }
+              name='sliders'
+              onPress={() => navigation.navigate('Filter')}
+              color='#2A93D5'
+              containerStyle={{marginHorizontal:25}}/>
+          </TouchableOpacity>
+        )
       })
     },
     Filter: {
