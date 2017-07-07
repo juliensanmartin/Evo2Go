@@ -16,6 +16,7 @@ const homeStack = StackNavigator({
             size={ 20 }
             name='sliders'
             onPress={() => navigation.navigate('Filter')}
+            color='#2A93D5'
             containerStyle={{marginHorizontal:25}}/>
           )
       })
