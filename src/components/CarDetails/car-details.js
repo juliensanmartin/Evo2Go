@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 import { Badge, Icon } from 'react-native-elements'
 
@@ -23,13 +23,14 @@ export default class CarDetailsComponent extends Component {
               <StyledText>{name}</StyledText>
               <StyledTextSmall>{address}</StyledTextSmall>
             </ViewName>
-            <Icon type='ionicon' size={ 50 } name='ios-navigate' color='#6699ff'
-              onPress={this.props.onDirectionPress}/>
+            <TouchableOpacity onPress={this.props.onDirectionPress}>
+              <StyledImageDirection source= {require('../assets/road-direction-icon.png')} />
+            </TouchableOpacity>
           </ViewMainDetails>
           <ViewSecondaryDetails>
             { fuel &&
               <ViewItem>
-                <Icon type='ionicon' size={ 50 } name='ios-speedometer' color='#99A3A4'/>
+                <Icon type='ionicon' size={ 50 } name='ios-speedometer' color='#3DDAD7'/>
                 <ViewName>
                   <StyledText>{fuel}%</StyledText>
                   <StyledTextSmall>Fuel level</StyledTextSmall>
@@ -38,7 +39,7 @@ export default class CarDetailsComponent extends Component {
             }
             { direction &&
               <ViewItem>
-                <Icon type='ionicon' size={ 50 } name='ios-compass' color='#99A3A4'/>
+                <Icon type='ionicon' size={ 50 } name='ios-compass' color='#3DDAD7'/>
                 <ViewName>
                   <StyledText>{direction}</StyledText>
                   <StyledTextSmall>Direction</StyledTextSmall>
@@ -46,7 +47,7 @@ export default class CarDetailsComponent extends Component {
               </ViewItem>
             }
             <ViewItem>
-              <Icon type='ionicon' size={ 50 } name='ios-clock' color='#99A3A4'/>
+              <Icon type='ionicon' size={ 50 } name='ios-clock' color='#3DDAD7'/>
               <ViewName>
                 <StyledText>{distance}</StyledText>
                 <StyledTextSmall>{duration}</StyledTextSmall>
@@ -76,7 +77,7 @@ const StyledContainer = styled.View`
 const DetailsContainer = styled.View`
   flexDirection: column;
   justifyContent: space-around;
-  backgroundColor: rgba(255,255,255,0.9);
+  backgroundColor: #EDFAFD;
   padding: 10;
   margin: 10;
 `
@@ -116,11 +117,20 @@ const StyledImage= styled.Image`
   width: 250;
 `
 
+const StyledImageDirection= styled.Image`
+  height: 30;
+  width: 30;
+  backgroundColor: #EDFAFD;
+  shadow-color: black;
+  shadow-offset: 5 10;
+  shadow-radius: 5;
+`
+
 const StyledText= styled.Text`
-  color: #99A3A4;
+  color: #135589;
 `
 
 const StyledTextSmall= styled.Text`
-  color: #99A3A4;
+  color: #135589;
   fontSize: 10;
 `

@@ -53,7 +53,7 @@ const StyledContainer = styled.View`
   padding: 10;
   margin: 10;
   height: 150;
-  backgroundColor: rgba(255,255,255,0.9);
+  backgroundColor: #EDFAFD;
 `
 
 const StyledView = styled.View`
@@ -79,5 +79,5 @@ const StyledImage= styled.Image`
 `
 
 const StyledText= styled.Text`
-  color: #99A3A4;
+  color: #135589;
 `

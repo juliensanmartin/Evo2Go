@@ -1,8 +1,7 @@
 import {
   StyleSheet,
   View,
-  ActivityIndicator,
-  Platform
+  ActivityIndicator
 } from 'react-native'
 import React, { Component, PropTypes } from 'react'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
@@ -107,18 +106,9 @@ export default class MapComponent extends Component {
             }
 
         </MapView>
-        { Platform.OS === 'ios' &&
-          <LoaderContainer>
-            <LoaderComponent animating={this.props.loading}/>
-          </LoaderContainer>
-        }
-        { Platform.OS === 'android' &&
-          <ActivityIndicator
-            animating={this.props.loading}
-            size="large"
-            color="blue"
-          />
-        }
+        <LoaderContainer>
+          <LoaderComponent animating={this.props.loading}/>
+        </LoaderContainer>
       </MapContainer>
     )
   }
@@ -142,7 +132,7 @@ const MapContainer = styled.View`
 `
 
 const LoaderContainer = styled.View`
-  align-self: flex-end;
+  align-self: center;
 `
 
 // But need to styled-components this one!!

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Icon, Badge } from 'react-native-elements'
-import { View } from 'react-native'
+import { View, Image } from 'react-native'
 
 export default class IconMarkerComponent extends Component {
   constructor(props) {
@@ -18,24 +18,27 @@ export default class IconMarkerComponent extends Component {
   render() {
     const { type, name } = this.props.marker
 
-    let icon = {
-      color: 'black',
-      name: 'ios-car'
-    }
-    if (type === 'evoPin') {
-      icon.color='black'
-      icon.name='ios-car'
-    }
-    if (type==='car2GoPin') {
-      icon.color='#00BCE2'
-      icon.name='ios-car'
-    }
+    // let icon = {
+    //   color: 'black',
+    //   name: 'ios-car'
+    // }
+    // if (type === 'evoPin') {
+    //   icon.color='black'
+    //   icon.name='ios-car'
+    // }
+    // if (type==='car2GoPin') {
+    //   icon.color='#00BCE2'
+    //   icon.name='ios-car'
+    // }
 
     let marker = null
     if (type === 'busPin') {
-      marker = <Badge value={name} containerStyle={{ backgroundColor: '#104f86'}}/>
+      marker = <Badge value={name} containerStyle={{ backgroundColor: '#104f86'}} textStyle={{ color: '#FFDD33' }}/>
+    } else if (type === 'evoPin') {
+      marker = <Image source={require('../assets/prius.png')} style={{width: 40, height: 20}}/>
     } else {
-      marker = <Icon type='ionicon' size={ 30 } name={icon.name} color={icon.color}/>
+      marker = <Image source={require('../assets/smart.png')} style={{width: 30, height: 30}}/>
+      //marker = <Icon type='ionicon' size={ 30 } name={icon.name} color={icon.color}/>
     }
 
     return (
