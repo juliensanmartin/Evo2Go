@@ -1,29 +1,44 @@
 import React from 'react'
 import { TabNavigator, StackNavigator, DrawerNavigator } from 'react-navigation'
 import { Icon } from 'react-native-elements'
-import { TouchableOpacity } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import MapScreen from '../screens/Map/index'
 import FilterScreen from '../screens/Filter/index'
 import CarDetailsScreen from '../screens/CarDetails/index'
 import AboutScreen from '../screens/About/index'
+import styled from 'styled-components/native'
 
-const homeStack = StackNavigator({
+export default StackNavigator({
     Map: {
       screen: MapScreen,
       navigationOptions: ({ navigation }) => ({
-        title: 'Evo 2 Go',
+        title: '',
+        headerBackTitle: 'MAP',
         headerRight: (
-          <TouchableOpacity>
-            <Icon
-              type='font-awesome'
-              size={ 20 }
-              name='sliders'
-              onPress={() => navigation.navigate('Filter')}
-              color='#135589'
-              //reverse
-              //raised
-              containerStyle={{marginHorizontal:25}}/>
-          </TouchableOpacity>
+          <StyledRightSideHeader>
+            <TouchableOpacity>
+              <Icon
+                type='font-awesome'
+                size={ 20 }
+                name='sliders'
+                onPress={() => navigation.navigate('Filter')}
+                color='#135589'
+                //reverse
+                //raised
+                containerStyle={{marginHorizontal:10}}/>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Icon
+                type='font-awesome'
+                size={ 20 }
+                name='info-circle'
+                onPress={() => navigation.navigate('About')}
+                color='#135589'
+                //reverse
+                //raised
+                containerStyle={{marginHorizontal:10}}/>
+            </TouchableOpacity>
+          </StyledRightSideHeader>
         ),
         headerTitleStyle: {
           color: '#135589'
@@ -41,7 +56,6 @@ const homeStack = StackNavigator({
       screen: FilterScreen,
       navigationOptions: {
         title: 'FILTER',
-        gesturesEnabled: true,
         headerTitleStyle: {
           color: '#135589'
         },
@@ -55,7 +69,6 @@ const homeStack = StackNavigator({
       screen: CarDetailsScreen,
       navigationOptions: {
         title: 'DETAILS',
-        gesturesEnabled: true,
         headerTitleStyle: {
           color: '#135589'
         },
@@ -64,17 +77,7 @@ const homeStack = StackNavigator({
         },
         gesturesEnabled: true
       }
-    }
-  },
-  {
-    cardStyle: {
-      backgroundColor: 'transparent',
-      opacity: 1
-    }
-  }
-)
-
-const aboutDrawer = StackNavigator({
+    },
     About: {
       screen: AboutScreen,
       navigationOptions: {
@@ -97,25 +100,9 @@ const aboutDrawer = StackNavigator({
   }
 )
 
-export default TabNavigator({
-  tabHome: {
-    screen: homeStack,
-    navigationOptions: {
-      tabBarLabel: 'Map',
-      tabBarIcon: ({ tintColor }) => <Icon type='ionicon' size={ 20 } name='ios-map' color={ tintColor }/>
-    },
-  },
-  tabSettings: {
-    screen: aboutDrawer,
-    navigationOptions: {
-      tabBarLabel: 'About',
-      tabBarIcon: ({ tintColor }) => <Icon type='font-awesome' size={ 20 } name='info-circle' color={ tintColor }/>
-    },
-  }
-},{
-    mode: 'modal',
-    headerMode: 'none',
-    animationEnabled: true,
-    swipeEnabled: true
-  }
-)
+const StyledRightSideHeader = styled.View`
+  flexDirection: row;
+  justifyContent: space-around;
+  padding: 5;
+  margin: 5;
+`

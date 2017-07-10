@@ -1,7 +1,3 @@
-//<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-
-//Car by Nurutdinov Timur from the Noun Project
-
 import React, { Component, PropTypes } from 'react'
 import { View, Switch, Text, Image } from 'react-native'
 import styled from 'styled-components/native'
@@ -11,23 +7,24 @@ export default class FilterComponent extends Component {
     return (
       <StyledContainer>
         <StyledView>
-          <Text>VEHICLES DATA PROVIDED BY</Text>
-          <StyledText>EVO CAR SHARE</StyledText>
-          <StyledText>CAR2GO</StyledText>
-          <StyledText>TRANSLINK</StyledText>
+          <TitleText>VEHICLES DATA PROVIDED BY</TitleText>
+          <StyledCreditText>EVO CAR SHARE</StyledCreditText>
+          <StyledCreditText>CAR2GO</StyledCreditText>
+          <StyledCreditText>TRANSLINK</StyledCreditText>
         </StyledView>
         <StyledView>
-          <Text>DISTANCE DATA PROVIDED BY</Text>
-          <StyledText>GOOGLE</StyledText>
+          <TitleText>DISTANCE DATA PROVIDED BY</TitleText>
+          <StyledCreditText>GOOGLE</StyledCreditText>
         </StyledView>
         <StyledView>
-          <Text>ICONS AND ASSETS PROVIDED BY</Text>
-          <StyledText>www.flaticon.com</StyledText>
-          <StyledText>Nurutdinov Timur from the Noun Project</StyledText>
+          <TitleText>ICONS AND ASSETS PROVIDED BY</TitleText>
+          <StyledCreditText>www.flaticon.com</StyledCreditText>
+          <StyledCreditText>Loader by Steven Parisi</StyledCreditText>
         </StyledView>
         <StyledView>
-          <StyledTextSmall>Made with &hearts; by Simon Reggiani &amp; Julien Sanmartin</StyledTextSmall>
-          <StyledTextSmall><StyledText> Evo 2 Go </StyledText> - Version 0.1.0</StyledTextSmall>
+          <StyledTextSmall>Made with &hearts; from Vancouver, BC</StyledTextSmall>
+          <StyledTextSmall>By Simon Reggiani &amp; Julien Sanmartin</StyledTextSmall>
+          <StyledTextSmall><StyledHighlightedText> Evo 2 Go </StyledHighlightedText> - Version 0.1.0</StyledTextSmall>
         </StyledView>
       </StyledContainer>
     )
@@ -53,6 +50,15 @@ const StyledTextSmall = styled.Text`
   fontSize: 10;
 `
 
-const StyledText= styled.Text`
+const StyledCreditText = styled.Text`
   color: #135589;
+`
+
+const StyledHighlightedText= styled.Text`
+  color: #135589;
+`
+
+const TitleText= styled.Text`
+  fontSize: 12;
+  color: #2A93D5;
 `

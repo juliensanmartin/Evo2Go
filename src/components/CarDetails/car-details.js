@@ -24,7 +24,7 @@ export default class CarDetailsComponent extends Component {
               <StyledTextSmall>{address}</StyledTextSmall>
             </ViewName>
             <TouchableOpacity onPress={this.props.onDirectionPress}>
-              <StyledImageDirection source= {require('../assets/road-direction-icon.png')} />
+              <Icon type='ionicon' size={ 50 } name='ios-navigate' color='#2A93D7'/>
             </TouchableOpacity>
           </ViewMainDetails>
           <ViewSecondaryDetails>
@@ -115,15 +115,6 @@ const ImageContainer = styled.View`
 const StyledImage= styled.Image`
   height: 150;
   width: 250;
-`
-
-const StyledImageDirection= styled.Image`
-  height: 30;
-  width: 30;
-  backgroundColor: #EDFAFD;
-  shadow-color: black;
-  shadow-offset: 5 10;
-  shadow-radius: 5;
 `
 
 const StyledText= styled.Text`
