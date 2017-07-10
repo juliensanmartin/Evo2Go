@@ -13,7 +13,8 @@ export default class FilterComponent extends Component {
           </StyledLeftView>
           <StyledSwitch
             onValueChange={this.props.onEvoToggle}
-            value={this.props.evoVisible} />
+            value={this.props.evoVisible}
+            onTintColor='#135589'/>
         </StyledView>
         <StyledView>
           <StyledLeftView>
@@ -22,7 +23,8 @@ export default class FilterComponent extends Component {
           </StyledLeftView>
           <StyledSwitch
             onValueChange={this.props.onCar2GoToggle}
-            value={this.props.car2GoVisible} />
+            value={this.props.car2GoVisible}
+            onTintColor='#135589'/>
         </StyledView>
         <StyledView>
           <StyledLeftView>
@@ -31,7 +33,8 @@ export default class FilterComponent extends Component {
           </StyledLeftView>
           <StyledSwitch
             onValueChange={this.props.onBusToggle}
-            value={this.props.busVisible} />
+            value={this.props.busVisible}
+            onTintColor='#135589'/>
         </StyledView>
       </StyledContainer>
     )

@@ -24,9 +24,11 @@ export default class FilterComponent extends Component {
           <Text>ICONS AND ASSETS PROVIDED BY</Text>
           <StyledText>www.flaticon.com</StyledText>
           <StyledText>Nurutdinov Timur from the Noun Project</StyledText>
-          <StyledText>TRANSLINK</StyledText>
         </StyledView>
-        <Text>Made with love by Simon Reggiani Julien Sanmartin </Text>
+        <StyledView>
+          <StyledTextSmall>Made with &hearts; by Simon Reggiani &amp; Julien Sanmartin</StyledTextSmall>
+          <StyledTextSmall><StyledText> Evo 2 Go </StyledText> - Version 0.1.0</StyledTextSmall>
+        </StyledView>
       </StyledContainer>
     )
   }
@@ -37,14 +39,18 @@ const StyledContainer = styled.View`
   justifyContent: space-around;
   padding: 10;
   margin: 10;
-  height: 150;
+  height: 400;
   backgroundColor: #EDFAFD;
 `
 
 const StyledView = styled.View`
-  flexDirection: row;
+  flexDirection: column;
   justifyContent: space-between;
   alignItems: center;
+`
+
+const StyledTextSmall = styled.Text`
+  fontSize: 10;
 `
 
 const StyledText= styled.Text`

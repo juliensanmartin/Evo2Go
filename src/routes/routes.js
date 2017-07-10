@@ -11,7 +11,7 @@ const homeStack = StackNavigator({
     Map: {
       screen: MapScreen,
       navigationOptions: ({ navigation }) => ({
-        title: 'MAP',
+        title: 'Evo 2 Go',
         headerRight: (
           <TouchableOpacity>
             <Icon
@@ -31,6 +31,7 @@ const homeStack = StackNavigator({
         headerStyle: {
          backgroundColor: '#edfafd'
         },
+        gesturesEnabled: true
         // tintColor: {
         //   /* this will color your back and forward arrows or left and right icons */
         // }
@@ -47,6 +48,7 @@ const homeStack = StackNavigator({
         headerStyle: {
          backgroundColor: '#edfafd'
         },
+        gesturesEnabled: true
       }
     },
     CarDetails: {
@@ -60,6 +62,7 @@ const homeStack = StackNavigator({
         headerStyle: {
          backgroundColor: '#edfafd'
         },
+        gesturesEnabled: true
       }
     }
   },
@@ -71,17 +74,28 @@ const homeStack = StackNavigator({
   }
 )
 
-const settingsDrawer = DrawerNavigator({
+const aboutDrawer = StackNavigator({
     About: {
-      screen: AboutScreen
-    },
-    About2: {
-      screen: AboutScreen
+      screen: AboutScreen,
+      navigationOptions: {
+        title: 'ABOUT',
+        headerTitleStyle: {
+          color: '#135589'
+        },
+        headerStyle: {
+         backgroundColor: '#edfafd'
+        },
+        gesturesEnabled: true
+      }
     }
   },
   {
-    drawerWidth: 200
-  })
+    cardStyle: {
+      backgroundColor: 'transparent',
+      opacity: 1
+    }
+  }
+)
 
 export default TabNavigator({
   tabHome: {
@@ -92,10 +106,10 @@ export default TabNavigator({
     },
   },
   tabSettings: {
-    screen: settingsDrawer,
+    screen: aboutDrawer,
     navigationOptions: {
-      drawerLabel: 'Settings',
-      drawerIcon: ({ tintColor }) => <Icon type='ionicon' size={ 20 } name='ion-navicon' color={ tintColor }/>
+      tabBarLabel: 'About',
+      tabBarIcon: ({ tintColor }) => <Icon type='font-awesome' size={ 20 } name='info-circle' color={ tintColor }/>
     },
   }
 },{
