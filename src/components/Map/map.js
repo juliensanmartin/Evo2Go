@@ -30,13 +30,24 @@ export default class MapComponent extends Component {
 
   componentDidMount() {
     navigator.geolocation.getCurrentPosition((position) => {
-        this.setState({
-          currentPosition: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-          },
-          error: null
-        })
+        this.props.onPositionFetched(position.coords)
+        if (this.props.positionInVancouver) {
+          this.setState({
+            currentPosition: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude
+            },
+            error: null
+          })
+        } else {
+          this.setState({
+            currentPosition: {
+              latitude: initialRegion.latitude,
+              longitude: initialRegion.longitude
+            },
+            error: null
+          })
+        }
         this.onCurrentPositionFetch()
       },
       error => this.setState({
@@ -77,9 +88,9 @@ export default class MapComponent extends Component {
       <MapContainer>
         <MapView
           ref={ref => { this.map = ref }}
-          showsUserLocation
-          followsUserLocation
-          showsMyLocationButton
+          showsUserLocation={this.props.positionInVancouver}
+          followsUserLocation={this.props.positionInVancouver}
+          showsMyLocationButton={this.props.positionInVancouver}
           showsPointsOfInterest={false}
           showsBuildings={false}
           showsIndoors={false}
@@ -119,7 +130,9 @@ MapComponent.propTypes = {
   loading: PropTypes.bool.isRequired,
   navigation: PropTypes.object.isRequired,
   direction: PropTypes.array,
-  onRegionChange: PropTypes.func.isRequired
+  onRegionChange: PropTypes.func.isRequired,
+  onPositionFetched: PropTypes.func.isRequired,
+  positionInVancouver: PropTypes.bool.isRequired
 }
 
 // Usage of styled-components : https://github.com/styled-components/styled-components

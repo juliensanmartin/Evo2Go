@@ -1,6 +1,7 @@
 import {
   GET_CURRENT_DISTANCE,
-  GET_CURRENT_DIRECTION
+  GET_CURRENT_DIRECTION,
+  CHECK_POSITION_IN_VANCOUVER
  } from './actions.type'
 import Polyline from '@mapbox/polyline'
 import { getTimeAndDistance, getDirection } from '../google-map.api'
@@ -38,3 +39,16 @@ export const fetchDirection = (origin, destination) => dispatch =>
       },
       errors => console.error(errors)
     )
+
+export const checkPositionInVancouver = position => dispatch => {
+  let positionInVancouver = false
+  const topY = 49.450516
+  const bottomY = 49.014739
+  const leftX = -123.540150
+  const rightX = -122.260243
+  if (position.longitude < leftX && position.longitude > rightX && position.latitude > bottomY && position.latitude < topY) positionInVancouver = true
+  return dispatch({
+    type: CHECK_POSITION_IN_VANCOUVER,
+    positionInVancouver
+  })
+}

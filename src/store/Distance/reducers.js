@@ -1,6 +1,7 @@
 import {
   GET_CURRENT_DISTANCE,
-  GET_CURRENT_DIRECTION
+  GET_CURRENT_DIRECTION,
+  CHECK_POSITION_IN_VANCOUVER
  } from './actions.type'
  import { combineReducers } from 'redux'
 
@@ -22,6 +23,15 @@ const direction = (state = [], action) => {
   }
 }
 
+const positionInVancouver = (state = false, action) => {
+  switch (action.type) {
+    case CHECK_POSITION_IN_VANCOUVER:
+      return action.positionInVancouver
+    default:
+      return state
+  }
+}
+
 export default distance = combineReducers({
-	distance, direction
+	distance, direction, positionInVancouver
 })
