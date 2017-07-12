@@ -7,6 +7,7 @@ import React, { Component, PropTypes } from 'react'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import styled from 'styled-components/native'
 import LoaderComponent from '../Loader/loader'
+import ToastComponent from '../Toast/index'
 import IconMarkerComponent from '../../components/IconMarker/icon-marker'
 
 const initialRegion = {
@@ -120,6 +121,7 @@ export default class MapComponent extends Component {
         <LoaderContainer>
           <LoaderComponent animating={this.props.loading}/>
         </LoaderContainer>
+        <ToastComponent message='You are not in Vancouver Area' visible={this.props.positionInVancouver}/>
       </MapContainer>
     )
   }
