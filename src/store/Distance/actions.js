@@ -42,11 +42,13 @@ export const fetchDirection = (origin, destination) => dispatch =>
 
 export const checkPositionInVancouver = position => dispatch => {
   let positionInVancouver = false
+
+  // Define the border to use the user GPS
   const topY = 49.450516
   const bottomY = 49.014739
   const leftX = -123.540150
   const rightX = -122.260243
-  if (position.longitude < leftX && position.longitude > rightX && position.latitude > bottomY && position.latitude < topY) positionInVancouver = true
+  if (position.longitude > leftX && position.longitude < rightX && position.latitude > bottomY && position.latitude < topY) positionInVancouver = true
   return dispatch({
     type: CHECK_POSITION_IN_VANCOUVER,
     positionInVancouver

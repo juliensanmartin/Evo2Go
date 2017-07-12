@@ -52,7 +52,6 @@ const getRegionMarkers = createSelector(
       return result
     }, [])
 
-    console.log(vehicles)
     return vehicles
   }
 )
