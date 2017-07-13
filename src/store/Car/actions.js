@@ -2,6 +2,7 @@ import {
   SET_EVO_VISIBILITY,
   SET_CAR2GO_VISIBILITY,
   SET_BUS_VISIBILITY,
+  SET_MOBI_VISIBILITY,
   GET_VISIBLE_CARS,
   CARS_LOADED,
   ON_REGION_CHANGE
@@ -9,20 +10,23 @@ import {
 import { getAvailableVehicleCar2Go } from '../car2go.api'
 import { getAvailableVehicleEvo } from '../evo.api'
 import { getAvailableBus } from '../translink.api'
-import { car2goVehicleNormalizer, evoVehicleNormalizer, busNormalizer } from './schema'
-import { reduce, chunk, each } from 'lodash'
+import { getAvailableMobi } from '../mobi.api'
+import { car2goVehicleNormalizer, evoVehicleNormalizer, busNormalizer, mobiNormalizer } from './schema'
+import { reduce, chunk, each, split, toNumber } from 'lodash'
 
 export const fetchVisibleCars = () => (dispatch, getState) => {
   const state = getState()
   const car2GoVisible = state.car.car2go.visible
   const evoVisible = state.car.evo.visible
   const busVisible = state.car.translink.visible
+  const mobiVisible = state.car.mobi.visible
 
   const promises = []
 
   if (car2GoVisible) promises.push(dispatch(fetchCar2GoCars()))
   if (evoVisible) promises.push(dispatch(fetchEvoCars()))
   if (busVisible) promises.push(dispatch(fetchBus()))
+  if (mobiVisible) promises.push(dispatch(fetchMobi()))
 
   Promise.all(promises)
     .then(() => {
@@ -178,6 +182,52 @@ export const setBusVisibility = visible => dispatch => {
   }
   return dispatch({
     type: SET_BUS_VISIBILITY,
+    visible
+  })
+}
+
+export const fetchMobi = () => dispatch => getAvailableMobi()
+  .then(response => {
+      const normalized = mobiNormalizer(response)
+      const vehicles = reduce(normalized.entities.mobi, (result, value, key) => {
+        const coordArray = split(value.coordinates, ',')
+        result.push({
+          id: key,
+          latlng: {
+            latitude: toNumber(coordArray[0]),
+            longitude: toNumber(coordArray[1])
+          },
+          type: 'mobiPin',
+          address: value.name,
+          avlBikes: value.avl_bikes
+        })
+        return result
+      }, [])
+
+      dispatch({
+        type: GET_VISIBLE_CARS,
+        vehicles
+      })
+    },
+    errors => console.error(errors)
+  )
+
+export const setMobiVisibility = visible => dispatch => {
+  if (visible) {
+    dispatch({
+      type: CARS_LOADED,
+      loaded: false
+    })
+    dispatch(fetchMobi())
+      .then(() => {
+        return dispatch({
+          type: CARS_LOADED,
+          loaded: true
+        })
+      })
+  }
+  return dispatch({
+    type: SET_MOBI_VISIBILITY,
     visible
   })
 }

@@ -36,6 +36,16 @@ export default class FilterComponent extends Component {
             value={this.props.busVisible}
             onTintColor='#135589'/>
         </StyledView>
+        <StyledView>
+          <StyledLeftView>
+            <StyledImage source={require('../assets/translink_logo.png')}/>
+            <StyledText>MOBI</StyledText>
+          </StyledLeftView>
+          <StyledSwitch
+            onValueChange={this.props.onMobiToggle}
+            value={this.props.mobiVisible}
+            onTintColor='#135589'/>
+        </StyledView>
       </StyledContainer>
     )
   }
@@ -47,7 +57,9 @@ FilterComponent.propTypes = {
   busVisible: PropTypes.bool.isRequired,
   onEvoToggle: PropTypes.func.isRequired,
   onCar2GoToggle: PropTypes.func.isRequired,
-  onBusToggle: PropTypes.func.isRequired
+  onBusToggle: PropTypes.func.isRequired,
+  mobiVisible: PropTypes.bool.isRequired,
+  onMobiToggle: PropTypes.func.isRequired
 }
 
 const StyledContainer = styled.View`
@@ -55,7 +67,7 @@ const StyledContainer = styled.View`
   justifyContent: space-around;
   padding: 10;
   margin: 10;
-  height: 150;
+  height: 200;
   backgroundColor: #EDFAFD;
 `
 

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import FilterComponent from '../../components/Filter/filter'
-import { setEvoVisibility, setCar2GoVisibility, setBusVisibility } from '../../store/Car/actions'
-import { getCar2GoVisibility, getEvoVisibility, getBusVisibility } from '../../store/Car/selectors'
+import { setEvoVisibility, setCar2GoVisibility, setBusVisibility, setMobiVisibility } from '../../store/Car/actions'
+import { getCar2GoVisibility, getEvoVisibility, getBusVisibility, getMobiVisibility } from '../../store/Car/selectors'
 import { connect } from 'react-redux';
 
 class Filter extends Component {
@@ -13,7 +13,9 @@ class Filter extends Component {
         onEvoToggle={this.props.onEvoToggle}
         onCar2GoToggle={this.props.onCar2GoToggle}
         onBusToggle={this.props.onBusToggle}
-        busVisible={this.props.busVisible}/>
+        busVisible={this.props.busVisible}
+        onMobiToggle={this.props.onMobiToggle}
+        mobiVisible={this.props.mobiVisible}/>
     )
   }
 }
@@ -24,14 +26,17 @@ Filter.propTypes = {
   onEvoToggle: PropTypes.func.isRequired,
   onCar2GoToggle: PropTypes.func.isRequired,
   busVisible: PropTypes.bool.isRequired,
-  onBusToggle: PropTypes.func.isRequired
+  onBusToggle: PropTypes.func.isRequired,
+  mobiVisible: PropTypes.bool.isRequired,
+  onMobiToggle: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {
   return {
     evoVisible: getEvoVisibility(state),
     car2GoVisible: getCar2GoVisibility(state),
-    busVisible: getBusVisibility(state)
+    busVisible: getBusVisibility(state),
+    mobiVisible: getMobiVisibility(state)
   }
 }
 
@@ -45,6 +50,9 @@ function mapDispatchToProps (dispatch) {
     },
     onBusToggle: (visible) => {
       dispatch(setBusVisibility(visible))
+    },
+    onMobiToggle: (visible) => {
+      dispatch(setMobiVisibility(visible))
     }
   }
 }

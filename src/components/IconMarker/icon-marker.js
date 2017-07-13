@@ -16,7 +16,7 @@ export default class IconMarkerComponent extends Component {
   }
 
   render() {
-    const { type, name } = this.props.marker
+    const { type, name, avlBikes } = this.props.marker
 
     // let icon = {
     //   color: 'black',
@@ -36,6 +36,8 @@ export default class IconMarkerComponent extends Component {
       marker = <Badge value={name} containerStyle={{ backgroundColor: '#104f86'}} textStyle={{ color: '#FFDD33' }}/>
     } else if (type === 'evoPin') {
       marker = <Image source={require('../assets/prius.png')} style={{width: 40, height: 20}}/>
+    } else if (type === 'mobiPin') {
+      marker = <Badge value={avlBikes} containerStyle={{ backgroundColor: '#008ABF'}} textStyle={{ color: '#ffffff' }}/>
     } else {
       marker = <Image source={require('../assets/smart.png')} style={{width: 30, height: 30}}/>
       //marker = <Icon type='ionicon' size={ 30 } name={icon.name} color={icon.color}/>

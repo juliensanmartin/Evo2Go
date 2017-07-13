@@ -5,7 +5,7 @@ import { Badge, Icon } from 'react-native-elements'
 
 export default class CarDetailsComponent extends Component {
   render() {
-    const { type, address, fuel, name, direction } = this.props.marker
+    const { type, address, fuel, name, direction, avlBikes } = this.props.marker
     const { distance, duration } = this.props.distance
     let logo
     if (type==='evoPin') logo=require('../assets/evo_car.png')
@@ -20,6 +20,9 @@ export default class CarDetailsComponent extends Component {
         <DetailsContainer>
           <ViewMainDetails>
             <ViewName>
+              { avlBikes &&
+                <StyledText>{avlBikes} Bikes availables</StyledText>
+              }
               <StyledText>{name}</StyledText>
               <StyledTextSmall>{address}</StyledTextSmall>
             </ViewName>
@@ -124,4 +127,9 @@ const StyledText= styled.Text`
 const StyledTextSmall= styled.Text`
   color: #135589;
   fontSize: 10;
+`
+
+const StyledTextBig= styled.Text`
+  color: #135589;
+  fontSize: 16;
 `
