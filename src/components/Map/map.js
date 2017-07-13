@@ -51,13 +51,16 @@ export default class MapComponent extends Component {
         }
         this.onCurrentPositionFetch()
       },
-      error => this.setState({
-        error: error.message,
-        currentPosition: {
-          latitude: initialRegion.latitude,
-          longitude: initialRegion.longitude
-        }
-      }),
+      error => {
+        this.setState({
+          error: error.message,
+          currentPosition: {
+            latitude: initialRegion.latitude,
+            longitude: initialRegion.longitude
+          }
+        })
+        this.onCurrentPositionFetch()
+      },
       {
         timeout: 20000,
         maximumAge: 1000
@@ -121,7 +124,11 @@ export default class MapComponent extends Component {
         <LoaderContainer>
           <LoaderComponent animating={this.props.loading}/>
         </LoaderContainer>
-        <ToastComponent message='You are not in Vancouver Area' visible={this.props.positionInVancouver}/>
+        <ToastComponent message='You are not in Vancouver area' visible={!this.props.positionInVancouver}/>
+        <ToastComponent
+          message='There is no vehicle around you'
+          visible={this.props.markers.length === 0 && this.props.positionInVancouver && !this.props.loading}
+          clickable={false}/>
       </MapContainer>
     )
   }
@@ -148,6 +155,14 @@ const MapContainer = styled.View`
 
 const LoaderContainer = styled.View`
   align-self: center;
+`
+
+const ModalContainer = styled.View`
+  flexDirection: column;
+  justifyContent: center;
+  alignItems: center;
+  height: 50;
+  width: 300;
 `
 
 // But need to styled-components this one!!
