@@ -25,7 +25,8 @@ export default class MapComponent extends Component {
 
       this.state = {
         currentPosition: null,
-        error: null
+        errorGPS: false,
+        locationFetched: false
       }
     }
 
@@ -38,7 +39,8 @@ export default class MapComponent extends Component {
               latitude: position.coords.latitude,
               longitude: position.coords.longitude
             },
-            error: null
+            errorGPS: false,
+            locationFetched: true
           })
         } else {
           this.setState({
@@ -46,14 +48,16 @@ export default class MapComponent extends Component {
               latitude: initialRegion.latitude,
               longitude: initialRegion.longitude
             },
-            error: null
+            errorGPS: false,
+            locationFetched: true
           })
         }
         this.onCurrentPositionFetch()
       },
       error => {
         this.setState({
-          error: error.message,
+          errorGPS: true,
+          locationFetched: true,
           currentPosition: {
             latitude: initialRegion.latitude,
             longitude: initialRegion.longitude
@@ -75,7 +79,6 @@ export default class MapComponent extends Component {
       latitudeDelta: initialRegion.latitudeDelta,
       longitudeDelta: initialRegion.longitudeDelta
     }
-    console.log(currentRegion)
     this.map.animateToRegion(currentRegion)
   }
 
@@ -124,7 +127,8 @@ export default class MapComponent extends Component {
         <LoaderContainer>
           <LoaderComponent animating={this.props.loading}/>
         </LoaderContainer>
-        <ToastComponent message='You are not in Vancouver area' visible={!this.props.positionInVancouver}/>
+        <ToastComponent message='Problems to locate your position' visible={this.state.errorGPS}/>
+        <ToastComponent message='You are not in Vancouver area' visible={!this.props.positionInVancouver && this.state.locationFetched}/>
         <ToastComponent
           message='There is no vehicle around you'
           visible={this.props.markers.length === 0 && this.props.positionInVancouver && !this.props.loading}

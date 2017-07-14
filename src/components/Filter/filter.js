@@ -8,8 +8,8 @@ export default class FilterComponent extends Component {
       <StyledContainer>
         <StyledView>
           <StyledLeftView>
-            <StyledImage source={require('../assets/evo_logo.png')}/>
-            <StyledText>EVO</StyledText>
+            //<StyledImage source={require('../assets/evo_logo.png')}/>
+            <StyledText>EVO CARS</StyledText>
           </StyledLeftView>
           <StyledSwitch
             onValueChange={this.props.onEvoToggle}
@@ -18,8 +18,8 @@ export default class FilterComponent extends Component {
         </StyledView>
         <StyledView>
           <StyledLeftView>
-            <StyledImage source={require('../assets/Car2go_logo.png')}/>
-            <StyledText>CAR2GO</StyledText>
+            //<StyledImage source={require('../assets/Car2go_logo.png')}/>
+            <StyledText>CAR2GO CARS</StyledText>
           </StyledLeftView>
           <StyledSwitch
             onValueChange={this.props.onCar2GoToggle}
@@ -28,8 +28,8 @@ export default class FilterComponent extends Component {
         </StyledView>
         <StyledView>
           <StyledLeftView>
-            <StyledImage source={require('../assets/translink_logo.png')}/>
-            <StyledText>TRANSLINK</StyledText>
+            // <StyledImage source={require('../assets/translink_logo.png')}/>
+            <StyledText>BUS</StyledText>
           </StyledLeftView>
           <StyledSwitch
             onValueChange={this.props.onBusToggle}
@@ -39,7 +39,7 @@ export default class FilterComponent extends Component {
         <StyledView>
           <StyledLeftView>
             <StyledImage source={require('../assets/translink_logo.png')}/>
-            <StyledText>MOBI</StyledText>
+            <StyledText>MOBI BIKES</StyledText>
           </StyledLeftView>
           <StyledSwitch
             onValueChange={this.props.onMobiToggle}
