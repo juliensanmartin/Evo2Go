@@ -19,6 +19,7 @@ export default class FilterComponent extends Component {
         <StyledView>
           <TitleText>ICONS AND ASSETS PROVIDED BY</TitleText>
           <StyledCreditText>Smart Car icon by Freepik from www.flaticon.com</StyledCreditText>
+          <StyledCreditText>Bike icon by Freepik from www.flaticon.com</StyledCreditText>
           <StyledCreditText>Loader by Steven Parisi</StyledCreditText>
         </StyledView>
         <StyledView>

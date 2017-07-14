@@ -8,7 +8,7 @@ export default class FilterComponent extends Component {
       <StyledContainer>
         <StyledView>
           <StyledLeftView>
-            //<StyledImage source={require('../assets/evo_logo.png')}/>
+            <StyledImageLong source={require('../assets/prius.png')}/>
             <StyledText>EVO CARS</StyledText>
           </StyledLeftView>
           <StyledSwitch
@@ -18,7 +18,7 @@ export default class FilterComponent extends Component {
         </StyledView>
         <StyledView>
           <StyledLeftView>
-            //<StyledImage source={require('../assets/Car2go_logo.png')}/>
+            <StyledImage source={require('../assets/smart.png')}/>
             <StyledText>CAR2GO CARS</StyledText>
           </StyledLeftView>
           <StyledSwitch
@@ -28,7 +28,7 @@ export default class FilterComponent extends Component {
         </StyledView>
         <StyledView>
           <StyledLeftView>
-            // <StyledImage source={require('../assets/translink_logo.png')}/>
+            <StyledImageLong source={require('../assets/bus.png')}/>
             <StyledText>BUS</StyledText>
           </StyledLeftView>
           <StyledSwitch
@@ -38,7 +38,7 @@ export default class FilterComponent extends Component {
         </StyledView>
         <StyledView>
           <StyledLeftView>
-            <StyledImage source={require('../assets/translink_logo.png')}/>
+            <StyledImage source={require('../assets/bike.png')}/>
             <StyledText>MOBI BIKES</StyledText>
           </StyledLeftView>
           <StyledSwitch
@@ -90,6 +90,12 @@ const StyledSwitch= styled.Switch`
 const StyledImage= styled.Image`
   height: 20;
   width: 20;
+  marginHorizontal: 10;
+`
+
+const StyledImageLong= styled.Image`
+  height: 15;
+  width: 30;
   marginHorizontal: 10;
 `
 
