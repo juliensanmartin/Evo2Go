@@ -7,6 +7,7 @@ import {
   CARS_LOADED,
   ON_REGION_CHANGE
  } from './actions.type'
+import { PROPAGATE_ERROR, RESET_ERROR } from '../Error/actions.type'
 import { getAvailableVehicleCar2Go } from '../car2go.api'
 import { getAvailableVehicleEvo } from '../evo.api'
 import { getAvailableBus } from '../translink.api'
@@ -15,6 +16,10 @@ import { car2goVehicleNormalizer, evoVehicleNormalizer, busNormalizer, mobiNorma
 import { reduce, chunk, each, split, toNumber } from 'lodash'
 
 export const fetchVisibleCars = () => (dispatch, getState) => {
+  dispatch({
+    type: RESET_ERROR,
+    message: ''
+  })
   const state = getState()
   const car2GoVisible = state.car.car2go.visible
   const evoVisible = state.car.evo.visible
@@ -65,7 +70,12 @@ export const fetchCar2GoCars = () => (dispatch, getState) => getAvailableVehicle
       vehicles
     })
   },
-  errors => console.error(errors)
+  errors => {
+    dispatch({
+      type: PROPAGATE_ERROR,
+      message: errors.message
+    })
+  }
 )
 
 export const setCar2GoVisibility = (visible) => (dispatch) => {
@@ -114,7 +124,12 @@ export const fetchEvoCars = () => (dispatch, getState) => getAvailableVehicleEvo
       vehicles
     })
   },
-  errors => console.error(errors)
+  errors => {
+    dispatch({
+      type: PROPAGATE_ERROR,
+      message: errors.message
+    })
+  }
 )
 
 export const setEvoVisibility = (visible) => (dispatch) => {
@@ -163,7 +178,12 @@ export const fetchBus = () => dispatch => getAvailableBus()
         vehicles
       })
     },
-    errors => console.error(errors)
+    errors => {
+      dispatch({
+        type: PROPAGATE_ERROR,
+        message: errors.message
+      })
+    }
   )
 
 export const setBusVisibility = visible => dispatch => {
@@ -209,7 +229,12 @@ export const fetchMobi = () => dispatch => getAvailableMobi()
         vehicles
       })
     },
-    errors => console.error(errors)
+    errors => {
+      dispatch({
+        type: PROPAGATE_ERROR,
+        message: errors.message
+      })
+    }
   )
 
 export const setMobiVisibility = visible => dispatch => {

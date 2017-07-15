@@ -13,7 +13,7 @@ export const getAvailableVehicleCar2Go = () => {
     .then(responseJson => {
       return responseJson.placemarks;
     })
-    .catch(error => {
-      console.error(error);
-    });
+    // .catch(error => {
+    //   console.error(error);
+    // });
 };

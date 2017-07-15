@@ -8,7 +8,7 @@ export const getAvailableVehicleEvo = () => {
     .then(responseJson => {
       return responseJson.data;
     })
-    .catch(error => {
-      console.error(error);
-    });
+    // .catch(error => {
+    //   console.error(error);
+    // });
 };

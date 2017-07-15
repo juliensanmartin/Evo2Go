@@ -35,7 +35,8 @@ class MapScreen extends Component {
         direction={this.props.direction}
         onRegionChange={this.props.onRegionChange}
         onPositionFetched={this.props.onPositionFetched}
-        positionInVancouver={this.props.positionInVancouver}/>
+        positionInVancouver={this.props.positionInVancouver}
+        errorApi={this.props.errorApi}/>
     )
   }
 }
@@ -47,7 +48,8 @@ MapScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
   onRegionChange: PropTypes.func.isRequired,
   onPositionFetched: PropTypes.func.isRequired,
-  positionInVancouver: PropTypes.bool.isRequired
+  positionInVancouver: PropTypes.bool.isRequired,
+  errorApi: PropTypes.string.isRequired
 }
 
 function mapStateToProps(state) {
@@ -55,7 +57,8 @@ function mapStateToProps(state) {
     markers: getRegionMarkers(state),
     loading: !isLoaded(state),
     direction: state.distance.direction,
-    positionInVancouver: state.distance.positionInVancouver
+    positionInVancouver: state.distance.positionInVancouver,
+    errorApi: state.errors.errorApi,
   }
 }
 

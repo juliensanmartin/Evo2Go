@@ -4,7 +4,7 @@ export const getAvailableMobi = () => {
     .then(responseJson => {
       return responseJson.result
     })
-    .catch(error => {
-      console.error(error)
-    })
+    // .catch(error => {
+    //   console.error(error)
+    // })
 }

@@ -127,12 +127,15 @@ export default class MapComponent extends Component {
         <LoaderContainer>
           <ActivityIndicator animating={this.props.loading} size='large' color='#135589'/>
         </LoaderContainer>
-        <ToastComponent message='Problems to locate your position' visible={this.state.errorGPS}/>
-        <ToastComponent message='You are not in Vancouver area' visible={!this.props.positionInVancouver && this.state.locationFetched}/>
-        <ToastComponent
-          message='There is no vehicle around you'
-          visible={this.props.markers.length === 0 && this.props.positionInVancouver && !this.props.loading}
-          clickable={false}/>
+        <ToastContainer>
+          <ToastComponent message='Problems to locate your position' visible={this.state.errorGPS}/>
+          <ToastComponent message='Problems to retrieve vehicles' visible={this.props.errorApi !== ''}/>
+          <ToastComponent message='You are not in Vancouver area' visible={!this.props.positionInVancouver && this.state.locationFetched}/>
+          <ToastComponent
+            message='There is no vehicle around you'
+            visible={this.props.markers.length === 0 && this.props.positionInVancouver && !this.props.loading && this.props.errorApi === ''}
+            clickable={false}/>
+          </ToastContainer>
       </MapContainer>
     )
   }
@@ -145,7 +148,8 @@ MapComponent.propTypes = {
   direction: PropTypes.array,
   onRegionChange: PropTypes.func.isRequired,
   onPositionFetched: PropTypes.func.isRequired,
-  positionInVancouver: PropTypes.bool.isRequired
+  positionInVancouver: PropTypes.bool.isRequired,
+  errorApi: PropTypes.string.isRequired
 }
 
 // Usage of styled-components : https://github.com/styled-components/styled-components
@@ -153,12 +157,17 @@ const MapContainer = styled.View`
   flex: 1;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   backgroundColor: #F5FCFF;
 `
 
 const LoaderContainer = styled.View`
   align-self: center;
+`
+
+const ToastContainer = styled.View`
+  flexDirection: column;
+  justifyContent: flex-end;
+  marginVertical: 40;
 `
 
 const ModalContainer = styled.View`

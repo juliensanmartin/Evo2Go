@@ -5,8 +5,9 @@ import { Badge, Icon } from 'react-native-elements'
 
 export default class CarDetailsComponent extends Component {
   render() {
-    const { type, address, fuel, name, direction, avlBikes } = this.props.marker
+    const { type, address, fuel, name, direction } = this.props.marker
     const { distance, duration } = this.props.distance
+    let { avlBikes } = this.props.marker
     let logo
     let long = false
     if (type==='evoPin') {
@@ -19,7 +20,7 @@ export default class CarDetailsComponent extends Component {
       long=true
     }
     if (type==='mobiPin') logo=require('../assets/bike.png')
-
+    if (avlBikes === 0) avlBikes = 'No'
     return (
       <StyledContainer>
         <DetailsContainer>
@@ -34,7 +35,7 @@ export default class CarDetailsComponent extends Component {
           <ViewMainDetails>
             <ViewName>
               { avlBikes &&
-                <StyledText>{avlBikes} Bikes availables</StyledText>
+                <StyledText>{avlBikes} bikes availables</StyledText>
               }
               <StyledText>{name}</StyledText>
               <StyledTextSmall>{address}</StyledTextSmall>
