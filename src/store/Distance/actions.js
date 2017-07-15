@@ -1,7 +1,8 @@
 import {
   GET_CURRENT_DISTANCE,
   GET_CURRENT_DIRECTION,
-  CHECK_POSITION_IN_VANCOUVER
+  CHECK_POSITION_IN_VANCOUVER,
+  RESET_DIRECTION
  } from './actions.type'
 import Polyline from '@mapbox/polyline'
 import { getTimeAndDistance, getDirection } from '../google-map.api'
@@ -39,6 +40,14 @@ export const fetchDirection = (origin, destination) => dispatch =>
       },
       errors => console.error(errors)
     )
+
+  export const resetDirection = () => dispatch => {
+    return dispatch({
+      type: RESET_DIRECTION,
+      coords: []
+    })
+  }
+
 
 export const checkPositionInVancouver = position => dispatch => {
   let positionInVancouver = false

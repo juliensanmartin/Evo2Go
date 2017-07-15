@@ -8,16 +8,29 @@ export default class CarDetailsComponent extends Component {
     const { type, address, fuel, name, direction, avlBikes } = this.props.marker
     const { distance, duration } = this.props.distance
     let logo
-    if (type==='evoPin') logo=require('../assets/evo_car.png')
-    if (type==='car2GoPin') logo=require('../assets/car2go_car.png')
-    if (type==='busPin') logo=require('../assets/bus.gif')
+    let long = false
+    if (type==='evoPin') {
+      logo=require('../assets/prius.png')
+      long=true
+    }
+    if (type==='car2GoPin') logo=require('../assets/smart.png')
+    if (type==='busPin')  {
+      logo=require('../assets/bus.png')
+      long=true
+    }
+    if (type==='mobiPin') logo=require('../assets/bike.png')
+
     return (
       <StyledContainer>
-        <ImageContainer>
-          <StyledImage source={logo}/>
-        </ImageContainer>
-
         <DetailsContainer>
+          <ImageContainer>
+            {long &&
+              <StyledImageLong source={logo}/>
+            }
+            {!long &&
+              <StyledImage source={logo}/>
+            }
+          </ImageContainer>
           <ViewMainDetails>
             <ViewName>
               { avlBikes &&
@@ -26,9 +39,11 @@ export default class CarDetailsComponent extends Component {
               <StyledText>{name}</StyledText>
               <StyledTextSmall>{address}</StyledTextSmall>
             </ViewName>
-            <TouchableOpacity onPress={this.props.onDirectionPress}>
-              <Icon type='ionicon' size={ 50 } name='ios-navigate' color='#2A93D7'/>
-            </TouchableOpacity>
+            {!positionInVancouver &&
+              <TouchableOpacity onPress={this.props.onDirectionPress}>
+                <Icon type='ionicon' size={ 50 } name='ios-navigate' color='#2A93D7'/>
+              </TouchableOpacity>
+            }
           </ViewMainDetails>
           <ViewSecondaryDetails>
             { fuel &&
@@ -66,7 +81,8 @@ export default class CarDetailsComponent extends Component {
 CarDetailsComponent.propTypes = {
   marker: PropTypes.object.isRequired,
   distance: PropTypes.object.isRequired,
-  onDirectionPress: PropTypes.func.isRequired
+  onDirectionPress: PropTypes.func.isRequired,
+  positionInVancouver: PropTypes.bool.isRequired
 }
 
 const StyledContainer = styled.View`
@@ -115,9 +131,14 @@ const ImageContainer = styled.View`
   alignItems: flex-end;
 `
 
-const StyledImage= styled.Image`
-  height: 150;
-  width: 250;
+const StyledImage = styled.Image`
+  height: 100;
+  width: 100;
+`
+
+const StyledImageLong = styled.Image`
+  height: 80;
+  width: 200;
 `
 
 const StyledText= styled.Text`

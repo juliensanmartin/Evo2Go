@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import MapComponent from '../../components/Map/map'
 import { fetchVisibleCars, updateRegion } from '../../store/Car/actions'
-import { checkPositionInVancouver } from '../../store/Distance/actions'
+import { checkPositionInVancouver, resetDirection } from '../../store/Distance/actions'
 import { getVisibleMarkers, isLoaded, getRegionMarkers } from '../../store/Car/selectors'
 import { connect } from 'react-redux'
 
@@ -23,6 +23,7 @@ class MapScreen extends Component {
 
   componentWillUnmount() {
     this.clearInterval(this.state.timer)
+    this.props.dispatch(resetDirection())
   }
 
   render() {
@@ -66,6 +67,7 @@ function mapDispatchToProps (dispatch) {
     onPositionFetched: (coord) => {
       dispatch(checkPositionInVancouver(coord))
     },
+
     dispatch: dispatch
   }
 }

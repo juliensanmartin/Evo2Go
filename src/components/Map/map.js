@@ -125,7 +125,7 @@ export default class MapComponent extends Component {
 
         </MapView>
         <LoaderContainer>
-          <LoaderComponent animating={this.props.loading}/>
+          <ActivityIndicator animating={this.props.loading} size='large' color='#135589'/>
         </LoaderContainer>
         <ToastComponent message='Problems to locate your position' visible={this.state.errorGPS}/>
         <ToastComponent message='You are not in Vancouver area' visible={!this.props.positionInVancouver && this.state.locationFetched}/>

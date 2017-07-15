@@ -55,4 +55,5 @@ const StyledContainer = styled.View`
 
 const StyledText= styled.Text`
   color: #EDFAFD;
+  fontSize: 16;
 `

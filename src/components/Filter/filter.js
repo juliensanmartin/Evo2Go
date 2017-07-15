@@ -90,13 +90,14 @@ const StyledSwitch= styled.Switch`
 const StyledImage= styled.Image`
   height: 20;
   width: 20;
-  marginHorizontal: 10;
+  marginHorizontal: 20;
 `
 
 const StyledImageLong= styled.Image`
   height: 15;
   width: 30;
-  marginHorizontal: 10;
+  marginLeft: 20;
+  marginRight: 10;
 `
 
 const StyledText= styled.Text`

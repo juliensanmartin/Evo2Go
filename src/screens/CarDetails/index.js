@@ -28,19 +28,22 @@ class CarDetails extends Component {
       <CarDetailsComponent
         marker={this.props.navigation.state.params.marker}
         distance={this.props.distance}
-        onDirectionPress={this.showDirectionOnMap}/>
+        onDirectionPress={this.showDirectionOnMap}
+        positionInVancouver={this.props.positionInVancouver}/>
     )
   }
 }
 
 CarDetails.propTypes = {
   navigation: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  positionInVancouver: PropTypes.bool.isRequired
 }
 
 function mapStateToProps(state) {
   return {
-    distance: state.distance.distance
+    distance: state.distance.distance,
+    positionInVancouver: state.distance.positionInVancouver
   }
 }
 

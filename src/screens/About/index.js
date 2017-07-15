@@ -11,6 +11,7 @@ export default class FilterComponent extends Component {
           <StyledCreditText>EVO CAR SHARE</StyledCreditText>
           <StyledCreditText>CAR2GO</StyledCreditText>
           <StyledCreditText>TRANSLINK</StyledCreditText>
+          <StyledCreditText>MOBI BIKE</StyledCreditText>
         </StyledView>
         <StyledView>
           <TitleText>DISTANCE DATA PROVIDED BY</TitleText>
@@ -19,7 +20,6 @@ export default class FilterComponent extends Component {
         <StyledView>
           <TitleText>ICONS AND ASSETS PROVIDED BY</TitleText>
           <StyledCreditText>Smart Car icon by Freepik from www.flaticon.com</StyledCreditText>
-          <StyledCreditText>Bike icon by Freepik from www.flaticon.com</StyledCreditText>
           <StyledCreditText>Loader by Steven Parisi</StyledCreditText>
         </StyledView>
         <StyledView>
