@@ -39,7 +39,7 @@ export default class CarDetailsComponent extends Component {
               <StyledText>{name}</StyledText>
               <StyledTextSmall>{address}</StyledTextSmall>
             </ViewName>
-            {!positionInVancouver &&
+            {!this.props.positionInVancouver &&
               <TouchableOpacity onPress={this.props.onDirectionPress}>
                 <Icon type='ionicon' size={ 50 } name='ios-navigate' color='#2A93D7'/>
               </TouchableOpacity>
