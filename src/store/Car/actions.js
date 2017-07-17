@@ -12,6 +12,7 @@ import { getAvailableVehicleCar2Go } from '../car2go.api'
 import { getAvailableVehicleEvo } from '../evo.api'
 import { getAvailableBus } from '../translink.api'
 import { getAvailableMobi } from '../mobi.api'
+import { getModoCars } from '../modo.api'
 import { car2goVehicleNormalizer, evoVehicleNormalizer, busNormalizer, mobiNormalizer } from './schema'
 import { reduce, chunk, each, split, toNumber } from 'lodash'
 
@@ -32,6 +33,7 @@ export const fetchVisibleCars = () => (dispatch, getState) => {
   if (evoVisible) promises.push(dispatch(fetchEvoCars()))
   if (busVisible) promises.push(dispatch(fetchBus()))
   if (mobiVisible) promises.push(dispatch(fetchMobi()))
+  promises.push(dispatch(fetchModoCars()))
 
   Promise.all(promises)
     .then(() => {
@@ -263,3 +265,10 @@ export const updateRegion = region => dispatch => {
     region
   })
 }
+
+// this is a thunk (redux-thunk)
+export const fetchModoCars = () => dispatch => getModoCars()
+  .then(ids => {
+    console.log('IDSSSSSSSS : ', ids)
+  }
+)
