@@ -1,14 +1,14 @@
-import { forEach, chunk, toString, flatten } from 'lodash'
+import { forEach, chunk, toString, flatten, filter } from 'lodash'
 
 export const getModoCars = () => {
   return fetch('https://bookit.modo.coop/api/fleet/cars')
     .then(response => response.json())
     .then(responseJson => {
-      return getModoAvailableCars(filter(responseJson))
+      return getModoAvailableCars(getCarIds(responseJson))
     })
 }
 
-const filter = (response) => {
+const getCarIds = (response) => {
 	const carIds = []
 	forEach(response.Neighbourhoods, function(value, key) {
 		forEach(value.Locations, function(value, key) {
@@ -21,11 +21,15 @@ const filter = (response) => {
 }
 
 export const getModoAvailableCars = (carIds) => {
+	const startDate = Date.now()
+
+	// endDate is startDate + 2 hours
+	const endDate = startDate + 8230
 	const carIdsPack = chunk(carIds, 20)
 	const promises = []
 	const result = []
 	forEach(carIdsPack, pack => {
-		promises.push(getModoCarsByPack(pack))
+		promises.push(getModoCarsByPack(pack, startDate, endDate))
 	})
 
 	Promise.all(promises)
@@ -36,11 +40,12 @@ export const getModoAvailableCars = (carIds) => {
 	return flatten(result)
 }
 
-const getModoCarsByPack = (carIds) => {
-  const request = `https://bookit.modo.coop/api/availability?cars=${toString(carIds)}`
+const getModoCarsByPack = (carIds, startDate, endDate) => {
+  const request = `https://bookit.modo.coop/api/availability/${startDate}/${endDate}?cars=${toString(carIds)}`
 	return fetch(request)
 		.then(response => response.json())
 		.then(response => {
-			 return response.Data
+			const availableCars = filter(response.Data, {Duration: '7200'})
+			return availableCars
 		})
 }
