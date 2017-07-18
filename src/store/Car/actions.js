@@ -13,7 +13,7 @@ import { getAvailableVehicleEvo } from '../evo.api'
 import { getAvailableBus } from '../translink.api'
 import { getAvailableMobi } from '../mobi.api'
 import { getModoCars } from '../modo.api'
-import { car2goVehicleNormalizer, evoVehicleNormalizer, busNormalizer, mobiNormalizer } from './schema'
+import { car2goVehicleNormalizer, evoVehicleNormalizer, busNormalizer, mobiNormalizer, modoVehicleNormalizer } from './schema'
 import { reduce, chunk, each, split, toNumber } from 'lodash'
 
 export const fetchVisibleCars = () => (dispatch, getState) => {
@@ -268,7 +268,35 @@ export const updateRegion = region => dispatch => {
 
 // this is a thunk (redux-thunk)
 export const fetchModoCars = () => dispatch => getModoCars()
-  .then(ids => {
-    console.log('IDSSSSSSSS : ', ids)
+  .then(cars => {
+    // placemarks => [objects]
+    // Normalized to entities => {objects} and result => [keys]
+    normalized= modoVehicleNormalizer(cars)
+    console.log('MODO NORMALIZED', normalized)
+
+    const vehicles = reduce(normalized.entities.vehicles, (result, value, key) => {
+      result.push({
+        id: key,
+        latlng: {
+          latitude: value.Latitude,
+          longitude: value.Longitude
+        },
+        type: 'modoPin',
+        address: value.LocationName,
+        name: value.CarDescription
+      })
+      return result
+    }, [])
+
+    dispatch({
+      type: GET_VISIBLE_CARS,
+      vehicles
+    })
+  },
+  errors => {
+    dispatch({
+      type: PROPAGATE_ERROR,
+      message: errors.message
+    })
   }
 )

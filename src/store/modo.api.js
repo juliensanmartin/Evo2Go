@@ -32,12 +32,10 @@ export const getModoAvailableCars = (carIds) => {
 		promises.push(getModoCarsByPack(pack, startDate, endDate))
 	})
 
-	Promise.all(promises)
+	return Promise.all(promises)
 		.then((data) => {
-			result.push(data)
+			return flatten(data)
 		})
-
-	return flatten(result)
 }
 
 const getModoCarsByPack = (carIds, startDate, endDate) => {

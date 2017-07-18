@@ -3,6 +3,7 @@ import {
   SET_CAR2GO_VISIBILITY,
   SET_BUS_VISIBILITY,
   SET_MOBI_VISIBILITY,
+  SET_MODO_VISIBILITY,
   GET_VISIBLE_CARS,
   CARS_LOADED,
   ON_REGION_CHANGE
@@ -72,6 +73,17 @@ const mobi = (state = {visible:false}, action) => {
   }
 }
 
+const modo = (state = {visible:false}, action) => {
+  switch (action.type) {
+    case SET_MODO_VISIBILITY:
+      return {
+        visible: action.visible
+      }
+    default:
+      return state
+  }
+}
+
 const currentRegion = (state = {
   latitude: 49.2800565,
   longitude: -123.1212937,
@@ -87,5 +99,5 @@ const currentRegion = (state = {
 }
 
 export default car = combineReducers({
-	car2go, evo, translink, visibleCars, carLoaded, currentRegion, mobi
+	car2go, evo, translink, visibleCars, carLoaded, currentRegion, mobi, modo
 })

@@ -18,3 +18,7 @@ export const busNormalizer = result => normalize(result, busListSchema)
 const mobi = new schema.Entity('mobi', {}, { idAttribute: 'name' })
 const mobiListSchema = [mobi]
 export const mobiNormalizer = result => normalize(result, mobiListSchema)
+
+const modoVehicle = new schema.Entity('vehicles', {}, { idAttribute: 'CarID' })
+const modoVehicleListSchema = [modoVehicle]
+export const modoVehicleNormalizer = result => normalize(result, modoVehicleListSchema)
