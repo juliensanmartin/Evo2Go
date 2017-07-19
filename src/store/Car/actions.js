@@ -3,6 +3,7 @@ import {
   SET_CAR2GO_VISIBILITY,
   SET_BUS_VISIBILITY,
   SET_MOBI_VISIBILITY,
+  SET_MODO_VISIBILITY,
   GET_VISIBLE_CARS,
   CARS_LOADED,
   ON_REGION_CHANGE
@@ -26,6 +27,7 @@ export const fetchVisibleCars = () => (dispatch, getState) => {
   const evoVisible = state.car.evo.visible
   const busVisible = state.car.translink.visible
   const mobiVisible = state.car.mobi.visible
+  const modoVisible = state.car.modo.visible
 
   const promises = []
 
@@ -33,7 +35,7 @@ export const fetchVisibleCars = () => (dispatch, getState) => {
   if (evoVisible) promises.push(dispatch(fetchEvoCars()))
   if (busVisible) promises.push(dispatch(fetchBus()))
   if (mobiVisible) promises.push(dispatch(fetchMobi()))
-  promises.push(dispatch(fetchModoCars()))
+  if (modoVisible) promises.push(dispatch(fetchModoCars()))
 
   Promise.all(promises)
     .then(() => {
@@ -278,8 +280,8 @@ export const fetchModoCars = () => dispatch => getModoCars()
       result.push({
         id: key,
         latlng: {
-          latitude: value.Latitude,
-          longitude: value.Longitude
+          latitude: parseFloat(value.Latitude),
+          longitude: parseFloat(value.Longitude)
         },
         type: 'modoPin',
         address: value.LocationName,
@@ -300,3 +302,23 @@ export const fetchModoCars = () => dispatch => getModoCars()
     })
   }
 )
+
+export const setModoVisibility = visible => dispatch => {
+  if (visible) {
+    dispatch({
+      type: CARS_LOADED,
+      loaded: false
+    })
+    dispatch(fetchModoCars())
+      .then(() => {
+        return dispatch({
+          type: CARS_LOADED,
+          loaded: true
+        })
+      })
+  }
+  return dispatch({
+    type: SET_MODO_VISIBILITY,
+    visible
+  })
+}

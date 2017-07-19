@@ -38,6 +38,8 @@ export default class IconMarkerComponent extends Component {
       marker = <Image source={require('../assets/prius.png')} style={{width: 40, height: 20}}/>
     } else if (type === 'mobiPin') {
       marker = <Badge value={avlBikes} containerStyle={{ backgroundColor: '#008ABF'}} textStyle={{ color: '#ffffff' }}/>
+    } else if (type === 'modoPin') {
+      marker = <Image source={require('../assets/modo.png')} style={{width: 30, height: 30}}/>
     } else {
       marker = <Image source={require('../assets/smart.png')} style={{width: 30, height: 30}}/>
       //marker = <Icon type='ionicon' size={ 30 } name={icon.name} color={icon.color}/>

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import FilterComponent from '../../components/Filter/filter'
-import { setEvoVisibility, setCar2GoVisibility, setBusVisibility, setMobiVisibility } from '../../store/Car/actions'
-import { getCar2GoVisibility, getEvoVisibility, getBusVisibility, getMobiVisibility } from '../../store/Car/selectors'
+import { setEvoVisibility, setCar2GoVisibility, setBusVisibility, setMobiVisibility, setModoVisibility } from '../../store/Car/actions'
+import { getCar2GoVisibility, getEvoVisibility, getBusVisibility, getMobiVisibility, getModoVisibility } from '../../store/Car/selectors'
 import { connect } from 'react-redux';
 
 class Filter extends Component {
@@ -15,7 +15,9 @@ class Filter extends Component {
         onBusToggle={this.props.onBusToggle}
         busVisible={this.props.busVisible}
         onMobiToggle={this.props.onMobiToggle}
-        mobiVisible={this.props.mobiVisible}/>
+        mobiVisible={this.props.mobiVisible}
+        onModoToggle={this.props.onModoToggle}
+        modoVisible={this.props.modoVisible}/>
     )
   }
 }
@@ -28,7 +30,9 @@ Filter.propTypes = {
   busVisible: PropTypes.bool.isRequired,
   onBusToggle: PropTypes.func.isRequired,
   mobiVisible: PropTypes.bool.isRequired,
-  onMobiToggle: PropTypes.func.isRequired
+  onMobiToggle: PropTypes.func.isRequired,
+  modoVisible: PropTypes.bool.isRequired,
+  onModoToggle: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {
@@ -36,7 +40,8 @@ function mapStateToProps(state) {
     evoVisible: getEvoVisibility(state),
     car2GoVisible: getCar2GoVisibility(state),
     busVisible: getBusVisibility(state),
-    mobiVisible: getMobiVisibility(state)
+    mobiVisible: getMobiVisibility(state),
+    modoVisible: getModoVisibility(state)
   }
 }
 
@@ -53,6 +58,9 @@ function mapDispatchToProps (dispatch) {
     },
     onMobiToggle: (visible) => {
       dispatch(setMobiVisibility(visible))
+    },
+    onModoToggle: (visible) => {
+      dispatch(setModoVisibility(visible))
     }
   }
 }

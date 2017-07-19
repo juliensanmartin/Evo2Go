@@ -28,6 +28,16 @@ export default class FilterComponent extends Component {
         </StyledView>
         <StyledView>
           <StyledLeftView>
+            <StyledImage source={require('../assets/modo.png')}/>
+            <StyledText>MODO CARS</StyledText>
+          </StyledLeftView>
+          <StyledSwitch
+            onValueChange={this.props.onModoToggle}
+            value={this.props.modoVisible}
+            onTintColor='#135589'/>
+        </StyledView>
+        <StyledView>
+          <StyledLeftView>
             <StyledImageLong source={require('../assets/bus.png')}/>
             <StyledText>BUS</StyledText>
           </StyledLeftView>
@@ -59,7 +69,9 @@ FilterComponent.propTypes = {
   onCar2GoToggle: PropTypes.func.isRequired,
   onBusToggle: PropTypes.func.isRequired,
   mobiVisible: PropTypes.bool.isRequired,
-  onMobiToggle: PropTypes.func.isRequired
+  onMobiToggle: PropTypes.func.isRequired,
+  modoVisible: PropTypes.bool.isRequired,
+  onModoToggle: PropTypes.func.isRequired
 }
 
 const StyledContainer = styled.View`
