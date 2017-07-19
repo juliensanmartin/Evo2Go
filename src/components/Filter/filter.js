@@ -8,7 +8,7 @@ export default class FilterComponent extends Component {
       <StyledContainer>
         <StyledView>
           <StyledLeftView>
-            <StyledImageLong source={require('../assets/prius.png')}/>
+            <StyledImageLong source={require('../assets/evo.png')}/>
             <StyledText>EVO CARS</StyledText>
           </StyledLeftView>
           <StyledSwitch

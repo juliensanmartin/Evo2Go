@@ -11,7 +11,7 @@ export default class CarDetailsComponent extends Component {
     let logo
     let long = false
     if (type==='evoPin') {
-      logo=require('../assets/prius.png')
+      logo=require('../assets/evo.png')
       long=true
     }
     if (type==='car2GoPin') logo=require('../assets/smart.png')
