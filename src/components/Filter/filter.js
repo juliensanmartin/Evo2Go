@@ -29,7 +29,7 @@ export default class FilterComponent extends Component {
         <StyledView>
           <StyledLeftView>
             <StyledImage source={require('../assets/modo.png')}/>
-            <StyledText>MODO CARS</StyledText>
+            <StyledText>MODO CARS (Available the next 2 hours)</StyledText>
           </StyledLeftView>
           <StyledSwitch
             onValueChange={this.props.onModoToggle}

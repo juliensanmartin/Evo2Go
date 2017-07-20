@@ -9,10 +9,10 @@ export default class FilterComponent extends Component {
         <StyledView>
           <TitleText>VEHICLES DATA PROVIDED BY</TitleText>
           <StyledCreditText>EVO CAR SHARE</StyledCreditText>
-          <StyledCreditText>CAR2GO</StyledCreditText>
           <StyledCreditText>TRANSLINK</StyledCreditText>
           <StyledCreditText>MOBI BIKE</StyledCreditText>
           <StyledCreditText>MODO</StyledCreditText>
+          <StyledCreditText>This product uses the car2go API but is not endorsed or certified by car2go.</StyledCreditText>
         </StyledView>
         <StyledView>
           <TitleText>DISTANCE DATA PROVIDED BY</TitleText>

@@ -25,6 +25,9 @@ export default class CarDetailsComponent extends Component {
     return (
       <StyledContainer>
         <DetailsContainer>
+          <TitleContainer>
+            <StyledText>{type}</StyledText>
+          </TitleContainer>
           <ImageContainer>
             {long &&
               <StyledImageLong source={logo}/>
@@ -131,6 +134,12 @@ const ImageContainer = styled.View`
   flexDirection: row;
   justifyContent: center;
   alignItems: flex-end;
+`
+
+const TitleContainer = styled.View`
+  flexDirection: row;
+  justifyContent: center;
+  alignItems: flex-start;
 `
 
 const StyledImage = styled.Image`
