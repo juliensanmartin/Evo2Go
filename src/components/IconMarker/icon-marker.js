@@ -35,13 +35,13 @@ export default class IconMarkerComponent extends Component {
     if (type === 'busPin') {
       marker = <Badge value={name} containerStyle={{ backgroundColor: '#104f86'}} textStyle={{ color: '#FFDD33' }}/>
     } else if (type === 'evoPin') {
-      marker = <Image source={require('../assets/prius.png')} style={{width: 40, height: 20}}/>
+      marker = <Image source={require('../assets/evo.png')} style={{width: 40, height: 40}}/>
     } else if (type === 'mobiPin') {
       marker = <Badge value={avlBikes} containerStyle={{ backgroundColor: '#008ABF'}} textStyle={{ color: '#ffffff' }}/>
     } else if (type === 'modoPin') {
-      marker = <Image source={require('../assets/modo.png')} style={{width: 30, height: 30}}/>
+      marker = <Image source={require('../assets/modo.png')} style={{width: 40, height: 40}}/>
     } else {
-      marker = <Image source={require('../assets/smart.png')} style={{width: 30, height: 30}}/>
+      marker = <Image source={require('../assets/car2go.png')} style={{width: 30, height: 30}}/>
       //marker = <Icon type='ionicon' size={ 30 } name={icon.name} color={icon.color}/>
     }
 

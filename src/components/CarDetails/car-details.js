@@ -14,8 +14,8 @@ export default class CarDetailsComponent extends Component {
       logo=require('../assets/evo.png')
       long=true
     }
-    if (type==='car2GoPin') logo=require('../assets/smart.png')
-    if (type==='ModoPin') logo=require('../assets/modo.png')
+    if (type==='car2GoPin') logo=require('../assets/car2go.png')
+    if (type==='modoPin') logo=require('../assets/modo.png')
     if (type==='busPin')  {
       logo=require('../assets/bus.png')
       long=true

@@ -8,7 +8,7 @@ export default class FilterComponent extends Component {
       <StyledContainer>
         <StyledView>
           <StyledLeftView>
-            <StyledImageLong source={require('../assets/evo.png')}/>
+            <StyledImage source={require('../assets/evo.png')}/>
             <StyledText>EVO CARS</StyledText>
           </StyledLeftView>
           <StyledSwitch
@@ -18,7 +18,7 @@ export default class FilterComponent extends Component {
         </StyledView>
         <StyledView>
           <StyledLeftView>
-            <StyledImage source={require('../assets/smart.png')}/>
+            <StyledImage source={require('../assets/car2go.png')}/>
             <StyledText>CAR2GO CARS</StyledText>
           </StyledLeftView>
           <StyledSwitch
@@ -38,7 +38,7 @@ export default class FilterComponent extends Component {
         </StyledView>
         <StyledView>
           <StyledLeftView>
-            <StyledImageLong source={require('../assets/bus.png')}/>
+            <StyledImage source={require('../assets/bus.png')}/>
             <StyledText>BUS</StyledText>
           </StyledLeftView>
           <StyledSwitch
@@ -92,6 +92,7 @@ const StyledView = styled.View`
 const StyledLeftView = styled.View`
   flexDirection: row;
   justifyContent: space-between;
+  alignItems: center;
 `
 
 const StyledSwitch= styled.Switch`
@@ -100,8 +101,8 @@ const StyledSwitch= styled.Switch`
 `
 
 const StyledImage= styled.Image`
-  height: 20;
-  width: 20;
+  height: 30;
+  width: 30;
   marginHorizontal: 20;
 `
 

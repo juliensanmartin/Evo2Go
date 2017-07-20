@@ -4,6 +4,7 @@ import {
   CHECK_POSITION_IN_VANCOUVER,
   RESET_DIRECTION
  } from './actions.type'
+import { PROPAGATE_ERROR, RESET_ERROR } from '../Error/actions.type'
 import Polyline from '@mapbox/polyline'
 import { getTimeAndDistance, getDirection } from '../google-map.api'
 
@@ -20,7 +21,12 @@ export const fetchDistance = (origin, destination) => dispatch =>
           }
         })
       },
-      errors => console.error(errors)
+      errors => {
+        dispatch({
+          type: PROPAGATE_ERROR,
+          message: errors.message
+        })
+      }
     )
 
 export const fetchDirection = (origin, destination) => dispatch =>
@@ -38,7 +44,12 @@ export const fetchDirection = (origin, destination) => dispatch =>
           coords
         })
       },
-      errors => console.error(errors)
+      errors => {
+        dispatch({
+          type: PROPAGATE_ERROR,
+          message: errors.message
+        })
+      }
     )
 
   export const resetDirection = () => dispatch => {
