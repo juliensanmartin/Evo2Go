@@ -5,6 +5,12 @@ import { getCar2GoVisibility, getEvoVisibility, getBusVisibility, getMobiVisibil
 import { connect } from 'react-redux';
 
 class Filter extends Component {
+
+  showMap() {
+    const backAction = NavigationActions.back()
+    this.props.navigation.dispatch(backAction)
+  }
+
   render() {
     return (
       <FilterComponent
@@ -17,7 +23,8 @@ class Filter extends Component {
         onMobiToggle={this.props.onMobiToggle}
         mobiVisible={this.props.mobiVisible}
         onModoToggle={this.props.onModoToggle}
-        modoVisible={this.props.modoVisible}/>
+        modoVisible={this.props.modoVisible}
+        onOutisideClick=={this.showMap}/>
     )
   }
 }
@@ -32,7 +39,8 @@ Filter.propTypes = {
   mobiVisible: PropTypes.bool.isRequired,
   onMobiToggle: PropTypes.func.isRequired,
   modoVisible: PropTypes.bool.isRequired,
-  onModoToggle: PropTypes.func.isRequired
+  onModoToggle: PropTypes.func.isRequired,
+  navigation: PropTypes.object.isRequired,
 }
 
 function mapStateToProps(state) {

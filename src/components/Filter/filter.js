@@ -1,65 +1,67 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Switch, Text, Image } from 'react-native'
+import { View, Switch, Text, Image, TouchableWithoutFeedback } from 'react-native'
 import styled from 'styled-components/native'
 
 export default class FilterComponent extends Component {
   render() {
     return (
-      <StyledContainer>
-        <StyledView>
-          <StyledLeftView>
-            <StyledImage source={require('../assets/evo.png')}/>
-            <StyledText>EVO CARS</StyledText>
-          </StyledLeftView>
-          <StyledSwitch
-            onValueChange={this.props.onEvoToggle}
-            value={this.props.evoVisible}
-            onTintColor='#135589'/>
-        </StyledView>
-        <StyledView>
-          <StyledLeftView>
-            <StyledImage source={require('../assets/car2go.png')}/>
-            <StyledText>CAR2GO CARS</StyledText>
-          </StyledLeftView>
-          <StyledSwitch
-            onValueChange={this.props.onCar2GoToggle}
-            value={this.props.car2GoVisible}
-            onTintColor='#135589'/>
-        </StyledView>
-        <StyledView>
-          <StyledLeftView>
-            <StyledImage source={require('../assets/modo.png')}/>
-            <StyledTextView>
-              <StyledText>MODO CARS</StyledText>
-              <StyledTextSmall>(Available the next 2 hours)</StyledTextSmall>
-            </StyledTextView>
-          </StyledLeftView>
-          <StyledSwitch
-            onValueChange={this.props.onModoToggle}
-            value={this.props.modoVisible}
-            onTintColor='#135589'/>
-        </StyledView>
-        <StyledView>
-          <StyledLeftView>
-            <StyledImage source={require('../assets/bus.png')}/>
-            <StyledText>BUS</StyledText>
-          </StyledLeftView>
-          <StyledSwitch
-            onValueChange={this.props.onBusToggle}
-            value={this.props.busVisible}
-            onTintColor='#135589'/>
-        </StyledView>
-        <StyledView>
-          <StyledLeftView>
-            <StyledImage source={require('../assets/bike.png')}/>
-            <StyledText>MOBI BIKES</StyledText>
-          </StyledLeftView>
-          <StyledSwitch
-            onValueChange={this.props.onMobiToggle}
-            value={this.props.mobiVisible}
-            onTintColor='#135589'/>
-        </StyledView>
-      </StyledContainer>
+      <TouchableContainer onPress={this.props.onOutsidePress}>
+        <StyledContainer>
+          <StyledView>
+            <StyledLeftView>
+              <StyledImage source={require('../assets/evo.png')}/>
+              <StyledText>EVO CARS</StyledText>
+            </StyledLeftView>
+            <StyledSwitch
+              onValueChange={this.props.onEvoToggle}
+              value={this.props.evoVisible}
+              onTintColor='#135589'/>
+          </StyledView>
+          <StyledView>
+            <StyledLeftView>
+              <StyledImage source={require('../assets/car2go.png')}/>
+              <StyledText>CAR2GO CARS</StyledText>
+            </StyledLeftView>
+            <StyledSwitch
+              onValueChange={this.props.onCar2GoToggle}
+              value={this.props.car2GoVisible}
+              onTintColor='#135589'/>
+          </StyledView>
+          <StyledView>
+            <StyledLeftView>
+              <StyledImage source={require('../assets/modo.png')}/>
+              <StyledTextView>
+                <StyledText>MODO CARS</StyledText>
+                <StyledTextSmall>(Available the next 2 hours)</StyledTextSmall>
+              </StyledTextView>
+            </StyledLeftView>
+            <StyledSwitch
+              onValueChange={this.props.onModoToggle}
+              value={this.props.modoVisible}
+              onTintColor='#135589'/>
+          </StyledView>
+          <StyledView>
+            <StyledLeftView>
+              <StyledImage source={require('../assets/bus.png')}/>
+              <StyledText>BUS</StyledText>
+            </StyledLeftView>
+            <StyledSwitch
+              onValueChange={this.props.onBusToggle}
+              value={this.props.busVisible}
+              onTintColor='#135589'/>
+          </StyledView>
+          <StyledView>
+            <StyledLeftView>
+              <StyledImage source={require('../assets/bike.png')}/>
+              <StyledText>MOBI BIKES</StyledText>
+            </StyledLeftView>
+            <StyledSwitch
+              onValueChange={this.props.onMobiToggle}
+              value={this.props.mobiVisible}
+              onTintColor='#135589'/>
+          </StyledView>
+        </StyledContainer>
+      </TouchableContainer>
     )
   }
 }
@@ -74,8 +76,13 @@ FilterComponent.propTypes = {
   mobiVisible: PropTypes.bool.isRequired,
   onMobiToggle: PropTypes.func.isRequired,
   modoVisible: PropTypes.bool.isRequired,
-  onModoToggle: PropTypes.func.isRequired
+  onModoToggle: PropTypes.func.isRequired,
+  onOutsidePress: PropTypes.func.isRequired,
 }
+
+const TouchableContainer = styled.TouchableWithoutFeedback`
+  flex: 1;
+`
 
 const StyledContainer = styled.View`
   flexDirection: column;

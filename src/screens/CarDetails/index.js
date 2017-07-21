@@ -3,7 +3,6 @@ import CarDetailsComponent from '../../components/CarDetails/car-details'
 import { fetchDistance, fetchDirection } from '../../store/Distance/actions'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
-import { TouchableWithoutFeedback } from 'react-native'
 
 class CarDetails extends Component {
   constructor() {
@@ -26,13 +25,11 @@ class CarDetails extends Component {
 
   render() {
     return (
-      <TouchableWithoutFeedback onPress={this.props.navigation.navigate('Map')}>
-        <CarDetailsComponent
-          marker={this.props.navigation.state.params.marker}
-          distance={this.props.distance}
-          onDirectionPress={this.showDirectionOnMap}
-          positionInVancouver={this.props.positionInVancouver}/>
-      </TouchableWithoutFeedback>
+      <CarDetailsComponent
+        marker={this.props.navigation.state.params.marker}
+        distance={this.props.distance}
+        onDirectionPress={this.showDirectionOnMap}
+        positionInVancouver={this.props.positionInVancouver}/>
     )
   }
 }
