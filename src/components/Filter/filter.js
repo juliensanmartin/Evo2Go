@@ -29,7 +29,10 @@ export default class FilterComponent extends Component {
         <StyledView>
           <StyledLeftView>
             <StyledImage source={require('../assets/modo.png')}/>
-            <StyledText>MODO CARS (Available the next 2 hours)</StyledText>
+            <StyledTextView>
+              <StyledText>MODO CARS</StyledText>
+              <StyledTextSmall>(Available the next 2 hours)</StyledTextSmall>
+            </StyledTextView>
           </StyledLeftView>
           <StyledSwitch
             onValueChange={this.props.onModoToggle}
@@ -89,6 +92,12 @@ const StyledView = styled.View`
   alignItems: center;
 `
 
+const StyledTextView = styled.View`
+  flexDirection: column;
+  justifyContent: space-between;
+  alignItems: flex-start;
+`
+
 const StyledLeftView = styled.View`
   flexDirection: row;
   justifyContent: space-between;
@@ -114,5 +123,10 @@ const StyledImageLong= styled.Image`
 `
 
 const StyledText= styled.Text`
+  color: #135589;
+`
+
+const StyledTextSmall= styled.Text`
+  fontSize: 10;
   color: #135589;
 `

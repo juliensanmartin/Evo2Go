@@ -61,7 +61,7 @@ export const fetchCar2GoCars = () => (dispatch, getState) => getAvailableVehicle
           latitude: value.coordinates[1],
           longitude: value.coordinates[0]
         },
-        type: 'car2GoPin',
+        type: 'Car 2 Go',
         address: value.address,
         fuel: value.fuel,
         name: value.name
@@ -115,7 +115,7 @@ export const fetchEvoCars = () => (dispatch, getState) => getAvailableVehicleEvo
           latitude: value.Lat,
           longitude: value.Lon,
         },
-        type: 'evoPin',
+        type: 'Evo',
         address: value.Address,
         fuel: value.Fuel,
         name: value.Name
@@ -168,7 +168,7 @@ export const fetchBus = () => dispatch => getAvailableBus()
             latitude: value.Latitude,
             longitude: value.Longitude
           },
-          type: 'busPin',
+          type: 'Bus',
           address: value.Destination,
           fuel: null,
           name: value.RouteNo,
@@ -221,7 +221,7 @@ export const fetchMobi = () => dispatch => getAvailableMobi()
             latitude: toNumber(coordArray[0]),
             longitude: toNumber(coordArray[1])
           },
-          type: 'mobiPin',
+          type: 'Mobi Bike',
           address: value.name,
           avlBikes: value.avl_bikes
         })
@@ -283,7 +283,7 @@ export const fetchModoCars = () => dispatch => getModoCars()
           latitude: parseFloat(value.Latitude),
           longitude: parseFloat(value.Longitude)
         },
-        type: 'modoPin',
+        type: 'Modo',
         address: value.LocationName,
         name: value.CarDescription
       })

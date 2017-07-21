@@ -10,23 +10,23 @@ export default class CarDetailsComponent extends Component {
     let { avlBikes } = this.props.marker
     let logo
     let long = false
-    if (type==='evoPin') {
+    if (type==='Evo') {
       logo=require('../assets/evo.png')
       long=true
     }
-    if (type==='car2GoPin') logo=require('../assets/car2go.png')
-    if (type==='modoPin') logo=require('../assets/modo.png')
-    if (type==='busPin')  {
+    if (type==='Car 2 Go') logo=require('../assets/car2go.png')
+    if (type==='Modo') logo=require('../assets/modo.png')
+    if (type==='Bus')  {
       logo=require('../assets/bus.png')
       long=true
     }
-    if (type==='mobiPin') logo=require('../assets/bike.png')
+    if (type==='Mobi Bike') logo=require('../assets/bike.png')
     if (avlBikes === 0) avlBikes = 'No'
     return (
       <StyledContainer>
         <DetailsContainer>
           <TitleContainer>
-            <StyledText>{type}</StyledText>
+            <StyledTitle>{type}</StyledTitle>
           </TitleContainer>
           <ImageContainer>
             {long &&
@@ -154,6 +154,11 @@ const StyledImageLong = styled.Image`
 
 const StyledText= styled.Text`
   color: #135589;
+`
+
+const StyledTitle= styled.Text`
+  color: #135589;
+  fontSize: 20;
 `
 
 const StyledTextSmall= styled.Text`
