@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Text, Image, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
+import { View, Text, Image, TouchableOpacity, TouchableWithoutFeedback, Platform, Linking } from 'react-native'
 import styled from 'styled-components/native'
 import { Badge, Icon } from 'react-native-elements'
 
@@ -7,6 +7,7 @@ export default class CarDetailsComponent extends Component {
   render() {
     const { type, address, fuel, name, direction } = this.props.marker
     const { distance, duration } = this.props.distance
+    let linking
     let { avlBikes } = this.props.marker
     let logo
     let long = false
@@ -14,9 +15,19 @@ export default class CarDetailsComponent extends Component {
       logo=require('../assets/evo.png')
       long=true
     }
-    if (type==='Car 2 Go') logo=require('../assets/car2go.png')
+    if (type==='Car 2 Go') {
+      logo=require('../assets/car2go.png')
+      if (Platform.OS === 'ios') {
+        linking = 'car2go://'
+      } else {
+        linking = 'https://car2go.com/'
+      }
+      linking = linking.concat(`vehicles/${this.props.marker.id}?latlng=${this.props.marker.latlng.latitude},${this.props.marker.latlng.longitude}`)
+      // Android: https://car2go.com/vehicle/WME4513341K828695?latlng=53.58775,10.12023
+      // iOS: car2go://vehicle/WME4513341K828695?latlng=53.58775,10.12023
+    }
     if (type==='Modo') logo=require('../assets/modo.png')
-    if (type==='Bus')  {
+    if (type==='Bus') {
       logo=require('../assets/bus.png')
       long=true
     }
@@ -70,6 +81,12 @@ export default class CarDetailsComponent extends Component {
                   </ViewName>
                 </ViewItem>
               }
+              { linking &&
+                <ViewItem>
+                  <Icon type='ionicon' size={ 50 } name='ios-link' color='#3DDAD7'
+                  onPress={() => Linking.openURL(linking)}/>
+                </ViewItem>
+              }
               <ViewItem>
                 <Icon type='ionicon' size={ 50 } name='ios-clock' color='#3DDAD7'/>
                 <ViewName>
@@ -94,7 +111,6 @@ CarDetailsComponent.propTypes = {
 
 const TouchableContainer = styled.TouchableWithoutFeedback`
   flex: 1;
-  backgroundColor: #F5FCFF;
 `
 
 const StyledContainer = styled.View`

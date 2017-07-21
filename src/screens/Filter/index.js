@@ -24,7 +24,7 @@ class Filter extends Component {
         mobiVisible={this.props.mobiVisible}
         onModoToggle={this.props.onModoToggle}
         modoVisible={this.props.modoVisible}
-        onOutisideClick=={this.showMap}/>
+        onOutisideClick={this.showMap}/>
     )
   }
 }
