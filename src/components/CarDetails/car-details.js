@@ -56,9 +56,14 @@ export default class CarDetailsComponent extends Component {
                 <StyledText>{name}</StyledText>
                 <StyledTextSmall>{address}</StyledTextSmall>
               </ViewName>
-              {!this.props.positionInVancouver &&
+              { this.props.positionInVancouver &&
                 <TouchableOpacity onPress={this.props.onDirectionPress}>
                   <Icon type='ionicon' size={ 50 } name='ios-navigate' color='#2A93D7'/>
+                </TouchableOpacity>
+              }
+              { linking &&
+                <TouchableOpacity onPress={() => Linking.openURL(linking)}>
+                  <Icon type='ionicon' size={ 50 } name='ios-link' color='#2A93D7'/>
                 </TouchableOpacity>
               }
             </ViewMainDetails>
@@ -79,12 +84,6 @@ export default class CarDetailsComponent extends Component {
                     <StyledText>{direction}</StyledText>
                     <StyledTextSmall>Direction</StyledTextSmall>
                   </ViewName>
-                </ViewItem>
-              }
-              { linking &&
-                <ViewItem>
-                  <Icon type='ionicon' size={ 50 } name='ios-link' color='#3DDAD7'
-                  onPress={() => Linking.openURL(linking)}/>
                 </ViewItem>
               }
               <ViewItem>
