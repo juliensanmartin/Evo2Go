@@ -6,6 +6,10 @@ import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 
 class Filter extends Component {
+  constructor() {
+    super()
+    this.showMap = this.showMap.bind(this)
+  }
 
   showMap() {
     const backAction = NavigationActions.back()
