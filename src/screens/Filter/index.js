@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import FilterComponent from '../../components/Filter/filter'
 import { setEvoVisibility, setCar2GoVisibility, setBusVisibility, setMobiVisibility, setModoVisibility } from '../../store/Car/actions'
 import { getCar2GoVisibility, getEvoVisibility, getBusVisibility, getMobiVisibility, getModoVisibility } from '../../store/Car/selectors'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
+import { NavigationActions } from 'react-navigation'
 
 class Filter extends Component {
 
@@ -40,7 +41,7 @@ Filter.propTypes = {
   onMobiToggle: PropTypes.func.isRequired,
   modoVisible: PropTypes.bool.isRequired,
   onModoToggle: PropTypes.func.isRequired,
-  navigation: PropTypes.object.isRequired,
+  navigation: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {

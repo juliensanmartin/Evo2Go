@@ -77,7 +77,7 @@ FilterComponent.propTypes = {
   onMobiToggle: PropTypes.func.isRequired,
   modoVisible: PropTypes.bool.isRequired,
   onModoToggle: PropTypes.func.isRequired,
-  onOutsidePress: PropTypes.func.isRequired,
+  onOutsidePress: PropTypes.func.isRequired
 }
 
 const TouchableContainer = styled.TouchableWithoutFeedback`
