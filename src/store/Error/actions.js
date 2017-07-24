@@ -1,8 +1,15 @@
-import { PROPAGATE_ERROR, RESET_ERROR } from './actions.type'
+import { PROPAGATE_ERROR, RESET_ERROR, PROPAGATE_ERROR_LINKING } from './actions.type'
 
 export const propagateError = (message) => dispatch => {
   return dispatch({
     type: PROPAGATE_ERROR,
+    message
+  })
+}
+
+export const propagateErrorLinking = (message) => dispatch => {
+  return dispatch({
+    type: PROPAGATE_ERROR_LINKING,
     message
   })
 }

@@ -2,12 +2,63 @@ import React, { Component, PropTypes } from 'react'
 import { View, Text, Image, TouchableOpacity, TouchableWithoutFeedback, Platform, Linking } from 'react-native'
 import styled from 'styled-components/native'
 import { Badge, Icon } from 'react-native-elements'
+import ToastComponent from '../Toast/index'
 
 export default class CarDetailsComponent extends Component {
+  state = {
+    canOpenURL: false,
+    link: ''
+  }
+
+  componentDidMount() {
+    let linking
+    this.state.link = ''
+
+    if (this.props.marker.type==='Car 2 Go') {
+      if (Platform.OS === 'ios') {
+        linking = 'car2go://'
+      } else {
+        linking = 'https://car2go.com/'
+      }
+      this.state.link = linking.concat(`vehicles/${this.props.marker.id}?latlng=${this.props.marker.latlng.latitude},${this.props.marker.latlng.longitude}`)
+      // Android: https://car2go.com/vehicle/WME4513341K828695?latlng=53.58775,10.12023
+      // iOS: car2go://vehicle/WME4513341K828695?latlng=53.58775,10.12023
+    }
+
+    if (this.props.marker.type==='Evo') {
+      if (Platform.OS === 'ios') {
+        linking = 'evo://'
+      } else {
+        linking = 'https://evo.ca/'
+      }
+      this.state.link = linking.concat(`vehicles/${this.props.marker.id}?latlng=${this.props.marker.latlng.latitude},${this.props.marker.latlng.longitude}`)
+    }
+
+    if (this.props.marker.type==='Modo') {
+      if (Platform.OS === 'ios') {
+        linking = 'modo://'
+      } else {
+        linking = 'https://bookit.modo.coop/'
+      }
+      this.state.link = linking.concat(`vehicles/${this.props.marker.id}?latlng=${this.props.marker.latlng.latitude},${this.props.marker.latlng.longitude}`)
+    }
+
+    Linking.canOpenURL(this.state.link)
+      .then(supported => {
+        console.log(this.state.link, ' SUPPORTED ? ',supported)
+        this.state.canOpenURL = supported
+      })
+
+  }
+
+  onClickLinkApp(linking) {
+    return Linking.openURL(linking)
+     .catch(err => this.props.onLinkingError(err.message))
+  }
+
   render() {
     const { type, address, fuel, name, direction } = this.props.marker
     const { distance, duration } = this.props.distance
-    let linking
     let { avlBikes } = this.props.marker
     let logo
     let long = false
@@ -17,14 +68,6 @@ export default class CarDetailsComponent extends Component {
     }
     if (type==='Car 2 Go') {
       logo=require('../assets/car2go.png')
-      if (Platform.OS === 'ios') {
-        linking = 'car2go://'
-      } else {
-        linking = 'https://car2go.com/'
-      }
-      linking = linking.concat(`vehicles/${this.props.marker.id}?latlng=${this.props.marker.latlng.latitude},${this.props.marker.latlng.longitude}`)
-      // Android: https://car2go.com/vehicle/WME4513341K828695?latlng=53.58775,10.12023
-      // iOS: car2go://vehicle/WME4513341K828695?latlng=53.58775,10.12023
     }
     if (type==='Modo') logo=require('../assets/modo.png')
     if (type==='Bus') {
@@ -56,14 +99,9 @@ export default class CarDetailsComponent extends Component {
                 <StyledText>{name}</StyledText>
                 <StyledTextSmall>{address}</StyledTextSmall>
               </ViewName>
-              { this.props.positionInVancouver &&
-                <TouchableOpacity onPress={this.props.onDirectionPress}>
-                  <Icon type='ionicon' size={ 50 } name='ios-navigate' color='#2A93D7'/>
-                </TouchableOpacity>
-              }
-              { linking &&
-                <TouchableOpacity onPress={() => Linking.openURL(linking)}>
-                  <Icon type='ionicon' size={ 50 } name='ios-link' color='#2A93D7'/>
+              { this.state.canOpenURL &&
+                <TouchableOpacity onPress={() => this.onClickLinkApp(this.state.link)}>
+                  <Icon reverse raised type='ionicon' size={ 30 } name='ios-link' color='#2A93D7'/>
                 </TouchableOpacity>
               }
             </ViewMainDetails>
@@ -95,6 +133,7 @@ export default class CarDetailsComponent extends Component {
               </ViewItem>
             </ViewSecondaryDetails>
           </DetailsContainer>
+          <ToastComponent message='Problems to access the App' visible={this.props.errorLinking !== ''}/>
         </StyledContainer>
       </TouchableContainer>
     )
@@ -105,7 +144,9 @@ CarDetailsComponent.propTypes = {
   marker: PropTypes.object.isRequired,
   distance: PropTypes.object.isRequired,
   onDirectionPress: PropTypes.func.isRequired,
-  positionInVancouver: PropTypes.bool.isRequired
+  positionInVancouver: PropTypes.bool.isRequired,
+  onLinkingError: PropTypes.func.isRequired,
+  errorLinking: PropTypes.string.isRequired
 }
 
 const TouchableContainer = styled.TouchableWithoutFeedback`
@@ -114,10 +155,10 @@ const TouchableContainer = styled.TouchableWithoutFeedback`
 
 const StyledContainer = styled.View`
   flexDirection: column;
-  justifyContent: center;
+  justifyContent: space-between;
   padding: 10;
   margin: 10;
-  height: 400;
+  height: 500;
 `
 
 const DetailsContainer = styled.View`
