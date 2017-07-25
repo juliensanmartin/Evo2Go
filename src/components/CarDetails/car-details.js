@@ -85,7 +85,7 @@ export default class CarDetailsComponent extends Component {
       <TouchableContainer onPress={this.props.onDirectionPress}>
         <StyledContainer>
           <Interactable.View
-            horizontalOnly={true}
+            horizontalOnly={false}
             snapPoints={[
               {x: 360},
               {x: 0, damping: 1-1-0.7, tension: 300},

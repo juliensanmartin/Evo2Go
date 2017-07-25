@@ -13,7 +13,7 @@ export default class FilterComponent extends Component {
     return (
       <TouchableContainer onPress={this.props.onOutsidePress}>
         <Interactable.View
-          horizontalOnly={true}
+          horizontalOnly={false}
           snapPoints={[
             {x: 360},
             {x: 0, damping: 1-1-0.7, tension: 300},

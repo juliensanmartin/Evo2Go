@@ -12,7 +12,7 @@ export default class FilterComponent extends Component {
   render() {
     return (
       <Interactable.View
-        horizontalOnly={true}
+        horizontalOnly={false}
         snapPoints={[
           {x: 360},
           {x: 0, damping: 1-1-0.7, tension: 300},
@@ -45,11 +45,11 @@ export default class FilterComponent extends Component {
           <StyledCreditText>Car by Nurutdinov Timur from the Noun Project</StyledCreditText>
           <StyledCreditText>Loader by Steven Parisi</StyledCreditText>
         </StyledView>
-        <StyledView>
+        <StyledViewCentered>
           <StyledTextSmall>Made with &hearts; from Vancouver, BC</StyledTextSmall>
           <StyledTextSmall>By Simon Reggiani &amp; Julien Sanmartin</StyledTextSmall>
-          <StyledTextSmall><StyledHighlightedText> Evo 2 Go </StyledHighlightedText> - Version 0.1.0</StyledTextSmall>
-        </StyledView>
+          <StyledTextSmall><StyledHighlightedText> CAR 4 VAN </StyledHighlightedText> - Version 0.1.0</StyledTextSmall>
+        </StyledViewCentered>
         </Animated.View>
       </Interactable.View>
     )
@@ -78,6 +78,12 @@ const styles = StyleSheet.create({
 const StyledView = styled.View`
   flexDirection: column;
   justifyContent: space-between;
+  alignItems: flex-start;
+`
+
+const StyledViewCentered = styled.View`
+  flexDirection: column;
+  justifyContent: space-between;
   alignItems: center;
 `
 
@@ -96,4 +102,5 @@ const StyledHighlightedText= styled.Text`
 const TitleText= styled.Text`
   fontSize: 12;
   color: #2A93D5;
+  align-self: center;
 `
