@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Text, Image, TouchableOpacity, TouchableWithoutFeedback, Platform, Linking, Animated, StyleSheet, Dimensions } from 'react-native'
+import { View, Text, Image, TouchableOpacity, TouchableWithoutFeedback, Platform, Linking, Animated, StyleSheet } from 'react-native'
 import styled from 'styled-components/native'
 import { Badge, Icon } from 'react-native-elements'
 import ToastComponent from '../Toast/index'
@@ -100,7 +100,6 @@ export default class CarDetailsComponent extends Component {
                 extrapolateRight: 'clamp'
               })
             }]}>
-              <DetailsContainer>
                 <TitleContainer>
                   <StyledTitle>{type}</StyledTitle>
                 </TitleContainer>
@@ -153,7 +152,6 @@ export default class CarDetailsComponent extends Component {
                     </ViewName>
                   </ViewItem>
                 </ViewSecondaryDetails>
-              </DetailsContainer>
             </Animated.View>
           </Interactable.View>
           <ToastComponent message='Problems to access the App' visible={this.props.errorLinking !== ''}/>
@@ -172,12 +170,13 @@ CarDetailsComponent.propTypes = {
   errorLinking: PropTypes.string.isRequired
 }
 
-const Screen = Dimensions.get('window')
-
 const styles = StyleSheet.create({
   card: {
-    width: Screen.width - 40,
-    backgroundColor: 'white',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    backgroundColor: '#EDFAFD',
+    padding: 10,
+    margin: 10,
     borderRadius: 6,
     marginHorizontal: 20,
     marginVertical: 10,
