@@ -1,13 +1,18 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Text, Image, TouchableOpacity, TouchableWithoutFeedback, Platform, Linking } from 'react-native'
+import { View, Text, Image, TouchableOpacity, TouchableWithoutFeedback, Platform, Linking, Animated, StyleSheet, Dimensions } from 'react-native'
 import styled from 'styled-components/native'
 import { Badge, Icon } from 'react-native-elements'
 import ToastComponent from '../Toast/index'
+import Interactable from 'react-native-interactable'
 
 export default class CarDetailsComponent extends Component {
-  state = {
-    canOpenURL: false,
-    link: ''
+  constructor(props) {
+    super(props)
+    this.deltaX = new Animated.Value(0)
+    this.state = {
+      canOpenURL: false,
+      link: ''
+    }
   }
 
   componentDidMount() {
@@ -79,60 +84,78 @@ export default class CarDetailsComponent extends Component {
     return (
       <TouchableContainer onPress={this.props.onDirectionPress}>
         <StyledContainer>
-          <DetailsContainer>
-            <TitleContainer>
-              <StyledTitle>{type}</StyledTitle>
-            </TitleContainer>
-            <ImageContainer>
-              {long &&
-                <StyledImageLong source={logo}/>
-              }
-              {!long &&
-                <StyledImage source={logo}/>
-              }
-            </ImageContainer>
-            <ViewMainDetails>
-              <ViewName>
-                { avlBikes &&
-                  <StyledText>{avlBikes} bikes availables</StyledText>
-                }
-                <StyledText>{name}</StyledText>
-                <StyledTextSmall>{address}</StyledTextSmall>
-              </ViewName>
-              { this.state.canOpenURL &&
-                <TouchableOpacity onPress={() => this.onClickLinkApp(this.state.link)}>
-                  <Icon reverse raised type='ionicon' size={ 30 } name='ios-link' color='#2A93D7'/>
-                </TouchableOpacity>
-              }
-            </ViewMainDetails>
-            <ViewSecondaryDetails>
-              { fuel &&
-                <ViewItem>
-                  <Icon type='ionicon' size={ 50 } name='ios-speedometer' color='#3DDAD7'/>
+          <Interactable.View
+            horizontalOnly={true}
+            snapPoints={[
+              {x: 360},
+              {x: 0, damping: 1-1-0.7, tension: 300},
+              {x: -360}
+            ]}
+            animatedValueX={this.deltaX}>
+            <Animated.View style={[styles.card, {
+              opacity: this.deltaX.interpolate({
+                inputRange: [-300, 0, 300],
+                outputRange: [0, 1, 0],
+                extrapolateLeft: 'clamp',
+                extrapolateRight: 'clamp'
+              })
+            }]}>
+              <DetailsContainer>
+                <TitleContainer>
+                  <StyledTitle>{type}</StyledTitle>
+                </TitleContainer>
+                <ImageContainer>
+                  {long &&
+                    <StyledImageLong source={logo}/>
+                  }
+                  {!long &&
+                    <StyledImage source={logo}/>
+                  }
+                </ImageContainer>
+                <ViewMainDetails>
                   <ViewName>
-                    <StyledText>{fuel}%</StyledText>
-                    <StyledTextSmall>Fuel level</StyledTextSmall>
+                    { avlBikes &&
+                      <StyledText>{avlBikes} bikes availables</StyledText>
+                    }
+                    <StyledText>{name}</StyledText>
+                    <StyledTextSmall>{address}</StyledTextSmall>
                   </ViewName>
-                </ViewItem>
-              }
-              { direction &&
-                <ViewItem>
-                  <Icon type='ionicon' size={ 50 } name='ios-compass' color='#3DDAD7'/>
-                  <ViewName>
-                    <StyledText>{direction}</StyledText>
-                    <StyledTextSmall>Direction</StyledTextSmall>
-                  </ViewName>
-                </ViewItem>
-              }
-              <ViewItem>
-                <Icon type='ionicon' size={ 50 } name='ios-clock' color='#3DDAD7'/>
-                <ViewName>
-                  <StyledText>{distance}</StyledText>
-                  <StyledTextSmall>{duration}</StyledTextSmall>
-                </ViewName>
-              </ViewItem>
-            </ViewSecondaryDetails>
-          </DetailsContainer>
+                  { this.state.canOpenURL &&
+                    <TouchableOpacity onPress={() => this.onClickLinkApp(this.state.link)}>
+                      <Icon reverse raised type='ionicon' size={ 30 } name='ios-link' color='#2A93D7'/>
+                    </TouchableOpacity>
+                  }
+                </ViewMainDetails>
+                <ViewSecondaryDetails>
+                  { fuel &&
+                    <ViewItem>
+                      <Icon type='ionicon' size={ 50 } name='ios-speedometer' color='#3DDAD7'/>
+                      <ViewName>
+                        <StyledText>{fuel}%</StyledText>
+                        <StyledTextSmall>Fuel level</StyledTextSmall>
+                      </ViewName>
+                    </ViewItem>
+                  }
+                  { direction &&
+                    <ViewItem>
+                      <Icon type='ionicon' size={ 50 } name='ios-compass' color='#3DDAD7'/>
+                      <ViewName>
+                        <StyledText>{direction}</StyledText>
+                        <StyledTextSmall>Direction</StyledTextSmall>
+                      </ViewName>
+                    </ViewItem>
+                  }
+                  <ViewItem>
+                    <Icon type='ionicon' size={ 50 } name='ios-clock' color='#3DDAD7'/>
+                    <ViewName>
+                      <StyledText>{distance}</StyledText>
+                      <StyledTextSmall>{duration}</StyledTextSmall>
+                    </ViewName>
+                  </ViewItem>
+                </ViewSecondaryDetails>
+              </DetailsContainer>
+            </Animated.View>
+          </Interactable.View>
           <ToastComponent message='Problems to access the App' visible={this.props.errorLinking !== ''}/>
         </StyledContainer>
       </TouchableContainer>
@@ -148,6 +171,23 @@ CarDetailsComponent.propTypes = {
   onLinkingError: PropTypes.func.isRequired,
   errorLinking: PropTypes.string.isRequired
 }
+
+const Screen = Dimensions.get('window')
+
+const styles = StyleSheet.create({
+  card: {
+    width: Screen.width - 40,
+    backgroundColor: 'white',
+    borderRadius: 6,
+    marginHorizontal: 20,
+    marginVertical: 10,
+    shadowColor: '#7f7f7f',
+    shadowOffset: {width: 0, height: 0},
+    shadowRadius: 2,
+    shadowOpacity: 0.4,
+    elevation: 4
+  }
+})
 
 const TouchableContainer = styled.TouchableWithoutFeedback`
   flex: 1;
