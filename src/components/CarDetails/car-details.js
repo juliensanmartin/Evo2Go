@@ -15,7 +15,7 @@ export default class CarDetailsComponent extends Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     let linking
     this.state.link = ''
 
@@ -119,11 +119,6 @@ export default class CarDetailsComponent extends Component {
                     <StyledText>{name}</StyledText>
                     <StyledTextSmall>{address}</StyledTextSmall>
                   </ViewName>
-                  { this.state.canOpenURL &&
-                    <TouchableOpacity onPress={() => this.onClickLinkApp(this.state.link)}>
-                      <Icon reverse raised type='ionicon' size={ 30 } name='ios-link' color='#2A93D7'/>
-                    </TouchableOpacity>
-                  }
                 </ViewMainDetails>
                 <ViewSecondaryDetails>
                   { fuel &&
@@ -152,6 +147,14 @@ export default class CarDetailsComponent extends Component {
                     </ViewName>
                   </ViewItem>
                 </ViewSecondaryDetails>
+                { this.state.canOpenURL &&
+                  <ViewMainDetailsCentered>
+                    <StyledText>Open {type} App</StyledText>
+                    <TouchableOpacity onPress={() => this.onClickLinkApp(this.state.link)}>
+                      <Icon reverse raised type='ionicon' size={ 30 } name='ios-key' color='#2A93D7'/>
+                    </TouchableOpacity>
+                  </ViewMainDetailsCentered>
+                }
             </Animated.View>
           </Interactable.View>
           <ToastComponent message='Problems to access the App' visible={this.props.errorLinking !== ''}/>
@@ -211,6 +214,12 @@ const DetailsContainer = styled.View`
 const ViewMainDetails = styled.View`
   flexDirection: row;
   justifyContent: space-between;
+  alignItems: center;
+`
+
+const ViewMainDetailsCentered = styled.View`
+  flexDirection: row;
+  justifyContent: center;
   alignItems: center;
 `
 
