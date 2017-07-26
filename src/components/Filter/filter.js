@@ -20,6 +20,7 @@ export default class FilterComponent extends Component {
               {x: 0, damping: 1-1-0.7, tension: 300},
               {x: -360}
             ]}
+            onSnap={this.props.onOutsidePress}
             animatedValueX={this.deltaX}>
             <Animated.View style={[styles.card, {
               opacity: this.deltaX.interpolate({

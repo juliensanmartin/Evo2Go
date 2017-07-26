@@ -27,6 +27,7 @@ export default class AboutComponent extends Component {
               {x: 0, damping: 1-1-0.7, tension: 300},
               {x: -360}
             ]}
+            onSnap={this.onScreenPress}
             animatedValueX={this.deltaX}>
             <Animated.View style={[styles.card, {
               opacity: this.deltaX.interpolate({
