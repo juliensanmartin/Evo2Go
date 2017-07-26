@@ -150,9 +150,9 @@ export default class CarDetailsComponent extends Component {
                 { this.state.canOpenURL &&
                   <ViewMainDetailsCentered>
                     <StyledText>Open {type} App</StyledText>
-                    <TouchableOpacity onPress={() => this.onClickLinkApp(this.state.link)}>
+                    <TouchableOpacityStyled onPress={() => this.onClickLinkApp(this.state.link)}>
                       <Icon reverse raised type='ionicon' size={ 30 } name='ios-key' color='#2A93D7'/>
-                    </TouchableOpacity>
+                    </TouchableOpacityStyled>
                   </ViewMainDetailsCentered>
                 }
             </Animated.View>
@@ -193,6 +193,10 @@ const styles = StyleSheet.create({
 
 const TouchableContainer = styled.TouchableWithoutFeedback`
   flex: 1;
+`
+
+const TouchableOpacityStyled = styled.TouchableOpacity`
+  zIndex: 10;
 `
 
 const StyledContainer = styled.View`
