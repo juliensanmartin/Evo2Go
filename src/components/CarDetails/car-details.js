@@ -200,7 +200,7 @@ const StyledContainer = styled.View`
   justifyContent: space-between;
   padding: 10;
   margin: 10;
-  height: 500;
+  height: 100%;
 `
 
 const DetailsContainer = styled.View`
