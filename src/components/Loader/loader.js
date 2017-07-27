@@ -7,6 +7,10 @@ export default class LoaderComponent extends Component {
     this.animation.play()
   }
 
+  componentDidUpdate() {
+    if (this.animation) this.animation.play()
+  }
+
   render() {
     return (
       <View>
@@ -14,11 +18,11 @@ export default class LoaderComponent extends Component {
         <Animation
           ref={animation => { this.animation = animation }}
           style={{
-            width: 200,
-            height: 200,
+            width: '100%',
+            height: 150
           }}
           loop={true}
-          source={require('./assets/loader_ring.json')}
+          source={require('./assets/progress_bar.json')}
         />
       }
       </View>

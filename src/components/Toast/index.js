@@ -43,17 +43,16 @@ const StyledContainer = styled.View`
   flexDirection: column;
   justifyContent: center;
   alignItems: center;
-  padding: 20;
-  marginVertical: 80;
+  padding: 10;
+  marginVertical: 30;
   marginHorizontal: 30;
   height: 50;
   width: 300;
   backgroundColor: #2a93d5;
-  borderRadius: 20;
   opacity: 0.7;
 `
 
 const StyledText= styled.Text`
   color: #EDFAFD;
-  fontSize: 16;
+  fontSize: 14;
 `

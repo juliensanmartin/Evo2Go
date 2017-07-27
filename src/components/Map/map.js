@@ -125,7 +125,7 @@ export default class MapComponent extends Component {
 
         </MapView>
         <LoaderContainer>
-          <ActivityIndicator animating={this.props.loading} size='large' color='#135589'/>
+          <LoaderComponent animating={this.props.loading}/>
         </LoaderContainer>
         <ToastContainer>
           <ToastComponent message='Problems to locate your position' visible={this.state.errorGPS}/>
@@ -156,18 +156,19 @@ MapComponent.propTypes = {
 const MapContainer = styled.View`
   flex: 1;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   backgroundColor: #F5FCFF;
 `
 
 const LoaderContainer = styled.View`
-  align-self: center;
+  flex-direction: column;
+  justify-content: center;
 `
 
 const ToastContainer = styled.View`
   flexDirection: column;
-  justifyContent: flex-end;
-  marginVertical: 40;
+  justifyContent: center;
+  align-self: flex-end;
 `
 
 const ModalContainer = styled.View`
