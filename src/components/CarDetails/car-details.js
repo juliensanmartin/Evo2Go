@@ -188,7 +188,8 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 0},
     shadowRadius: 2,
     shadowOpacity: 0.4,
-    elevation: 4
+    elevation: 4,
+    zIndex: 4
   }
 })
 
@@ -198,6 +199,7 @@ const TouchableContainer = styled.TouchableWithoutFeedback`
 
 const TouchableOpacityStyled = styled.TouchableOpacity`
   zIndex: 10;
+  elevation: 10;
 `
 
 const StyledContainer = styled.View`

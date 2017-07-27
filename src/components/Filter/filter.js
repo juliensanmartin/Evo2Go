@@ -119,7 +119,8 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 0},
     shadowRadius: 2,
     shadowOpacity: 0.4,
-    elevation: 4
+    elevation: 4,
+    zIndex: 4
   }
 })
 
@@ -156,7 +157,8 @@ const StyledLeftView = styled.View`
 const StyledSwitch= styled.Switch`
   padding: 10;
   margin: 10;
-  zIndex:10;
+  zIndex: 10;
+  elevation: 10;
 `
 
 const StyledImage= styled.Image`

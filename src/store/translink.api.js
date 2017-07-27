@@ -1,6 +1,6 @@
 const translinkConfig = {
 	key: 'pbiQspKk9nYe5sFwUn04',
-	url: 'http://api.translink.ca/rttiapi/v1/buses',
+	url: 'https://api.translink.ca/rttiapi/v1/buses',
 }
 
 const params = `?apiKey=${translinkConfig.key}`

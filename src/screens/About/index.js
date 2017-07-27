@@ -39,11 +39,11 @@ export default class AboutComponent extends Component {
             }]}>
             <StyledView>
               <TitleText>VEHICLES DATA PROVIDED BY</TitleText>
-              <StyledCreditText>EVO CAR SHARE</StyledCreditText>
-              <StyledCreditText>TRANSLINK</StyledCreditText>
-              <StyledCreditText>MOBI BIKE</StyledCreditText>
-              <StyledCreditText>MODO</StyledCreditText>
-              <StyledCreditText>This product uses the car2go API but is not endorsed or certified by car2go.</StyledCreditText>
+              <StyledTextSmall>EVO CAR SHARE</StyledTextSmall>
+              <StyledTextSmall>Some of the data used in this product or service is provided by permission of TransLink. TransLink assumes no responsibility for the accuracy or currency of the Data used in this product or service.</StyledTextSmall>
+              <StyledTextSmall>MOBI BIKE</StyledTextSmall>
+              <StyledTextSmall>MODO</StyledTextSmall>
+              <StyledTextSmall>This product uses the car2go API but is not endorsed or certified by car2go.</StyledTextSmall>
             </StyledView>
             <StyledView>
               <TitleText>DISTANCE DATA PROVIDED BY</TitleText>
@@ -83,7 +83,8 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 0},
     shadowRadius: 2,
     shadowOpacity: 0.4,
-    elevation: 4
+    elevation: 4,
+    zIndex: 4
   }
 })
 
