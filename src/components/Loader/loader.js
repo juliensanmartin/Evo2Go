@@ -22,7 +22,7 @@ export default class LoaderComponent extends Component {
             height: 150
           }}
           loop={true}
-          source={require('./assets/progress_bar.json')}
+          source={require('./assets/loader_ring.json')}
         />
       }
       </View>

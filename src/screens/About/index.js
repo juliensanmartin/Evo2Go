@@ -21,7 +21,7 @@ export default class AboutComponent extends Component {
       <TouchableContainer onPress={this.onScreenPress}>
         <StyledContainer>
           <Interactable.View
-            horizontalOnly={true}
+            horizontalOnly={false}
             snapPoints={[
               {x: 360},
               {x: 0, damping: 1-1-0.7, tension: 300},

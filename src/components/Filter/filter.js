@@ -11,7 +11,6 @@ export default class FilterComponent extends Component {
 
   render() {
     return (
-      <TouchableContainer onPress={this.props.onOutsidePress}>
         <StyledContainer>
           <Interactable.View
             horizontalOnly={true}
@@ -86,7 +85,6 @@ export default class FilterComponent extends Component {
             </Animated.View>
           </Interactable.View>
         </StyledContainer>
-      </TouchableContainer>
     )
   }
 }
@@ -110,7 +108,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-around',
     padding: 10,
-    height: 300,
+    height: 200,
     backgroundColor: '#EDFAFD',
     borderRadius: 6,
     marginHorizontal: 10,
@@ -126,6 +124,8 @@ const styles = StyleSheet.create({
 
 const TouchableContainer = styled.TouchableWithoutFeedback`
   flex: 1;
+  zIndex: 1;
+  elevation: 1;
 `
 
 const StyledContainer = styled.View`
