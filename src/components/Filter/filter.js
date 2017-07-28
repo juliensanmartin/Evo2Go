@@ -14,7 +14,7 @@ export default class FilterComponent extends Component {
       <TouchableContainer onPress={this.props.onOutsidePress}>
         <StyledContainer>
           <Interactable.View
-            horizontalOnly={false}
+            horizontalOnly={true}
             snapPoints={[
               {x: 360},
               {x: 0, damping: 1-1-0.7, tension: 300},
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-around',
     padding: 10,
-    height: 200,
+    height: 300,
     backgroundColor: '#EDFAFD',
     borderRadius: 6,
     marginHorizontal: 10,

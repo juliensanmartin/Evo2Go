@@ -48,11 +48,13 @@ export default class CarDetailsComponent extends Component {
       this.state.link = linking.concat(`vehicles/${this.props.marker.id}?latlng=${this.props.marker.latlng.latitude},${this.props.marker.latlng.longitude}`)
     }
 
-    Linking.canOpenURL(this.state.link)
-      .then(supported => {
-        console.log(this.state.link, ' SUPPORTED ? ',supported)
-        this.state.canOpenURL = supported
-      })
+    if (this.state.link !== '') {
+      Linking.canOpenURL(this.state.link)
+        .then(supported => {
+          console.log(this.state.link, ' SUPPORTED ? ',supported)
+          this.state.canOpenURL = supported
+        })
+    }
 
   }
 
@@ -85,7 +87,7 @@ export default class CarDetailsComponent extends Component {
       <TouchableContainer onPress={this.props.onDirectionPress}>
         <StyledContainer>
           <Interactable.View
-            horizontalOnly={false}
+            horizontalOnly={true}
             snapPoints={[
               {x: 360},
               {x: 0, damping: 1-1-0.7, tension: 300},
