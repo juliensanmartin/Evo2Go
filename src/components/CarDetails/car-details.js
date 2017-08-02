@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Text, Image, TouchableOpacity, TouchableWithoutFeedback, Platform, Linking, Animated, StyleSheet } from 'react-native'
+import { View, Text, Image, TouchableOpacity, TouchableWithoutFeedback, Platform, Linking, Animated, StyleSheet, Modal } from 'react-native'
 import styled from 'styled-components/native'
 import { Badge, Icon } from 'react-native-elements'
 import ToastComponent from '../Toast/index'
@@ -84,7 +84,10 @@ export default class CarDetailsComponent extends Component {
     if (type==='Mobi Bike') logo=require('../assets/bike.png')
     if (avlBikes === 0) avlBikes = 'No'
     return (
-      <TouchableContainer onPress={this.props.onDirectionPress}>
+      <ModalContainer
+        animationType={"slide"}
+        transparent={true}
+        visible={this.props.visible}>
         <StyledContainer>
           <Interactable.View
             horizontalOnly={true}
@@ -162,7 +165,7 @@ export default class CarDetailsComponent extends Component {
           </Interactable.View>
           <ToastComponent message='Problems to access the App' visible={this.props.errorLinking !== ''}/>
         </StyledContainer>
-      </TouchableContainer>
+      </ModalContainer>
     )
   }
 }
@@ -173,7 +176,8 @@ CarDetailsComponent.propTypes = {
   onDirectionPress: PropTypes.func.isRequired,
   positionInVancouver: PropTypes.bool.isRequired,
   onLinkingError: PropTypes.func.isRequired,
-  errorLinking: PropTypes.string.isRequired
+  errorLinking: PropTypes.string.isRequired,
+  visible: PropTypes.bool.isRequired
 }
 
 const styles = StyleSheet.create({
@@ -195,7 +199,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const TouchableContainer = styled.TouchableWithoutFeedback`
+const ModalContainer = styled.Modal`
   flex: 1;
 `
 

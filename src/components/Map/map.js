@@ -9,6 +9,7 @@ import styled from 'styled-components/native'
 import LoaderComponent from '../Loader/loader'
 import ToastComponent from '../Toast/index'
 import IconMarkerComponent from '../../components/IconMarker/icon-marker'
+import CarDetailsScreen from '../../screens/CarDetails/index'
 
 const initialRegion = {
   latitude: 49.2800565,
@@ -26,7 +27,8 @@ export default class MapComponent extends Component {
       this.state = {
         currentPosition: null,
         errorGPS: false,
-        locationFetched: false
+        locationFetched: false,
+        showCarDetailsModal: false
       }
     }
 
@@ -34,7 +36,7 @@ export default class MapComponent extends Component {
     navigator.geolocation.getCurrentPosition((position) => {
         this.props.onPositionFetched(position.coords)
         if (this.props.positionInVancouver) {
-          this.setState({
+          this.setState({...this.state,
             currentPosition: {
               latitude: position.coords.latitude,
               longitude: position.coords.longitude
@@ -43,7 +45,7 @@ export default class MapComponent extends Component {
             locationFetched: true
           })
         } else {
-          this.setState({
+          this.setState({...this.state,
             currentPosition: {
               latitude: initialRegion.latitude,
               longitude: initialRegion.longitude
@@ -55,7 +57,7 @@ export default class MapComponent extends Component {
         this.onCurrentPositionFetch()
       },
       error => {
-        this.setState({
+        this.setState({...this.state,
           errorGPS: true,
           locationFetched: true,
           currentPosition: {
@@ -87,8 +89,10 @@ export default class MapComponent extends Component {
       edgePadding: DEFAULT_PADDING,
       animated: true,
     })
-    this.props.navigation.navigate('CarDetails', { marker, currentPosition: this.state.currentPosition })
+    this.setState({...this.state, showCarDetailsModal: true})
   }
+
+  on
 
   render() {
     return (
@@ -124,6 +128,10 @@ export default class MapComponent extends Component {
             }
 
         </MapView>
+        <CarDetailsScreen
+          visible={this.state.showCarDetailsModal}
+          marker={this.state.marker}
+          currentPosition={this.state.currentPosition}/>
         <LoaderContainer>
           <LoaderComponent animating={this.props.loading}/>
         </LoaderContainer>

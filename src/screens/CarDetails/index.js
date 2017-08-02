@@ -17,11 +17,11 @@ class CarDetails extends Component {
   }
 
   componentWillMount() {
-    const {currentPosition, marker} = this.props.navigation.state.params
-    if (this.props.positionInVancouver) {
+    const {currentPosition, marker, positionInVancouver, dispatch} = this.props
+    if (positionInVancouver) {
       Promise.all([
-        this.props.dispatch(fetchDistance(currentPosition, marker.latlng)),
-        this.props.dispatch(fetchDirection(currentPosition, marker.latlng))
+        dispatch(fetchDistance(currentPosition, marker.latlng)),
+        dispatch(fetchDirection(currentPosition, marker.latlng))
       ])
     }
   }
@@ -29,22 +29,25 @@ class CarDetails extends Component {
   render() {
     return (
       <CarDetailsComponent
-        marker={this.props.navigation.state.params.marker}
+        marker={this.props.marker}
         distance={this.props.distance}
         onDirectionPress={this.showDirectionOnMap}
         positionInVancouver={this.props.positionInVancouver}
         onLinkingError={this.props.onLinkingError}
-        errorLinking={this.props.errorLinking}/>
+        errorLinking={this.props.errorLinking}
+        visible={this.props.visible}/>
     )
   }
 }
 
 CarDetails.propTypes = {
-  navigation: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   positionInVancouver: PropTypes.bool.isRequired,
   onLinkingError: PropTypes.func.isRequired,
-  errorLinking: PropTypes.string.isRequired
+  errorLinking: PropTypes.string.isRequired,
+  visible: PropTypes.bool.isRequired,
+  marker: PropTypes.object.isRequired,
+  currentPosition: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
