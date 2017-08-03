@@ -28,8 +28,11 @@ export default class MapComponent extends Component {
         currentPosition: null,
         errorGPS: false,
         locationFetched: false,
-        showCarDetailsModal: false
+        showCarDetailsModal: false,
+        marker: null
       }
+
+      this.onHideCarDetailsScreen = this.onHideCarDetailsScreen.bind(this)
     }
 
   componentDidMount() {
@@ -41,7 +44,6 @@ export default class MapComponent extends Component {
               latitude: position.coords.latitude,
               longitude: position.coords.longitude
             },
-            errorGPS: false,
             locationFetched: true
           })
         } else {
@@ -50,7 +52,6 @@ export default class MapComponent extends Component {
               latitude: initialRegion.latitude,
               longitude: initialRegion.longitude
             },
-            errorGPS: false,
             locationFetched: true
           })
         }
@@ -89,10 +90,12 @@ export default class MapComponent extends Component {
       edgePadding: DEFAULT_PADDING,
       animated: true,
     })
-    this.setState({...this.state, showCarDetailsModal: true})
+    this.setState({...this.state, showCarDetailsModal: true, marker})
   }
 
-  on
+  onHideCarDetailsScreen() {
+    this.setState({...this.state, showCarDetailsModal: false})
+  }
 
   render() {
     return (
@@ -128,10 +131,13 @@ export default class MapComponent extends Component {
             }
 
         </MapView>
-        <CarDetailsScreen
-          visible={this.state.showCarDetailsModal}
-          marker={this.state.marker}
-          currentPosition={this.state.currentPosition}/>
+        {this.state.showCarDetailsModal &&
+          <CarDetailsScreen
+            visible={this.state.showCarDetailsModal}
+            marker={this.state.marker}
+            currentPosition={this.state.currentPosition}
+            onClose={this.onHideCarDetailsScreen}/>
+        }
         <LoaderContainer>
           <LoaderComponent animating={this.props.loading}/>
         </LoaderContainer>

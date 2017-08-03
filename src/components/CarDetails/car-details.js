@@ -18,7 +18,7 @@ export default class CarDetailsComponent extends Component {
   componentWillMount() {
     let linking
     this.state.link = ''
-
+    
     if (this.props.marker.type==='Car 2 Go') {
       if (Platform.OS === 'ios') {
         linking = 'car2go://'
@@ -55,7 +55,6 @@ export default class CarDetailsComponent extends Component {
           this.state.canOpenURL = supported
         })
     }
-
   }
 
   onClickLinkApp(linking) {
@@ -84,88 +83,86 @@ export default class CarDetailsComponent extends Component {
     if (type==='Mobi Bike') logo=require('../assets/bike.png')
     if (avlBikes === 0) avlBikes = 'No'
     return (
-      <ModalContainer
+      <Modal
         animationType={"slide"}
         transparent={true}
         visible={this.props.visible}>
-        <StyledContainer>
-          <Interactable.View
-            horizontalOnly={true}
-            snapPoints={[
-              {x: 360},
-              {x: 0, damping: 1-1-0.7, tension: 300},
-              {x: -360}
-            ]}
-            onSnap={this.props.onDirectionPress}
-            animatedValueX={this.deltaX}>
-            <Animated.View style={[styles.card, {
-              opacity: this.deltaX.interpolate({
-                inputRange: [-300, 0, 300],
-                outputRange: [0, 1, 0],
-                extrapolateLeft: 'clamp',
-                extrapolateRight: 'clamp'
-              })
-            }]}>
-                <TitleContainer>
-                  <StyledTitle>{type}</StyledTitle>
-                </TitleContainer>
-                <ImageContainer>
-                  {long &&
-                    <StyledImageLong source={logo}/>
+        <Interactable.View
+          horizontalOnly={true}
+          snapPoints={[
+            {x: 360},
+            {x: 0, damping: 1-1-0.7, tension: 300},
+            {x: -360}
+          ]}
+          onSnap={this.props.onClose}
+          animatedValueX={this.deltaX}>
+          <Animated.View style={[styles.card, {
+            opacity: this.deltaX.interpolate({
+              inputRange: [-300, 0, 300],
+              outputRange: [0, 1, 0],
+              extrapolateLeft: 'clamp',
+              extrapolateRight: 'clamp'
+            })
+          }]}>
+              <TitleContainer>
+                <StyledTitle>{type}</StyledTitle>
+              </TitleContainer>
+              <ImageContainer>
+                {long &&
+                  <StyledImageLong source={logo}/>
+                }
+                {!long &&
+                  <StyledImage source={logo}/>
+                }
+              </ImageContainer>
+              <ViewMainDetails>
+                <ViewName>
+                  { avlBikes &&
+                    <StyledText>{avlBikes} bikes availables</StyledText>
                   }
-                  {!long &&
-                    <StyledImage source={logo}/>
-                  }
-                </ImageContainer>
-                <ViewMainDetails>
-                  <ViewName>
-                    { avlBikes &&
-                      <StyledText>{avlBikes} bikes availables</StyledText>
-                    }
-                    <StyledText>{name}</StyledText>
-                    <StyledTextSmall>{address}</StyledTextSmall>
-                  </ViewName>
-                </ViewMainDetails>
-                <ViewSecondaryDetails>
-                  { fuel &&
-                    <ViewItem>
-                      <Icon type='ionicon' size={ 50 } name='ios-speedometer' color='#3DDAD7'/>
-                      <ViewName>
-                        <StyledText>{fuel}%</StyledText>
-                        <StyledTextSmall>Fuel level</StyledTextSmall>
-                      </ViewName>
-                    </ViewItem>
-                  }
-                  { direction &&
-                    <ViewItem>
-                      <Icon type='ionicon' size={ 50 } name='ios-compass' color='#3DDAD7'/>
-                      <ViewName>
-                        <StyledText>{direction}</StyledText>
-                        <StyledTextSmall>Direction</StyledTextSmall>
-                      </ViewName>
-                    </ViewItem>
-                  }
+                  <StyledText>{name}</StyledText>
+                  <StyledTextSmall>{address}</StyledTextSmall>
+                </ViewName>
+              </ViewMainDetails>
+              <ViewSecondaryDetails>
+                { fuel &&
                   <ViewItem>
-                    <Icon type='ionicon' size={ 50 } name='ios-clock' color='#3DDAD7'/>
+                    <Icon type='ionicon' size={ 50 } name='ios-speedometer' color='#3DDAD7'/>
                     <ViewName>
-                      <StyledText>{distance}</StyledText>
-                      <StyledTextSmall>{duration}</StyledTextSmall>
+                      <StyledText>{fuel}%</StyledText>
+                      <StyledTextSmall>Fuel level</StyledTextSmall>
                     </ViewName>
                   </ViewItem>
-                </ViewSecondaryDetails>
-                { this.state.canOpenURL &&
-                  <ViewMainDetailsCentered>
-                    <StyledText>Open {type} App</StyledText>
-                    <TouchableOpacityStyled onPress={() => this.onClickLinkApp(this.state.link)}>
-                      <Icon reverse raised type='ionicon' size={ 30 } name='ios-key' color='#2A93D7'/>
-                    </TouchableOpacityStyled>
-                  </ViewMainDetailsCentered>
                 }
-            </Animated.View>
-          </Interactable.View>
-          <ToastComponent message='Problems to access the App' visible={this.props.errorLinking !== ''}/>
-        </StyledContainer>
-      </ModalContainer>
+                { direction &&
+                  <ViewItem>
+                    <Icon type='ionicon' size={ 50 } name='ios-compass' color='#3DDAD7'/>
+                    <ViewName>
+                      <StyledText>{direction}</StyledText>
+                      <StyledTextSmall>Direction</StyledTextSmall>
+                    </ViewName>
+                  </ViewItem>
+                }
+                <ViewItem>
+                  <Icon type='ionicon' size={ 50 } name='ios-clock' color='#3DDAD7'/>
+                  <ViewName>
+                    <StyledText>{distance}</StyledText>
+                    <StyledTextSmall>{duration}</StyledTextSmall>
+                  </ViewName>
+                </ViewItem>
+              </ViewSecondaryDetails>
+              { this.state.canOpenURL &&
+                <ViewMainDetailsCentered>
+                  <StyledText>Open {type} App</StyledText>
+                  <TouchableOpacityStyled onPress={() => this.onClickLinkApp(this.state.link)}>
+                    <Icon reverse raised type='ionicon' size={ 30 } name='ios-key' color='#2A93D7'/>
+                  </TouchableOpacityStyled>
+                </ViewMainDetailsCentered>
+              }
+          </Animated.View>
+        </Interactable.View>
+        <ToastComponent message='Problems to access the App' visible={this.props.errorLinking !== ''}/>
+      </Modal>
     )
   }
 }
@@ -173,11 +170,11 @@ export default class CarDetailsComponent extends Component {
 CarDetailsComponent.propTypes = {
   marker: PropTypes.object.isRequired,
   distance: PropTypes.object.isRequired,
-  onDirectionPress: PropTypes.func.isRequired,
   positionInVancouver: PropTypes.bool.isRequired,
   onLinkingError: PropTypes.func.isRequired,
   errorLinking: PropTypes.string.isRequired,
-  visible: PropTypes.bool.isRequired
+  visible: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired
 }
 
 const styles = StyleSheet.create({
@@ -189,7 +186,7 @@ const styles = StyleSheet.create({
     margin: 10,
     borderRadius: 6,
     marginHorizontal: 10,
-    marginVertical: 10,
+    marginVertical: 100,
     shadowColor: '#7f7f7f',
     shadowOffset: {width: 0, height: 0},
     shadowRadius: 2,
@@ -199,21 +196,9 @@ const styles = StyleSheet.create({
   }
 })
 
-const ModalContainer = styled.Modal`
-  flex: 1;
-`
-
 const TouchableOpacityStyled = styled.TouchableOpacity`
   zIndex: 10;
   elevation: 10;
-`
-
-const StyledContainer = styled.View`
-  flexDirection: column;
-  justifyContent: space-between;
-  padding: 10;
-  margin: 10;
-  height: 100%;
 `
 
 const DetailsContainer = styled.View`

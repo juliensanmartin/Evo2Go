@@ -6,16 +6,6 @@ import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 
 class CarDetails extends Component {
-  constructor() {
-    super()
-    this.showDirectionOnMap = this.showDirectionOnMap.bind(this)
-  }
-
-  showDirectionOnMap() {
-    const backAction = NavigationActions.back()
-    this.props.navigation.dispatch(backAction)
-  }
-
   componentWillMount() {
     const {currentPosition, marker, positionInVancouver, dispatch} = this.props
     if (positionInVancouver) {
@@ -31,11 +21,11 @@ class CarDetails extends Component {
       <CarDetailsComponent
         marker={this.props.marker}
         distance={this.props.distance}
-        onDirectionPress={this.showDirectionOnMap}
         positionInVancouver={this.props.positionInVancouver}
         onLinkingError={this.props.onLinkingError}
         errorLinking={this.props.errorLinking}
-        visible={this.props.visible}/>
+        visible={this.props.visible}
+        onClose={this.props.onClose}/>
     )
   }
 }
@@ -47,7 +37,8 @@ CarDetails.propTypes = {
   errorLinking: PropTypes.string.isRequired,
   visible: PropTypes.bool.isRequired,
   marker: PropTypes.object.isRequired,
-  currentPosition: PropTypes.object.isRequired
+  currentPosition: PropTypes.object.isRequired,
+  onClose: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {

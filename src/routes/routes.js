@@ -4,7 +4,6 @@ import { Icon } from 'react-native-elements'
 import { TouchableOpacity, View } from 'react-native'
 import MapScreen from '../screens/Map/index'
 import FilterScreen from '../screens/Filter/index'
-import CarDetailsScreen from '../screens/CarDetails/index'
 import AboutComponent from '../screens/About/index'
 import styled from 'styled-components/native'
 
@@ -56,19 +55,6 @@ export default StackNavigator({
       screen: FilterScreen,
       navigationOptions: {
         title: 'FILTER',
-        headerTitleStyle: {
-          color: '#135589'
-        },
-        headerStyle: {
-         backgroundColor: '#edfafd'
-        },
-        gesturesEnabled: true
-      }
-    },
-    CarDetails: {
-      screen: CarDetailsScreen,
-      navigationOptions: {
-        title: 'DETAILS',
         headerTitleStyle: {
           color: '#135589'
         },
