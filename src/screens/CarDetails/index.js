@@ -16,6 +16,10 @@ class CarDetails extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.visible
+  }
+
   render() {
     return (
       <CarDetailsComponent

@@ -18,7 +18,7 @@ export default class CarDetailsComponent extends Component {
   componentWillMount() {
     let linking
     this.state.link = ''
-    
+
     if (this.props.marker.type==='Car 2 Go') {
       if (Platform.OS === 'ios') {
         linking = 'car2go://'
