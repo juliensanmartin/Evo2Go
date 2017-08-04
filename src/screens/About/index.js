@@ -18,8 +18,7 @@ export default class AboutComponent extends Component {
 
   render() {
     return (
-      <TouchableContainer onPress={this.onScreenPress}>
-        <StyledContainer>
+        <View>
           <Interactable.View
             horizontalOnly={false}
             snapPoints={[
@@ -62,8 +61,7 @@ export default class AboutComponent extends Component {
             </StyledViewCentered>
             </Animated.View>
           </Interactable.View>
-        </StyledContainer>
-      </TouchableContainer>
+        </View>
     )
   }
 }
@@ -73,7 +71,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-around',
     padding: 10,
-    margin: 10,
     height: 400,
     backgroundColor: '#EDFAFD',
     borderRadius: 6,
@@ -91,18 +88,6 @@ const styles = StyleSheet.create({
 AboutComponent.propTypes = {
   navigation: PropTypes.object.isRequired
 }
-
-const TouchableContainer = styled.TouchableWithoutFeedback`
-  flex: 1;
-`
-
-const StyledContainer = styled.View`
-  flexDirection: column;
-  justifyContent: space-between;
-  padding: 10;
-  margin: 10;
-  height: 100%;
-`
 
 const StyledView = styled.View`
   flexDirection: column;

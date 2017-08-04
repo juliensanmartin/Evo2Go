@@ -6,14 +6,8 @@ import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 
 class Filter extends Component {
-  constructor() {
-    super()
-    this.showMap = this.showMap.bind(this)
-  }
-
-  showMap() {
-    const backAction = NavigationActions.back()
-    this.props.navigation.dispatch(backAction)
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.visible
   }
 
   render() {
@@ -29,7 +23,8 @@ class Filter extends Component {
         mobiVisible={this.props.mobiVisible}
         onModoToggle={this.props.onModoToggle}
         modoVisible={this.props.modoVisible}
-        onOutsidePress={this.showMap}/>
+        visible={this.props.visible}
+        onClose={this.props.onClose}/>
     )
   }
 }
@@ -45,7 +40,8 @@ Filter.propTypes = {
   onMobiToggle: PropTypes.func.isRequired,
   modoVisible: PropTypes.bool.isRequired,
   onModoToggle: PropTypes.func.isRequired,
-  navigation: PropTypes.object.isRequired
+  visible: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Switch, Text, Image, TouchableWithoutFeedback, Animated, StyleSheet } from 'react-native'
+import { View, Switch, Text, Image, Animated, StyleSheet, Modal } from 'react-native'
 import styled from 'styled-components/native'
 import Interactable from 'react-native-interactable'
 
@@ -11,7 +11,10 @@ export default class FilterComponent extends Component {
 
   render() {
     return (
-        <StyledContainer>
+      <Modal
+        animationType={"slide"}
+        transparent={true}
+        visible={this.props.visible}>
           <Interactable.View
             horizontalOnly={true}
             snapPoints={[
@@ -19,7 +22,7 @@ export default class FilterComponent extends Component {
               {x: 0, damping: 1-1-0.7, tension: 300},
               {x: -360}
             ]}
-            onSnap={this.props.onOutsidePress}
+            onSnap={this.props.onClose}
             animatedValueX={this.deltaX}>
             <Animated.View style={[styles.card, {
               opacity: this.deltaX.interpolate({
@@ -84,7 +87,7 @@ export default class FilterComponent extends Component {
               </StyledView>
             </Animated.View>
           </Interactable.View>
-        </StyledContainer>
+        </Modal>
     )
   }
 }
@@ -100,7 +103,8 @@ FilterComponent.propTypes = {
   onMobiToggle: PropTypes.func.isRequired,
   modoVisible: PropTypes.bool.isRequired,
   onModoToggle: PropTypes.func.isRequired,
-  onOutsidePress: PropTypes.func.isRequired
+  visible: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired
 }
 
 const styles = StyleSheet.create({
@@ -112,7 +116,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#EDFAFD',
     borderRadius: 6,
     marginHorizontal: 10,
-    marginVertical: 10,
+    marginVertical: 100,
     shadowColor: '#7f7f7f',
     shadowOffset: {width: 0, height: 0},
     shadowRadius: 2,
@@ -121,20 +125,6 @@ const styles = StyleSheet.create({
     zIndex: 4
   }
 })
-
-const TouchableContainer = styled.TouchableWithoutFeedback`
-  flex: 1;
-  zIndex: 1;
-  elevation: 1;
-`
-
-const StyledContainer = styled.View`
-  flexDirection: column;
-  justifyContent: flex-start;
-  padding: 10;
-  margin: 10;
-  height: 100%;
-`
 
 const StyledView = styled.View`
   flexDirection: row;

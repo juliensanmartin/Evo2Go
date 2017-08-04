@@ -1,8 +1,10 @@
 import {
   StyleSheet,
   View,
-  ActivityIndicator
+  ActivityIndicator,
+  TouchableOpacity
 } from 'react-native'
+import { Icon } from 'react-native-elements'
 import React, { Component, PropTypes } from 'react'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import styled from 'styled-components/native'
@@ -10,6 +12,7 @@ import LoaderComponent from '../Loader/loader'
 import ToastComponent from '../Toast/index'
 import IconMarkerComponent from '../../components/IconMarker/icon-marker'
 import CarDetailsScreen from '../../screens/CarDetails/index'
+import FilterScreen from '../../screens/Filter/index'
 
 const initialRegion = {
   latitude: 49.2800565,
@@ -29,10 +32,12 @@ export default class MapComponent extends Component {
         errorGPS: false,
         locationFetched: false,
         showCarDetailsModal: false,
-        marker: null
+        marker: null,
+        showFilterModal: false
       }
 
       this.onHideCarDetailsScreen = this.onHideCarDetailsScreen.bind(this)
+      this.onHideFilterScreen = this.onHideFilterScreen.bind(this)
     }
 
   componentDidMount() {
@@ -97,6 +102,14 @@ export default class MapComponent extends Component {
     this.setState({...this.state, showCarDetailsModal: false})
   }
 
+  onFilterPress () {
+    this.setState({...this.state, showFilterModal: true})
+  }
+
+  onHideFilterScreen() {
+    this.setState({...this.state, showFilterModal: false})
+  }
+
   render() {
     return (
       <MapContainer>
@@ -138,10 +151,25 @@ export default class MapComponent extends Component {
             currentPosition={this.state.currentPosition}
             onClose={this.onHideCarDetailsScreen}/>
         }
+        <TouchableOpacityStyle>
+          <Icon
+            type='font-awesome'
+            size={ 20 }
+            name='sliders'
+            onPress={() => this.onFilterPress()}
+            color='#135589'
+            reverse
+            raised/>
+        </TouchableOpacityStyle>
+        {this.state.showFilterModal &&
+          <FilterScreen
+            visible={this.state.showFilterModal}
+            onClose={this.onHideFilterScreen}/>
+        }
         <LoaderContainer>
           <LoaderComponent animating={this.props.loading}/>
         </LoaderContainer>
-        <ToastContainer>
+        <View>
           <ToastComponent message='Problems to locate your position' visible={this.state.errorGPS}/>
           <ToastComponent message='Problems to retrieve vehicles' visible={this.props.errorApi !== ''}/>
           <ToastComponent message='You are not in Vancouver area' visible={!this.props.positionInVancouver && this.state.locationFetched}/>
@@ -149,7 +177,7 @@ export default class MapComponent extends Component {
             message='There is no vehicle around you'
             visible={this.props.markers.length === 0 && this.props.positionInVancouver && !this.props.loading && this.props.errorApi === ''}
             clickable={false}/>
-          </ToastContainer>
+          </View>
       </MapContainer>
     )
   }
@@ -166,31 +194,22 @@ MapComponent.propTypes = {
   errorApi: PropTypes.string.isRequired
 }
 
-// Usage of styled-components : https://github.com/styled-components/styled-components
 const MapContainer = styled.View`
   flex: 1;
   flex-direction: column;
   justify-content: flex-end;
+  alignItems: center;
   backgroundColor: #F5FCFF;
 `
 
+const TouchableOpacityStyle = styled.TouchableOpacity`
+  align-self: flex-start;
+  flex: 1;
+`
+
 const LoaderContainer = styled.View`
-  flex-direction: column;
-  justify-content: center;
-`
-
-const ToastContainer = styled.View`
-  flexDirection: column;
-  justifyContent: center;
-  align-self: flex-end;
-`
-
-const ModalContainer = styled.View`
-  flexDirection: column;
-  justifyContent: center;
-  alignItems: center;
-  height: 50;
-  width: 300;
+  align-self: center;
+  flex: 1;
 `
 
 // But need to styled-components this one!!

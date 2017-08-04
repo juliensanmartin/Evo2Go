@@ -3,7 +3,6 @@ import { TabNavigator, StackNavigator, DrawerNavigator } from 'react-navigation'
 import { Icon } from 'react-native-elements'
 import { TouchableOpacity, View } from 'react-native'
 import MapScreen from '../screens/Map/index'
-import FilterScreen from '../screens/Filter/index'
 import AboutComponent from '../screens/About/index'
 import styled from 'styled-components/native'
 
@@ -11,21 +10,10 @@ export default StackNavigator({
     Map: {
       screen: MapScreen,
       navigationOptions: ({ navigation }) => ({
-        title: '',
+        title: 'CAR 4 VAN',
         headerBackTitle: 'MAP',
         headerRight: (
           <StyledRightSideHeader>
-            <TouchableOpacity>
-              <Icon
-                type='font-awesome'
-                size={ 20 }
-                name='sliders'
-                onPress={() => navigation.navigate('Filter')}
-                color='#135589'
-                //reverse
-                //raised
-                containerStyle={{marginHorizontal:10}}/>
-            </TouchableOpacity>
             <TouchableOpacity>
               <Icon
                 type='font-awesome'
@@ -46,23 +34,7 @@ export default StackNavigator({
          backgroundColor: '#edfafd'
         },
         gesturesEnabled: true
-        // tintColor: {
-        //   /* this will color your back and forward arrows or left and right icons */
-        // }
       })
-    },
-    Filter: {
-      screen: FilterScreen,
-      navigationOptions: {
-        title: 'FILTER',
-        headerTitleStyle: {
-          color: '#135589'
-        },
-        headerStyle: {
-         backgroundColor: '#edfafd'
-        },
-        gesturesEnabled: true
-      }
     },
     About: {
       screen: AboutComponent,

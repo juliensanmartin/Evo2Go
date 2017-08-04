@@ -18,7 +18,7 @@ export default class LoaderComponent extends Component {
         <Animation
           ref={animation => { this.animation = animation }}
           style={{
-            width: '100%',
+            width: 150,
             height: 150
           }}
           loop={true}
