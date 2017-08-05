@@ -14,7 +14,8 @@ export default class FilterComponent extends Component {
       <Modal
         animationType={"slide"}
         transparent={true}
-        visible={this.props.visible}>
+        visible={this.props.visible}
+        onRequestClose={this.props.onClose}>
           <Interactable.View
             horizontalOnly={true}
             snapPoints={[

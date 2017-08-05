@@ -38,21 +38,35 @@ export default class AboutComponent extends Component {
             }]}>
             <StyledView>
               <TitleText>VEHICLES DATA PROVIDED BY</TitleText>
-              <StyledTextSmall>EVO CAR SHARE</StyledTextSmall>
-              <StyledTextSmall>Some of the data used in this product or service is provided by permission of TransLink. TransLink assumes no responsibility for the accuracy or currency of the Data used in this product or service.</StyledTextSmall>
-              <StyledTextSmall>MOBI BIKE</StyledTextSmall>
-              <StyledTextSmall>MODO</StyledTextSmall>
-              <StyledTextSmall>This product uses the car2go API but is not endorsed or certified by car2go.</StyledTextSmall>
+              <StyledViewRow>
+                <StyledCreditText>&bull; EVO CAR SHARE</StyledCreditText>
+              </StyledViewRow>
+              <StyledViewRow>
+                <StyledCreditText>&bull; CAR 2 GO</StyledCreditText>
+                <StyledTextSmall>This product uses the car2go API but is not endorsed or certified by car2go.</StyledTextSmall>
+              </StyledViewRow>
+              <StyledViewRow>
+                <StyledCreditText>&bull; MOBI BIKES</StyledCreditText>
+              </StyledViewRow>
+              <StyledViewRow>
+                <StyledCreditText>&bull; MODO</StyledCreditText>
+              </StyledViewRow>
+              <StyledViewRow>
+                <StyledCreditText>&bull; TRANSLINK</StyledCreditText>
+                <StyledTextSmall>Some of the data used in this product or service is provided by permission of TransLink. TransLink assumes no responsibility for the accuracy or currency of the Data used in this product or service.</StyledTextSmall>
+              </StyledViewRow>
             </StyledView>
             <StyledView>
               <TitleText>DISTANCE DATA PROVIDED BY</TitleText>
-              <StyledCreditText>GOOGLE</StyledCreditText>
+              <StyledViewRow>
+                <StyledCreditText>&bull; GOOGLE</StyledCreditText>
+              </StyledViewRow>
             </StyledView>
             <StyledView>
               <TitleText>ICONS AND ASSETS PROVIDED BY</TitleText>
-              <StyledCreditText>Freepik from www.flaticon.com</StyledCreditText>
-              <StyledCreditText>Car by Nurutdinov Timur from the Noun Project</StyledCreditText>
-              <StyledCreditText>Loader by Steven Parisi</StyledCreditText>
+              <StyledCreditText>&bull; Freepik from www.flaticon.com</StyledCreditText>
+              <StyledCreditText>&bull; Car by Nurutdinov Timur from the Noun Project</StyledCreditText>
+              <StyledCreditText>&bull; Loader by Steven Parisi</StyledCreditText>
             </StyledView>
             <StyledViewCentered>
               <StyledTextSmall>Made with &hearts; from Vancouver, BC</StyledTextSmall>
@@ -71,7 +85,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-around',
     padding: 10,
-    height: 400,
+    height: 500,
     backgroundColor: '#EDFAFD',
     borderRadius: 6,
     marginHorizontal: 20,
@@ -99,6 +113,12 @@ const StyledViewCentered = styled.View`
   flexDirection: column;
   justifyContent: space-between;
   alignItems: center;
+`
+
+const StyledViewRow = styled.View`
+  flexDirection: column;
+  justifyContent: space-between;
+  marginVertical: 10;
 `
 
 const StyledTextSmall = styled.Text`

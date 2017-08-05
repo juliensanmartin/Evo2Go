@@ -212,18 +212,19 @@ export const setBusVisibility = visible => dispatch => {
 
 export const fetchMobi = () => dispatch => getAvailableMobi()
   .then(response => {
-      const normalized = mobiNormalizer(response)
-      const vehicles = reduce(normalized.entities.mobi, (result, value, key) => {
-        const coordArray = split(value.coordinates, ',')
+      //const normalized = mobiNormalizer(response)
+      //console.log(normalized)
+      const vehicles = reduce(response, (result, value, key) => {
         result.push({
           id: key,
           latlng: {
-            latitude: toNumber(coordArray[0]),
-            longitude: toNumber(coordArray[1])
+            latitude: value.geometry.coordinates[1],
+            longitude: value.geometry.coordinates[0]
           },
           type: 'Mobi Bike',
-          address: value.name,
-          avlBikes: value.avl_bikes
+          address: value.properties.name,
+          avlBikes: value.properties.avl_bikes,
+          freeSlots: value.properties.free_slots
         })
         return result
       }, [])

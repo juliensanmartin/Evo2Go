@@ -1,8 +1,9 @@
 export const getAvailableMobi = () => {
-  return fetch('http://vancouver-ca.smoove.pro/api-public/stations')
+  //
+  return fetch('https://mountainmath.ca/mobi/stations')
     .then(response => response.json())
     .then(responseJson => {
-      return responseJson.result
+      return responseJson.features
     })
     // .catch(error => {
     //   console.error(error)
