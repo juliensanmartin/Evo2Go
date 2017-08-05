@@ -65,7 +65,7 @@ export default class CarDetailsComponent extends Component {
   render() {
     const { type, address, fuel, name, direction } = this.props.marker
     const { distance, duration } = this.props.distance
-    let { avlBikes } = this.props.marker
+    let { avlBikes, freeSlots } = this.props.marker
     let logo
     let long = false
     if (type==='Evo') {
@@ -82,6 +82,7 @@ export default class CarDetailsComponent extends Component {
     }
     if (type==='Mobi Bike') logo=require('../assets/bike.png')
     if (avlBikes === 0) avlBikes = 'No'
+    if (freeSlots === 0) freeSlots = 'No'
     return (
       <Modal
         animationType={"slide"}
@@ -120,6 +121,9 @@ export default class CarDetailsComponent extends Component {
                 <ViewName>
                   { avlBikes &&
                     <StyledText>{avlBikes} bikes availables</StyledText>
+                  }
+                  { freeSlots &&
+                    <StyledText>{freeSlots} free slots availables</StyledText>
                   }
                   <StyledText>{name}</StyledText>
                   <StyledTextSmall>{address}</StyledTextSmall>

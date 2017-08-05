@@ -47,6 +47,7 @@ export default class AboutComponent extends Component {
               </StyledViewRow>
               <StyledViewRow>
                 <StyledCreditText>&bull; MOBI BIKES</StyledCreditText>
+                <StyledTextSmall>Provided by http://doodles.mountainmath.ca/</StyledTextSmall>
               </StyledViewRow>
               <StyledViewRow>
                 <StyledCreditText>&bull; MODO</StyledCreditText>
@@ -64,9 +65,15 @@ export default class AboutComponent extends Component {
             </StyledView>
             <StyledView>
               <TitleText>ICONS AND ASSETS PROVIDED BY</TitleText>
-              <StyledCreditText>&bull; Freepik from www.flaticon.com</StyledCreditText>
-              <StyledCreditText>&bull; Car by Nurutdinov Timur from the Noun Project</StyledCreditText>
-              <StyledCreditText>&bull; Loader by Steven Parisi</StyledCreditText>
+              <StyledViewRow>
+                <StyledTextSmall>&bull; Loader by Steven Parisi</StyledTextSmall>
+              </StyledViewRow>
+              <StyledViewRow>
+                <StyledTextSmall>&bull; Car by Nurutdinov Timur from the Noun Project</StyledTextSmall>
+              </StyledViewRow>
+              <StyledViewRow>
+                <StyledTextSmall>&bull; Freepik from www.flaticon.com</StyledTextSmall>
+              </StyledViewRow>
             </StyledView>
             <StyledViewCentered>
               <StyledTextSmall>Made with &hearts; from Vancouver, BC</StyledTextSmall>
@@ -85,7 +92,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-around',
     padding: 10,
-    height: 500,
+    height: 550,
     backgroundColor: '#EDFAFD',
     borderRadius: 6,
     marginHorizontal: 20,
@@ -107,12 +114,17 @@ const StyledView = styled.View`
   flexDirection: column;
   justifyContent: space-between;
   alignItems: flex-start;
+  border: 1;
+  marginVertical: 10;
+  padding: 5;
+
 `
 
 const StyledViewCentered = styled.View`
   flexDirection: column;
   justifyContent: space-between;
   alignItems: center;
+  marginVertical: 10;
 `
 
 const StyledViewRow = styled.View`
