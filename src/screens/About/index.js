@@ -60,7 +60,7 @@ export default class AboutComponent extends Component {
             <StyledView>
               <TitleText>DISTANCE DATA PROVIDED BY</TitleText>
               <StyledViewRow>
-                <StyledCreditText>&bull; GOOGLE</StyledCreditText>
+                <StyledCreditText>&bull; GOOGLE MAPS</StyledCreditText>
               </StyledViewRow>
             </StyledView>
             <StyledView>
@@ -92,8 +92,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-around',
     padding: 10,
-    height: 550,
-    backgroundColor: '#EDFAFD',
+    height: 500,
+    backgroundColor: '#aed9da',
     borderRadius: 6,
     marginHorizontal: 20,
     marginVertical: 10,
@@ -113,11 +113,16 @@ AboutComponent.propTypes = {
 const StyledView = styled.View`
   flexDirection: column;
   justifyContent: space-between;
+  backgroundColor: #EDFAFD;
   alignItems: flex-start;
+  borderRadius: 6;
   border: 1;
   marginVertical: 10;
   padding: 5;
-
+  shadowColor: #7f7f7f;
+  shadowOffset: 0 0;
+  shadowRadius: 2;
+  shadowOpacity: 0.6;
 `
 
 const StyledViewCentered = styled.View`
@@ -130,7 +135,7 @@ const StyledViewCentered = styled.View`
 const StyledViewRow = styled.View`
   flexDirection: column;
   justifyContent: space-between;
-  marginVertical: 10;
+  paddingVertical: 5;
 `
 
 const StyledTextSmall = styled.Text`
