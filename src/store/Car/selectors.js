@@ -19,19 +19,19 @@ const getVisibleMarkers = createSelector(
   (car2goVisible, evoVisible, busVisibility, mobiVisibility, modoVisibility, markers) => {
     let result = markers
     if (!car2goVisible) {
-      result = reject(result, {type:'car2GoPin'})
+      result = reject(result, {type:'Car 2 Go'})
     }
     if (!evoVisible) {
-      result = reject(result, {type:'evoPin'})
+      result = reject(result, {type:'Evo'})
     }
     if (!busVisibility) {
-      result = reject(result, {type:'busPin'})
+      result = reject(result, {type:'Bus'})
     }
     if (!mobiVisibility) {
-      result = reject(result, {type:'mobiPin'})
+      result = reject(result, {type:'Mobi Bike'})
     }
     if (!modoVisibility) {
-      result = reject(result, {type:'modoPin'})
+      result = reject(result, {type:'Modo'})
     }
     return result
   }
