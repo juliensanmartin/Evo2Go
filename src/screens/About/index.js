@@ -1,10 +1,10 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component, PropTypes, PureComponent } from 'react'
 import { View, Text, Image, Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native'
 import styled from 'styled-components/native'
 import Interactable from 'react-native-interactable'
 import { NavigationActions } from 'react-navigation'
 
-export default class AboutComponent extends Component {
+export default class AboutComponent extends PureComponent {
   constructor(props) {
     super(props)
     this.deltaX = new Animated.Value(0)
@@ -94,13 +94,8 @@ const styles = StyleSheet.create({
     padding: 10,
     height: 500,
     backgroundColor: '#aed9da',
-    borderRadius: 6,
     marginHorizontal: 20,
     marginVertical: 10,
-    shadowColor: '#7f7f7f',
-    shadowOffset: {width: 0, height: 0},
-    shadowRadius: 2,
-    shadowOpacity: 0.4,
     elevation: 4,
     zIndex: 4
   }
