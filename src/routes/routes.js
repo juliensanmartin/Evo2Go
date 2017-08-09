@@ -21,8 +21,6 @@ export default StackNavigator({
                 name='info-circle'
                 onPress={() => navigation.navigate('About')}
                 color='#135589'
-                //reverse
-                //raised
                 containerStyle={{marginHorizontal:10}}/>
             </TouchableOpacity>
           </StyledRightSideHeader>
@@ -32,8 +30,7 @@ export default StackNavigator({
         },
         headerStyle: {
          backgroundColor: '#edfafd'
-        },
-        gesturesEnabled: true
+        }
       })
     },
     About: {
@@ -45,8 +42,7 @@ export default StackNavigator({
         },
         headerStyle: {
          backgroundColor: '#edfafd'
-        },
-        gesturesEnabled: true
+        }
       }
     }
   },
