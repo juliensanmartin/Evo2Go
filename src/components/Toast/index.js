@@ -43,7 +43,6 @@ const StyledContainer = styled.View`
   flexDirection: column;
   justifyContent: center;
   alignItems: center;
-  padding: 10;
   marginVertical: 30;
   marginHorizontal: 30;
   height: 50;

@@ -116,9 +116,8 @@ const StyledView = styled.View`
   backgroundColor: #EDFAFD;
   alignItems: flex-start;
   borderRadius: 6;
-  border: 1;
+  borderWidth: 1;
   marginVertical: 10;
-  padding: 5;
   shadowColor: #7f7f7f;
   shadowOffset: 0 0;
   shadowRadius: 2;

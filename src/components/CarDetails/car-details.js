@@ -210,8 +210,6 @@ const DetailsContainer = styled.View`
   flexDirection: column;
   justifyContent: space-around;
   backgroundColor: #EDFAFD;
-  padding: 10;
-  margin: 10;
 `
 
 const ViewMainDetails = styled.View`
@@ -235,7 +233,6 @@ const ViewSecondaryDetails = styled.View`
 const ViewName = styled.View`
   flexDirection: column;
   justifyContent: center;
-  margin: 10;
 `
 
 const ViewItem = styled.View`

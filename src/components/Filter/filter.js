@@ -146,8 +146,6 @@ const StyledLeftView = styled.View`
 `
 
 const StyledSwitch= styled.Switch`
-  padding: 10;
-  margin: 10;
   zIndex: 10;
   elevation: 10;
 `

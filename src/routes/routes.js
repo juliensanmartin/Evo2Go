@@ -52,7 +52,7 @@ export default StackNavigator({
   },
   {
     cardStyle: {
-      backgroundColor: 'transparent',
+      backgroundColor: '#aed9da',
       opacity: 1
     }
   }
@@ -61,6 +61,4 @@ export default StackNavigator({
 const StyledRightSideHeader = styled.View`
   flexDirection: row;
   justifyContent: space-around;
-  padding: 5;
-  margin: 5;
 `
