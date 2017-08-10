@@ -228,11 +228,15 @@ const ViewSecondaryDetails = styled.View`
   flexDirection: row;
   justifyContent: space-between;
   alignItems: center;
+  paddingVertical: 10;
+  paddingHorizontal: 10;
 `
 
 const ViewName = styled.View`
   flexDirection: column;
   justifyContent: center;
+  paddingVertical: 10;
+  paddingHorizontal: 10;
 `
 
 const ViewItem = styled.View`

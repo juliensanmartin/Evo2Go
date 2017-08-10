@@ -263,9 +263,20 @@ export const setMobiVisibility = visible => dispatch => {
 }
 
 export const updateRegion = region => dispatch => {
-  return dispatch({
+  dispatch({
     type: ON_REGION_CHANGE,
     region
+  })
+  return dispatch({
+    type: CARS_LOADED,
+    loaded: true
+  })
+}
+
+export const activateLoader = () => dispatch => {
+  return dispatch({
+    type: CARS_LOADED,
+    loaded: false
   })
 }
 

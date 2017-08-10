@@ -86,6 +86,8 @@ const StyledView = styled.View`
   shadowOffset: 0 0;
   shadowRadius: 2;
   shadowOpacity: 0.6;
+  paddingVertical: 10;
+  paddingHorizontal: 10;
 `
 
 const StyledViewCentered = styled.View`
@@ -93,6 +95,8 @@ const StyledViewCentered = styled.View`
   justifyContent: space-between;
   alignItems: center;
   marginVertical: 10;
+  paddingVertical: 10;
+  paddingHorizontal: 10;
 `
 
 const StyledViewRow = styled.View`

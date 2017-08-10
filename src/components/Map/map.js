@@ -124,7 +124,8 @@ export default class MapComponent extends Component {
           toolbarEnabled={false}
           initialRegion={initialRegion}
           style={styles.map}
-          onRegionChangeComplete={this.props.onRegionChange}
+          onRegionChangeComplete={this.props.onRegionChangeComplete}
+          onRegionChange={this.props.onRegionChange}
           initialRegion={initialRegion}>
             {
               this.props.markers.map(marker =>
@@ -188,6 +189,7 @@ MapComponent.propTypes = {
   loading: PropTypes.bool.isRequired,
   navigation: PropTypes.object.isRequired,
   direction: PropTypes.array,
+  onRegionChangeComplete: PropTypes.func.isRequired,
   onRegionChange: PropTypes.func.isRequired,
   onPositionFetched: PropTypes.func.isRequired,
   positionInVancouver: PropTypes.bool.isRequired,
