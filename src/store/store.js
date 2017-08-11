@@ -1,6 +1,7 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
+import { persistStore, autoRehydrate } from 'redux-persist'
 import devTools from 'remote-redux-devtools'
 import car from './Car/reducers'
 import distance from './Distance/reducers'
@@ -18,9 +19,11 @@ const enhancer = compose(
         collapsed: true
     })
 	),
-	devTools()
+	devTools(),
+	autoRehydrate()
 )
 
 const store = createStore(appReducer, enhancer)
+persistStore(store, {storage: AsyncStorage})
 
 export default store
