@@ -1,12 +1,10 @@
 import { forEach, chunk, toString, flatten, filter } from 'lodash'
-import * as moment from 'moment'
+import moment from 'moment'
 
-export const getModoCars = (hoursRequested = 2) => {
+export const getModoCars = (hoursRequested) => {
   return fetch('https://bookit.modo.coop/api/fleet/cars')
     .then(response => response.json())
-    .then(responseJson => {
-      return getModoAvailableCars(getCarIds(responseJson), hoursRequested)
-    })
+    .then(responseJson => getModoAvailableCars(getCarIds(responseJson), hoursRequested))
 }
 
 const getCarIds = (response) => {
@@ -22,9 +20,8 @@ const getCarIds = (response) => {
 }
 
 export const getModoAvailableCars = (carIds, hoursRequested) => {
-	// endDate is startDate + 2 hours
-	const endDate = moment().unix() + convertHoursToSeconds(hoursRequested) + 900
-  console.log(endDate)
+	// endDate is now + hoursRequested + 15 minutes gap
+	const endDate = (moment().unix() + convertHoursToSeconds(hoursRequested) + 900) / 1000
 	const carIdsPack = chunk(carIds, 20)
 	const promises = []
 	const result = []
@@ -43,7 +40,7 @@ const getModoCarsByPack = (carIds, startDate, endDate, hoursRequested) => {
 	return fetch(request)
 		.then(response => response.json())
 		.then(response => {
-			const availableCars = filter(response.Data, {Duration: convertHoursToSeconds(hoursRequested).toString()})
+			const availableCars = filter(response.Data, {Duration: (convertHoursToSeconds(hoursRequested)+900).toString()})
 			return availableCars
 		})
 }

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import MapComponent from '../../components/Map/map'
 import { fetchVisibleCars, updateRegion, activateLoader } from '../../store/Car/actions'
 import { checkPositionInVancouver, resetDirection } from '../../store/Distance/actions'

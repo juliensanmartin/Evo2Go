@@ -15,7 +15,7 @@ const appReducer = combineReducers({
 	car, distance, errors
 })
 
-const persitingReducers = createFilter('car', ['car2go', 'evo', 'modo', 'translink', 'mobi'])
+const persitingCarReducers = createFilter('car', ['car2go', 'evo', 'modo', 'translink', 'mobi'])
 
 const enhancer = compose(
 	applyMiddleware(
@@ -31,10 +31,6 @@ const enhancer = compose(
 )
 
 const store = createStore(appReducer, enhancer)
-persistStore(store, {storage: AsyncStorage, transforms: [
-        persitingReducers
-    ]}, () => {
-  console.log('rehydration complete')
-})
+persistStore(store, {storage: AsyncStorage, transforms: [persitingCarReducers]})
 
 export default store

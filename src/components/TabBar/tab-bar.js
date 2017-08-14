@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { View, Text, Image, TouchableOpacity, TouchableWithoutFeedback, Platform, Linking, Animated, StyleSheet, Modal } from 'react-native'
 import styled from 'styled-components/native'
 import { Badge, Icon, Tabs, Tab } from 'react-native-elements'

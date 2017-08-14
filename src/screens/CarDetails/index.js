@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import CarDetailsComponent from '../../components/CarDetails/car-details'
 import { fetchDistance, fetchDirection } from '../../store/Distance/actions'
 import { propagateErrorLinking } from '../../store/Error/actions'

@@ -282,7 +282,7 @@ export const activateLoader = () => dispatch => {
 }
 
 // this is a thunk (redux-thunk)
-export const fetchModoCars = () => dispatch => getModoCars()
+export const fetchModoCars = (hoursRequested = 2) => dispatch => getModoCars(hoursRequested)
   .then(cars => {
     // placemarks => [objects]
     // Normalized to entities => {objects} and result => [keys]

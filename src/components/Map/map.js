@@ -5,7 +5,8 @@ import {
   TouchableOpacity
 } from 'react-native'
 import { Icon } from 'react-native-elements'
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import styled from 'styled-components/native'
 import LoaderComponent from '../Loader/loader'
