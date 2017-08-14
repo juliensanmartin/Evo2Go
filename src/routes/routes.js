@@ -4,6 +4,7 @@ import { Icon } from 'react-native-elements'
 import { TouchableOpacity, View } from 'react-native'
 import MapScreen from '../screens/Map/index'
 import AboutComponent from '../screens/About/index'
+import Settings from '../screens/Settings/index'
 import styled from 'styled-components/native'
 
 export default StackNavigator({
@@ -14,6 +15,15 @@ export default StackNavigator({
         headerBackTitle: 'MAP',
         headerRight: (
           <StyledRightSideHeader>
+            <TouchableOpacity>
+              <Icon
+                type='font-awesome'
+                size={ 20 }
+                name='cog'
+                onPress={() => navigation.navigate('Settings')}
+                color='#135589'
+                containerStyle={{marginHorizontal:10}}/>
+            </TouchableOpacity>
             <TouchableOpacity>
               <Icon
                 type='font-awesome'
@@ -32,6 +42,18 @@ export default StackNavigator({
          backgroundColor: '#edfafd'
         }
       })
+    },
+    Settings: {
+      screen: Settings,
+      navigationOptions: {
+        title: 'SETTINGS',
+        headerTitleStyle: {
+          color: '#135589'
+        },
+        headerStyle: {
+         backgroundColor: '#edfafd'
+        }
+      }
     },
     About: {
       screen: AboutComponent,

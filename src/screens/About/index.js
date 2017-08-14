@@ -2,14 +2,8 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, Image } from 'react-native'
 import styled from 'styled-components/native'
-import { NavigationActions } from 'react-navigation'
 
 export default class AboutComponent extends PureComponent {
-  onScreenPress() {
-    const backAction = NavigationActions.back()
-    this.props.navigation.dispatch(backAction)
-  }
-
   render() {
     return (
         <ViewContainer>
@@ -60,10 +54,6 @@ export default class AboutComponent extends PureComponent {
         </ViewContainer>
     )
   }
-}
-
-AboutComponent.propTypes = {
-  navigation: PropTypes.object.isRequired
 }
 
 const ViewContainer = styled.View`
