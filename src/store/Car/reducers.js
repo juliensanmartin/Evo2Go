@@ -4,6 +4,7 @@ import {
   SET_BUS_VISIBILITY,
   SET_MOBI_VISIBILITY,
   SET_MODO_VISIBILITY,
+  SET_MODO_HOURS_AVAILABLE,
   GET_VISIBLE_CARS,
   CARS_LOADED,
   ON_REGION_CHANGE
@@ -73,12 +74,12 @@ const mobi = (state = {visible:false}, action) => {
   }
 }
 
-const modo = (state = {visible:false}, action) => {
+const modo = (state = {visible:false, hoursAvailable:2}, action) => {
   switch (action.type) {
     case SET_MODO_VISIBILITY:
-      return {
-        visible: action.visible
-      }
+      return { ...state, visible: action.visible }
+    case SET_MODO_HOURS_AVAILABLE:
+      return { ...state, hoursAvailable: action.hoursAvailable }
     default:
       return state
   }

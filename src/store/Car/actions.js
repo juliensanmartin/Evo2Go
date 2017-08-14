@@ -4,6 +4,7 @@ import {
   SET_BUS_VISIBILITY,
   SET_MOBI_VISIBILITY,
   SET_MODO_VISIBILITY,
+  SET_MODO_HOURS_AVAILABLE,
   GET_VISIBLE_CARS,
   CARS_LOADED,
   ON_REGION_CHANGE
@@ -314,6 +315,24 @@ export const fetchModoCars = () => dispatch => getModoCars()
     })
   }
 )
+
+export const setModoHoursAvailable = hoursRequested => dispatch => {
+    dispatch({
+      type: CARS_LOADED,
+      loaded: false
+    })
+    dispatch({
+      type: SET_MODO_HOURS_AVAILABLE,
+      hoursAvailable: hoursRequested
+    })
+    dispatch(fetchModoCars(hoursRequested))
+      .then(() => {
+        return dispatch({
+          type: CARS_LOADED,
+          loaded: true
+        })
+      })
+}
 
 export const setModoVisibility = visible => dispatch => {
   if (visible) {
