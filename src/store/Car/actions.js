@@ -315,14 +315,11 @@ export const fetchModoCars = (hoursRequested = 2) => dispatch => getModoCars(hou
   }
 )
 
-const secondsToHm = (d) => {
-    d = Number(d)
-    var h = Math.floor(d / 3600)
-    var m = Math.floor(d % 3600 / 60)
-
-    var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : ""
-    var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : ""
-    return `${hDisplay} ${mDisplay}`
+const secondsToHm = seconds => {
+    seconds = Number(seconds)
+    const hours = Math.floor(seconds / 3600)
+    const minutes = Math.floor(seconds % 3600 / 60)
+    return `${hours} hours and ${minutes} minutes`
 }
 
 export const setModoHoursAvailable = hoursRequested => dispatch => {
