@@ -7,7 +7,7 @@ import devTools from 'remote-redux-devtools'
 import car from './Car/reducers'
 import distance from './Distance/reducers'
 import errors from './Error/reducers'
-import { createFilter } from 'redux-persist-transform-filter'
+import { createFilter, createBlacklistFilter } from 'redux-persist-transform-filter'
 import createActionBuffer from 'redux-action-buffer'
 import {REHYDRATE} from 'redux-persist/constants'
 
@@ -15,7 +15,9 @@ const appReducer = combineReducers({
 	car, distance, errors
 })
 
-const persitingCarReducers = createFilter('car', ['car2go', 'evo', 'modo', 'translink', 'mobi'])
+const persistingCarReducers = createFilter('car', ['car2go', 'evo', 'modo', 'translink', 'mobi'])
+const notPersistedErrorReducers = createBlacklistFilter('error', ['errorApi', 'errorLinking'])
+const notPersistedDistanceReducers = createBlacklistFilter('error', ['distance', 'direction', 'positionInVancouver'])
 
 const enhancer = compose(
 	applyMiddleware(
@@ -31,6 +33,6 @@ const enhancer = compose(
 )
 
 const store = createStore(appReducer, enhancer)
-persistStore(store, {storage: AsyncStorage, transforms: [persitingCarReducers]})
+persistStore(store, {storage: AsyncStorage, transforms: [persistingCarReducers, notPersistedErrorReducers, notPersistedDistanceReducers]})
 
 export default store

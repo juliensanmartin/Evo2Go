@@ -284,9 +284,7 @@ export const activateLoader = () => dispatch => {
 // this is a thunk (redux-thunk)
 export const fetchModoCars = (hoursRequested = 2) => dispatch => getModoCars(hoursRequested)
   .then(cars => {
-    // placemarks => [objects]
-    // Normalized to entities => {objects} and result => [keys]
-    normalized= modoVehicleNormalizer(cars)
+    normalized = modoVehicleNormalizer(cars)
     console.log('MODO NORMALIZED', normalized)
 
     const vehicles = reduce(normalized.entities.vehicles, (result, value, key) => {
@@ -298,7 +296,8 @@ export const fetchModoCars = (hoursRequested = 2) => dispatch => getModoCars(hou
         },
         type: 'Modo',
         address: value.LocationName,
-        name: value.CarDescription
+        name: value.CarDescription,
+        duration: secondsToHm(value.Duration)
       })
       return result
     }, [])
@@ -315,6 +314,16 @@ export const fetchModoCars = (hoursRequested = 2) => dispatch => getModoCars(hou
     })
   }
 )
+
+const secondsToHm = (d) => {
+    d = Number(d)
+    var h = Math.floor(d / 3600)
+    var m = Math.floor(d % 3600 / 60)
+
+    var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : ""
+    var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : ""
+    return `${hDisplay} ${mDisplay}`
+}
 
 export const setModoHoursAvailable = hoursRequested => dispatch => {
     dispatch({
