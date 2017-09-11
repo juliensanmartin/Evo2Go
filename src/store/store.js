@@ -17,7 +17,7 @@ const appReducer = combineReducers({
 
 const persistingCarReducers = createFilter('car', ['car2go', 'evo', 'modo', 'translink', 'mobi'])
 const notPersistedErrorReducers = createBlacklistFilter('error', ['errorApi', 'errorLinking'])
-const notPersistedDistanceReducers = createBlacklistFilter('error', ['distance', 'direction', 'positionInVancouver'])
+const notPersistedDistanceReducers = createBlacklistFilter('distance', ['distance', 'direction', 'positionInVancouver'])
 
 const enhancer = compose(
 	applyMiddleware(
