@@ -10,6 +10,7 @@ const getEvoVisibility = (state) => state.car.evo.visible
 const getBusVisibility = (state) => state.car.translink.visible
 const getMobiVisibility = (state) => state.car.mobi.visible
 const getModoVisibility = (state) => state.car.modo.visible
+const getModoHoursAvailable = (state) => state.car.modo.hoursAvailable
 const getVisibleCars = (state) => state.car.visibleCars
 const isLoaded = state => state.car.carLoaded
 const currentRegion = state => state.car.currentRegion
@@ -72,5 +73,6 @@ export {
   getBusVisibility,
   getMobiVisibility,
   getModoVisibility,
+  getModoHoursAvailable,
   getRegionMarkers
 }

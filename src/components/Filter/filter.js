@@ -59,7 +59,7 @@ export default class FilterComponent extends Component {
                   <StyledImage source={require('../assets/modo.png')}/>
                   <StyledTextView>
                     <StyledText>MODO CARS</StyledText>
-                    <StyledTextSmall>(Available the next 2 hours)</StyledTextSmall>
+                    <StyledTextSmall>(Available the next {this.props.modoHoursAvailable} hours)</StyledTextSmall>
                   </StyledTextView>
                 </StyledLeftView>
                 <StyledSwitch
@@ -104,6 +104,7 @@ FilterComponent.propTypes = {
   mobiVisible: PropTypes.bool.isRequired,
   onMobiToggle: PropTypes.func.isRequired,
   modoVisible: PropTypes.bool.isRequired,
+  modoHoursAvailable: PropTypes.number.isRequired,
   onModoToggle: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired

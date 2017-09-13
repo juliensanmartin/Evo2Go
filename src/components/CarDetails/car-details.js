@@ -154,7 +154,7 @@ export default class CarDetailsComponent extends Component {
                     <Icon type='ionicon' size={ 50 } name='ios-compass' color='#3DDAD7'/>
                     <ViewName>
                       <StyledTextSmall>Available for the next</StyledTextSmall>
-                      <StyledText>{duration}</StyledText>
+                      <StyledText>{this.props.marker.duration}</StyledText>
                     </ViewName>
                   </ViewItem>
                 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import FilterComponent from '../../components/Filter/filter'
 import { setEvoVisibility, setCar2GoVisibility, setBusVisibility, setMobiVisibility, setModoVisibility } from '../../store/Car/actions'
-import { getCar2GoVisibility, getEvoVisibility, getBusVisibility, getMobiVisibility, getModoVisibility } from '../../store/Car/selectors'
+import { getCar2GoVisibility, getEvoVisibility, getBusVisibility, getMobiVisibility, getModoVisibility, getModoHoursAvailable } from '../../store/Car/selectors'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 
@@ -24,6 +24,7 @@ class Filter extends Component {
         mobiVisible={this.props.mobiVisible}
         onModoToggle={this.props.onModoToggle}
         modoVisible={this.props.modoVisible}
+        modoHoursAvailable={this.props.modoHoursAvailable}
         visible={this.props.visible}
         onClose={this.props.onClose}/>
     )
@@ -40,6 +41,7 @@ Filter.propTypes = {
   mobiVisible: PropTypes.bool.isRequired,
   onMobiToggle: PropTypes.func.isRequired,
   modoVisible: PropTypes.bool.isRequired,
+  modoHoursAvailable: PropTypes.number.isRequired,
   onModoToggle: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired
@@ -51,7 +53,8 @@ function mapStateToProps(state) {
     car2GoVisible: getCar2GoVisibility(state),
     busVisible: getBusVisibility(state),
     mobiVisible: getMobiVisibility(state),
-    modoVisible: getModoVisibility(state)
+    modoVisible: getModoVisibility(state),
+    modoHoursAvailable: getModoHoursAvailable(state)
   }
 }
 

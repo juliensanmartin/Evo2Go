@@ -7,15 +7,15 @@ import { getVisibleMarkers, isLoaded, getRegionMarkers } from '../../store/Car/s
 import { connect } from 'react-redux'
 
 class MapScreen extends Component {
-  state = {
-    timer: null
-  }
+  // state = {
+  //   timer: null
+  // }
 
   componentDidMount() {
-    let timer = setInterval(() => {
-        this.props.dispatch(fetchVisibleCars())
-    }, 30000)
-    this.setState({timer})
+    // let timer = setInterval(() => {
+    //     this.props.dispatch(fetchVisibleCars())
+    // }, 30000)
+    // this.setState({timer})
 
     // Duplicate here to run the first time and because the setInterval
     // does not work when in Debugging Mode on Chrome
@@ -23,7 +23,7 @@ class MapScreen extends Component {
   }
 
   componentWillUnmount() {
-    this.clearInterval(this.state.timer)
+    //this.clearInterval(this.state.timer)
     this.props.dispatch(resetDirection())
   }
 
