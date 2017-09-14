@@ -4,14 +4,13 @@ import { Icon, Badge } from 'react-native-elements'
 import { View, Image } from 'react-native'
 
 export default class IconMarkerComponent extends Component {
-  constructor(props) {
-  	super(props)
-  	this.state = {...props}
-  }
-
   shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps.coordinate) {
-  	  return nextProps.coordinate.latitude != this.state.coordinate.latitude && nextProps.coordinate.longitude != this.state.coordinate.longitude
+    if (nextProps.marker) {
+      const currentLat = this.props.marker.latlng.latitude
+      const currentLng = this.props.marker.latlng.longitude
+      const nextLat = nextProps.marker.latlng.latitude
+      const nextLng = nextProps.marker.latlng.longitude
+      return currentLat != nextLat || currentLng != nextLng
     }
     return true
   }
