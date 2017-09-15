@@ -14,6 +14,7 @@ import ToastComponent from '../Toast/index'
 import IconMarkerComponent from '../../components/IconMarker/icon-marker'
 import CarDetailsScreen from '../../screens/CarDetails/index'
 import FilterScreen from '../../screens/Filter/index'
+import { debounce } from 'lodash'
 
 const initialRegion = {
   latitude: 49.2800565,
@@ -39,6 +40,8 @@ export default class MapComponent extends Component {
 
       this.onHideCarDetailsScreen = this.onHideCarDetailsScreen.bind(this)
       this.onHideFilterScreen = this.onHideFilterScreen.bind(this)
+
+      this.debouncedOnRegionChangeComplete = debounce(this.props.onRegionChangeComplete, 500)
     }
 
   componentDidMount() {
@@ -125,7 +128,7 @@ export default class MapComponent extends Component {
           toolbarEnabled={false}
           initialRegion={initialRegion}
           style={styles.map}
-          onRegionChangeComplete={this.props.onRegionChangeComplete}
+          onRegionChangeComplete={this.debouncedOnRegionChangeComplete}
           onRegionChange={this.props.onRegionChange}
           initialRegion={initialRegion}>
             {
