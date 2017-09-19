@@ -42,7 +42,7 @@ export default class MapComponent extends Component {
       this.onHideFilterScreen = this.onHideFilterScreen.bind(this)
 
       this.debouncedOnRegionChangeComplete = debounce(this.props.onRegionChangeComplete, 1000)
-      this.debouncedOnRegionChange = debounce(this.props.onRegionChange, 1000)
+      this.debouncedOnRegionChange = debounce(this.props.onRegionChange, 500)
     }
 
   componentDidMount() {
@@ -127,9 +127,9 @@ export default class MapComponent extends Component {
           showsBuildings={false}
           showsIndoors={false}
           toolbarEnabled={false}
-          initialRegion={initialRegion}
           style={styles.map}
           onRegionChangeComplete={this.debouncedOnRegionChangeComplete}
+          onRegionChange={this.debouncedOnRegionChange}
           initialRegion={initialRegion}>
             {
               this.props.markers.map(marker =>
