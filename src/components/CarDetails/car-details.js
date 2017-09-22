@@ -26,27 +26,27 @@ export default class CarDetailsComponent extends Component {
       } else {
         linking = 'https://car2go.com/'
       }
-      this.state.link = linking.concat(`vehicles/${this.props.marker.id}?latlng=${this.props.marker.latlng.latitude},${this.props.marker.latlng.longitude}`)
+      this.state.link = linking.concat(`vehicle/${this.props.marker.id}?latlng=${this.props.marker.latlng.latitude},${this.props.marker.latlng.longitude}`)
       // Android: https://car2go.com/vehicle/WME4513341K828695?latlng=53.58775,10.12023
       // iOS: car2go://vehicle/WME4513341K828695?latlng=53.58775,10.12023
     }
 
     if (this.props.marker.type==='Evo') {
       if (Platform.OS === 'ios') {
-        linking = 'evo://'
+        linking = 'https://fo.evo.vulog.com/bcaa-front/Account/FindCars'
       } else {
-        linking = 'https://evo.ca/'
+        linking = 'https://fo.evo.vulog.com/bcaa-front/Account/FindCars'
       }
-      this.state.link = linking.concat(`vehicles/${this.props.marker.id}?latlng=${this.props.marker.latlng.latitude},${this.props.marker.latlng.longitude}`)
+      this.state.link = linking//.concat(`vehicle/${this.props.marker.id}?latlng=${this.props.marker.latlng.latitude},${this.props.marker.latlng.longitude}`)
     }
 
     if (this.props.marker.type==='Modo') {
       if (Platform.OS === 'ios') {
-        linking = 'modo://'
+        linking = 'https://bookit.modo.coop/'
       } else {
         linking = 'https://bookit.modo.coop/'
       }
-      this.state.link = linking.concat(`vehicles/${this.props.marker.id}?latlng=${this.props.marker.latlng.latitude},${this.props.marker.latlng.longitude}`)
+      this.state.link = linking//.concat(`vehicles/${this.props.marker.id}?latlng=${this.props.marker.latlng.latitude},${this.props.marker.latlng.longitude}`)
     }
 
     if (this.state.link !== '') {

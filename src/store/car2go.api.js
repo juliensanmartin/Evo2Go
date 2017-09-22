@@ -1,5 +1,5 @@
 const car2GoConfig = {
-	key: 'TransitApp',
+	key: 'CarData',
 	url: 'https://www.car2go.com/api/v2.1',
   format: 'json',
   loc: 'vancouver',
