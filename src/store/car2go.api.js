@@ -5,6 +5,8 @@ const car2GoConfig = {
   loc: 'vancouver',
 };
 
+// api key : car2gowebsite / roadzapp
+
 const params = `?loc=${car2GoConfig.loc}&oauth_consumer_key=${car2GoConfig.key}&format=${car2GoConfig.format}`;
 
 export const getAvailableVehicleCar2Go = () => {
