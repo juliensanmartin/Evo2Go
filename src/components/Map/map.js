@@ -42,7 +42,7 @@ export default class MapComponent extends Component {
       this.onHideFilterScreen = this.onHideFilterScreen.bind(this)
 
       this.debouncedOnRegionChangeComplete = debounce(this.props.onRegionChangeComplete, 1000)
-      this.debouncedOnRegionChange = debounce(this.props.onRegionChange, 500)
+      this.debouncedOnRegionChange = debounce(this.props.onRegionChange, 950)
     }
 
   componentDidMount() {
