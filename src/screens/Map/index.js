@@ -7,24 +7,17 @@ import { getVisibleMarkers, isLoaded, getRegionMarkers } from '../../store/Car/s
 import { connect } from 'react-redux'
 
 class MapScreen extends Component {
-  // state = {
-  //   timer: null
-  // }
-
   componentDidMount() {
-    // let timer = setInterval(() => {
-    //     this.props.dispatch(fetchVisibleCars())
-    // }, 30000)
-    // this.setState({timer})
-
-    // Duplicate here to run the first time and because the setInterval
-    // does not work when in Debugging Mode on Chrome
     this.props.dispatch(fetchVisibleCars())
   }
 
   componentWillUnmount() {
-    //this.clearInterval(this.state.timer)
     this.props.dispatch(resetDirection())
+  }
+
+  onRefreshMap () {
+    this.props.dispatch(fetchVisibleCars())
+    this.props.dispatch(activateLoader())
   }
 
   render() {
@@ -38,7 +31,8 @@ class MapScreen extends Component {
         onRegionChange={this.props.onRegionChange}
         onPositionFetched={this.props.onPositionFetched}
         positionInVancouver={this.props.positionInVancouver}
-        errorApi={this.props.errorApi}/>
+        errorApi={this.props.errorApi}
+        refreshMap={() => this.onRefreshMap()}/>
     )
   }
 }

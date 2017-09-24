@@ -27,25 +27,34 @@ const DEFAULT_PADDING = { top: 40, right: 40, bottom: 40, left: 40 }
 
 export default class MapComponent extends Component {
   constructor(props) {
-      super(props)
+    super(props)
 
-      this.state = {
-        currentPosition: null,
-        errorGPS: false,
-        locationFetched: false,
-        showCarDetailsModal: false,
-        marker: null,
-        showFilterModal: false
-      }
-
-      this.onHideCarDetailsScreen = this.onHideCarDetailsScreen.bind(this)
-      this.onHideFilterScreen = this.onHideFilterScreen.bind(this)
-
-      this.debouncedOnRegionChangeComplete = debounce(this.props.onRegionChangeComplete, 1000)
-      this.debouncedOnRegionChange = debounce(this.props.onRegionChange, 950)
+    this.state = {
+      currentPosition: null,
+      errorGPS: false,
+      locationFetched: false,
+      showCarDetailsModal: false,
+      marker: null,
+      showFilterModal: false,
+      canRefresh: false
     }
 
+    this.onHideCarDetailsScreen = this.onHideCarDetailsScreen.bind(this)
+    this.onHideFilterScreen = this.onHideFilterScreen.bind(this)
+
+    this.debouncedOnRegionChangeComplete = debounce(this.props.onRegionChangeComplete, 1000)
+    this.debouncedOnRegionChange = debounce(this.props.onRegionChange, 950)
+  }
+
+  startTimerRefresh() {
+    this.setState({...this.state, canRefresh:false})
+    setTimeout(() => {
+      this.setState({...this.state, canRefresh:true})
+    }, 60000)
+  }
+
   componentDidMount() {
+    this.startTimerRefresh()
     navigator.geolocation.getCurrentPosition((position) => {
         this.props.onPositionFetched(position.coords)
         if (this.props.positionInVancouver) {
@@ -115,6 +124,11 @@ export default class MapComponent extends Component {
     this.setState({...this.state, showFilterModal: false})
   }
 
+  onRefreshPress () {
+    this.startTimerRefresh()
+    this.props.refreshMap()
+  }
+
   render() {
     return (
       <MapContainer>
@@ -165,6 +179,17 @@ export default class MapComponent extends Component {
             color='#135589'
             reverse
             raised/>
+          {this.state.canRefresh &&
+            <Icon
+              type='font-awesome'
+              size={ 20 }
+              name='refresh'
+              onPress={() => this.onRefreshPress()}
+              color='#135589'
+              reverse
+              raised
+            />
+          }
         </TouchableOpacityStyle>
         {this.state.showFilterModal &&
           <FilterScreen
@@ -197,7 +222,8 @@ MapComponent.propTypes = {
   onRegionChange: PropTypes.func.isRequired,
   onPositionFetched: PropTypes.func.isRequired,
   positionInVancouver: PropTypes.bool.isRequired,
-  errorApi: PropTypes.string.isRequired
+  errorApi: PropTypes.string.isRequired,
+  refreshMap: PropTypes.func.isRequired
 }
 
 const MapContainer = styled.View`

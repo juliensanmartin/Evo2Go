@@ -11,7 +11,7 @@ export default StackNavigator({
     Map: {
       screen: MapScreen,
       navigationOptions: ({ navigation }) => ({
-        title: 'CAR 4 VAN',
+        title: 'CAR4VAN',
         headerBackTitle: 'MAP',
         headerRight: (
           <StyledRightSideHeader>
